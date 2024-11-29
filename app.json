@@ -33,6 +33,20 @@
             "node_modules/@expo-google-fonts/inter/Poppins_700Bold.ttf"
          ]
         }
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Aceita que $(PRODUCT_NAME) acesse sua câmera",
+          "microphonePermission": "Aceita que $(PRODUCT_NAME) acesse seu microfone",
+          "recordAudioAndroid": true
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "O Aplicativo deseja acesso a sua galeria"
+        }
       ]
     ]
   }

@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native'
 
 import { Button } from 'components/atoms/Button'
-import { Container } from 'components/organisms/Container/styles'
+import { Container } from 'components/templates/Container/styles'
 import {
   ContainerForm,
   Title,

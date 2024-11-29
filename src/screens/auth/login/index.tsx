@@ -1,5 +1,5 @@
 import { Button } from 'components/atoms/Button'
-import { Container } from 'components/organisms/Container/styles'
+import { Container } from 'components/templates/Container/styles'
 import { ContainerForm, ContainerInputs, ContainerOptions } from './styles'
 
 import { InputIcon } from 'components/atoms/InputIcon'
@@ -37,7 +37,7 @@ export function LoginScreen() {
             placeholder="E-mail"
           />
           <InputPassword label="Senha" placeholder="Senha" />
-          <Button title="Entrar" color="button" />
+          <Button title="Entrar" color="button" onPress={handleNavToSignIn} />
         </ContainerInputs>
         <ContainerOptions>
           <TextShape.WrapperTextInline>

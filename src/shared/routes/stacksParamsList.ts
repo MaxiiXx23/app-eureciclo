@@ -3,4 +3,11 @@ type AuthStackParamList = {
   ChooseRegisterScreen: undefined
 }
 
-export { AuthStackParamList }
+type HomeStackParamList = {
+  Home: undefined
+  Collect: undefined
+  Activities: undefined
+  Account: undefined
+}
+
+export { AuthStackParamList, HomeStackParamList }
