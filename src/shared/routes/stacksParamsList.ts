@@ -10,4 +10,11 @@ type HomeStackParamList = {
   Account: undefined
 }
 
-export { AuthStackParamList, HomeStackParamList }
+type CollectStackParamList = {
+  CollectInitial: undefined
+  Request: undefined
+  Status: undefined
+  Camera: undefined
+}
+
+export { AuthStackParamList, HomeStackParamList, CollectStackParamList }

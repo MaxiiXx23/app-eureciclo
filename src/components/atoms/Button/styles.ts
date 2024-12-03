@@ -18,5 +18,8 @@ export const ContainerBtn = styled(TouchableOpacity)<IButtonProps>`
 export const Title = styled.Text`
   color: ${({ theme }) => theme.colors.shape};
   font-size: 16px;
+  text-transform: uppercase;
   font-weight: bold;
 `
+
+

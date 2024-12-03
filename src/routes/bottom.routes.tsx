@@ -1,7 +1,9 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { HomeRouter } from './home.routes';
 
-import { House } from 'phosphor-react-native';
+import { House, Recycle } from 'phosphor-react-native';
+import { CollectScreen } from 'screens/Collect';
+import { CollectRouter } from './collect.routes';
 
 const Tab = createBottomTabNavigator();
 
@@ -12,7 +14,9 @@ export function BottomRouter() {
         screenOptions={{
             tabBarActiveTintColor: '#FFF',
             tabBarInactiveTintColor: '#969CB2',
-            tabBarActiveBackgroundColor: '#4ADE80',
+            tabBarStyle: {
+              backgroundColor: '#4ADE80'
+            },
             tabBarLabelStyle: {
                 fontSize: 16
             },
@@ -29,6 +33,19 @@ export function BottomRouter() {
             <House color={color} size={size} />
           ),
         }}
+        />
+
+        <Tab.Screen         
+          name="Collect"
+          component={CollectRouter} 
+          options={{
+            headerShown: false,
+            tabBarLabel: 'Coleta',
+            // tabBarBadge: 3,
+            tabBarIcon: ({ color, size }) => (
+              <Recycle color={color} size={size} />
+            ),
+          }}
         />
     </Tab.Navigator>
   );
