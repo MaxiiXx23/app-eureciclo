@@ -20,4 +20,7 @@ export const Content = styled(ScrollView)`
   paddingLeft:  ${({theme}) => theme.spacing[3]};
   paddingTop:  ${({theme}) => theme.spacing[3]};
   paddingBottom:  ${({theme}) => theme.spacing[3]};
+
+  border-top-right-radius: ${({theme}) => theme.spacing[6]};
+  border-top-left-radius: ${({theme}) => theme.spacing[6]};
 `

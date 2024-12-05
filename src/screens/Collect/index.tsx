@@ -17,8 +17,12 @@ export function CollectScreen() {
   const theme = useTheme()
   const navigation = useNavigation<NavProps>()
 
-  function handleNavToSignIn() {
+  function handleNavToRequest() {
     navigation.navigate('Request')
+  }
+
+  function handleNavToVerify() {
+    navigation.navigate('Verify')
   }
 
   return (
@@ -30,12 +34,12 @@ export function CollectScreen() {
 
             <ContainerCards>
               <CardCollect
-                onPress={handleNavToSignIn}
+                onPress={handleNavToRequest}
                 title='Solicitar Coleta' 
                 description='Solicite a coleta de seus materiais recicláveis.' 
               />
               <CardCollect 
-                onPress={handleNavToSignIn}
+                onPress={handleNavToVerify}
                 title='Verificar Coleta' 
                 description='Verifique o status da sua solicitação de coleta.' 
               />

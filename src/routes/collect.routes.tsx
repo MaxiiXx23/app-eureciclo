@@ -4,6 +4,7 @@ import { CollectStackParamList } from 'shared/routes/stacksParamsList'
 import { CollectScreen } from 'screens/Collect'
 import { RequestCollectScreen } from 'screens/RequestCollectScreen'
 import { CameraScreen } from 'screens/CameraScreen'
+import { VerifyCollectScreen } from 'screens/VerifyCollectScreen'
 
 const Stack = createNativeStackNavigator<CollectStackParamList>()
 
@@ -22,6 +23,18 @@ export function CollectRouter() {
         component={RequestCollectScreen}
         options={{
           headerTitle: 'Solicitar Coleta',
+          headerStyle: {
+            backgroundColor: '#4ADE80',
+          },
+          headerTintColor: '#FFF'
+        }}
+      />
+
+      <Stack.Screen
+        name="Verify"
+        component={VerifyCollectScreen}
+        options={{
+          headerTitle: 'Verificar Coleta',
           headerStyle: {
             backgroundColor: '#4ADE80',
           },

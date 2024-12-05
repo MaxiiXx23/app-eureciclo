@@ -16,6 +16,9 @@ export const Content = styled(View)`
   paddingBottom:  ${({theme}) => theme.spacing[3]};
 
   gap: ${({theme}) => theme.spacing[10]};
+
+  border-top-right-radius: ${({theme}) => theme.spacing[6]};
+  border-top-left-radius: ${({theme}) => theme.spacing[6]};
 `
 
 export const ContainerInput = styled(View)`

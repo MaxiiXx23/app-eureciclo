@@ -16,4 +16,7 @@ export const Content = styled(ScrollView)`
   paddingBottom:  ${({theme}) => theme.spacing[3]};
 
   gap: ${({theme}) => theme.spacing[5]};
+
+  border-top-right-radius: ${({theme}) => theme.spacing[6]};
+  border-top-left-radius: ${({theme}) => theme.spacing[6]};
 `

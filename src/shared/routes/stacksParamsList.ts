@@ -15,6 +15,7 @@ type CollectStackParamList = {
   Request: undefined
   Status: undefined
   Camera: undefined
+  Verify: undefined
 }
 
 export { AuthStackParamList, HomeStackParamList, CollectStackParamList }
