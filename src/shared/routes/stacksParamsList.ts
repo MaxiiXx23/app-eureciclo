@@ -18,4 +18,9 @@ type CollectStackParamList = {
   Verify: undefined
 }
 
-export { AuthStackParamList, HomeStackParamList, CollectStackParamList }
+
+type ActivitiesStackParamList = {
+  ActivitiesInitial: undefined
+}
+
+export { AuthStackParamList, HomeStackParamList, CollectStackParamList, ActivitiesStackParamList }
