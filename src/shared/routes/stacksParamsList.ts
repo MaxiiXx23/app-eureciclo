@@ -23,4 +23,15 @@ type ActivitiesStackParamList = {
   ActivitiesInitial: undefined
 }
 
-export { AuthStackParamList, HomeStackParamList, CollectStackParamList, ActivitiesStackParamList }
+type ProfileStackParamList = {
+  ProfileInitial: undefined
+}
+
+
+export { 
+  AuthStackParamList, 
+  HomeStackParamList, 
+  CollectStackParamList, 
+  ActivitiesStackParamList,
+  ProfileStackParamList
+}

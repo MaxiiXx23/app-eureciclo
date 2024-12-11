@@ -1,9 +1,10 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { House, Recycle } from 'phosphor-react-native';
+import { House, Receipt, Recycle, User } from 'phosphor-react-native';
 
 import { CollectRouter } from './collect.routes';
 import { HomeRouter } from './home.routes';
 import { ActivitiesRouter } from './activities.routes';
+import { ProfileRouter } from './profile.routes';
 
 const Tab = createBottomTabNavigator();
 
@@ -56,7 +57,20 @@ export function BottomRouter() {
             tabBarLabel: 'Atividades',
             // tabBarBadge: 3,
             tabBarIcon: ({ color, size }) => (
-              <Recycle color={color} size={size} />
+              <Receipt color={color} size={size} />
+            ),
+          }}
+        />
+
+        <Tab.Screen         
+          name="Profile"
+          component={ProfileRouter} 
+          options={{
+            headerShown: false,
+            tabBarLabel: 'Perfil',
+            // tabBarBadge: 3,
+            tabBarIcon: ({ color, size }) => (
+              <User color={color} size={size} />
             ),
           }}
         />
