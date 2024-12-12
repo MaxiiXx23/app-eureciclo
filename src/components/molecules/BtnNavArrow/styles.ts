@@ -1,7 +1,7 @@
-import { Text, TouchableHighlight, View } from 'react-native'
+import { Text, TouchableOpacity, View } from 'react-native'
 import styled from 'styled-components/native'
 
-export const Container = styled(TouchableHighlight)`
+export const Container = styled(TouchableOpacity)`
   width: 100%;
   flex-direction: row;
   justify-content: space-between;

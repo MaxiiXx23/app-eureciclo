@@ -3,16 +3,16 @@ import { ElementType } from "react";
 import { Container, Title, Wrapper } from "./styles";
 import { CaretRight } from "phosphor-react-native";
 
-import { TouchableHighlightProps } from "react-native";
+import { TouchableOpacityProps } from "react-native";
 
-interface IProps extends TouchableHighlightProps {
+interface IProps extends TouchableOpacityProps {
     icon: ElementType
     label: string
 }
 
 export function BtnNavArrow({ icon:Icon, label, ...rest }: IProps) {
     return (
-        <Container>
+        <Container {...rest}>
             <>
             <Wrapper>
                 <Icon size={24} color='#4ADE80' />

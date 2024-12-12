@@ -25,6 +25,9 @@ type ActivitiesStackParamList = {
 
 type ProfileStackParamList = {
   ProfileInitial: undefined
+  Donation: undefined
+  Help: undefined
+  Profile: undefined
 }
 
 

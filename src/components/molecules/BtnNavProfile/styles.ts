@@ -1,7 +1,7 @@
-import { Text, TouchableHighlight } from 'react-native'
+import { Text, TouchableOpacity } from 'react-native'
 import styled from 'styled-components/native'
 
-export const Container = styled(TouchableHighlight)`
+export const Container = styled(TouchableOpacity)`
 
     width: ${({theme}) => theme.spacing[20]};
     height: ${({theme}) => theme.spacing[20]};

@@ -4,7 +4,7 @@ import { House, Receipt, Recycle, User } from 'phosphor-react-native';
 import { CollectRouter } from './collect.routes';
 import { HomeRouter } from './home.routes';
 import { ActivitiesRouter } from './activities.routes';
-import { ProfileRouter } from './profile.routes';
+import { AccountRouter } from './account.routes';
 
 const Tab = createBottomTabNavigator();
 
@@ -63,11 +63,11 @@ export function BottomRouter() {
         />
 
         <Tab.Screen         
-          name="Profile"
-          component={ProfileRouter} 
+          name="Account"
+          component={AccountRouter} 
           options={{
             headerShown: false,
-            tabBarLabel: 'Perfil',
+            tabBarLabel: 'Conta',
             // tabBarBadge: 3,
             tabBarIcon: ({ color, size }) => (
               <User color={color} size={size} />

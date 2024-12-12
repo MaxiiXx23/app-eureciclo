@@ -11,13 +11,14 @@ import {
     WrapperTitle 
 } from "./styles";
 import { Icons } from "shared/imports/icons";
+import { SelectImagePicker } from "components/molecules/SelectImagePicker";
 
-export function InfoProfile() {
+export function Profile() {
     return(
         <Container>
 
             <WrapperProfile>
-                <ProfileImage src='https://github.com/MaxiiXx23.png' />
+                <SelectImagePicker />
                 <Name>Max Jônatas</Name>
                 <WrapperLabel>
                     <LabelRating>

@@ -1,8 +1,8 @@
-import { TouchableHighlightProps } from "react-native";
+import { TouchableOpacityProps } from "react-native";
 import { Container, TitleBtn } from "./styles";
 import { ElementType } from "react";
 
-interface IProps extends TouchableHighlightProps {
+interface IProps extends TouchableOpacityProps {
     icon: ElementType
     title: string
 }
