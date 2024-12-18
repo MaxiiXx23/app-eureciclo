@@ -7,9 +7,9 @@ export const ContainerForm = styled(View)`
   justify-content: center;
   width: 100%;
   height: 100%;
-  padding-left: ${({ theme }) => theme.spacing['6']};
-  padding-right: ${({ theme }) => theme.spacing['6']};
-  gap: ${({ theme }) => theme.spacing['8']};
+  padding-left: ${({ theme }) => theme.spacing[6]};
+  padding-right: ${({ theme }) => theme.spacing[6]};
+  gap: ${({ theme }) => theme.spacing[8]};
 `
 
 export const ContainerInputs = styled(View)`
@@ -17,7 +17,7 @@ export const ContainerInputs = styled(View)`
   align-items: center;
   justify-content: center;
   width: 100%;
-  gap: ${({ theme }) => theme.spacing['4']};
+  gap: ${({ theme }) => theme.spacing[4]};
 `
 
 export const ContainerOptions = styled(View)`
@@ -25,5 +25,5 @@ export const ContainerOptions = styled(View)`
   align-items: center;
   justify-content: center;
   width: 100%;
-  gap: ${({ theme }) => theme.spacing['6']};
+  gap: ${({ theme }) => theme.spacing[6]};
 `

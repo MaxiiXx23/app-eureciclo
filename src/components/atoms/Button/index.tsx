@@ -8,7 +8,7 @@ interface IProps extends TouchableOpacityProps {
 
 export function Button({ color, title, ...rest }: IProps) {
   return (
-    <ContainerBtn color={color} {...rest}>
+    <ContainerBtn color={color} {...rest} activeOpacity={0.7}>
       <Title>{title}</Title>
     </ContainerBtn>
   )

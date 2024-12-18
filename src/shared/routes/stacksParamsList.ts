@@ -1,6 +1,9 @@
 type AuthStackParamList = {
   LoginScreen: undefined
   ChooseRegisterScreen: undefined
+  RegisterClientScreen: undefined
+  RegisterCollector: undefined
+  RegisterBusinessRouter: undefined
 }
 
 type HomeStackParamList = {
@@ -30,11 +33,24 @@ type ProfileStackParamList = {
   Profile: undefined
 }
 
+type RegisterCollectorStackParamList = {
+  RegisterCollectorInitial: undefined
+  RegisterCollectiorInfo: undefined
+}
+
+type RegisterBusinessStackParamList = {
+  RegisterBusinessInitial: undefined
+  RegisterPlanBusinessInfo: undefined
+  CheckoutPayment: undefined
+}
+
 
 export { 
   AuthStackParamList, 
   HomeStackParamList, 
   CollectStackParamList, 
   ActivitiesStackParamList,
-  ProfileStackParamList
+  ProfileStackParamList,
+  RegisterCollectorStackParamList,
+  RegisterBusinessStackParamList
 }

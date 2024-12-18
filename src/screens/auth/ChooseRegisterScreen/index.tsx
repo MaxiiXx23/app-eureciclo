@@ -27,6 +27,18 @@ export function ChooseRegisterScreen() {
     navigation.navigate('LoginScreen')
   }
 
+  function handleNavToRegisterClient() {
+    navigation.navigate('RegisterClientScreen')
+  }
+
+  function handleNavToRegisterCollector() {
+    navigation.navigate('RegisterCollector')
+  }
+
+  function handleNavToRegisterBusiness() {
+    navigation.navigate('RegisterBusinessRouter')
+  }
+
   return (
     <Container>
       <ContainerForm>
@@ -35,9 +47,9 @@ export function ChooseRegisterScreen() {
           <Title>Como deseja se cadastrar?</Title>
         </ContainerIcon>
         <ContainerBtns>
-          <Button color="button" title="Cliente" />
-          <Button color="button" title="Coletor Indívidual" />
-          <Button color="button" title="Empresa" />
+          <Button color="button" title="Cliente" onPress={handleNavToRegisterClient} />
+          <Button color="button" title="Coletor" onPress={handleNavToRegisterCollector} />
+          <Button color="button" title="Empresa" onPress={handleNavToRegisterBusiness} />
         </ContainerBtns>
         <WrapperTextRegister>
           <TextRegister>Já possui uma conta?</TextRegister>

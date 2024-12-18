@@ -10,7 +10,7 @@ export const Container = styled(View)`
 `
 
 export const Label = styled.Text`
-  font-size: ${({ theme }) => theme.spacing['4']};
+  font-size: ${({ theme }) => theme.spacing[5]};
   font-weight: bold;
   color: ${({ theme }) => theme.colors.shape};
 `
@@ -21,7 +21,7 @@ export const ContainerInput = styled(View)`
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  border-radius: ${({ theme }) => theme.spacing['2']};
+  border-radius: ${({ theme }) => theme.spacing[2]};
   background-color: ${({ theme }) => theme.colors.shape};
 `
 
