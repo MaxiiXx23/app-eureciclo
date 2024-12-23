@@ -1,14 +1,16 @@
-import { Button } from 'components/atoms/Button'
-import { Container } from 'components/templates/Container/styles'
-import { ContainerForm, ContainerInputs, ContainerOptions } from './styles'
-
-import { InputIcon } from 'components/atoms/InputIcon'
+import { useState, useEffect } from 'react'
+import { ToastAndroid } from 'react-native'
 
 import { EnvelopeSimple } from 'phosphor-react-native'
 import { useTheme } from 'styled-components'
-import { InputPassword } from 'components/atoms/InputPassword'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+
+import { Button } from 'components/atoms/Button'
+import { Container } from 'components/templates/Container/styles'
+import { ContainerForm, ContainerInputs, ContainerOptions } from './styles'
+import { InputIcon } from 'components/atoms/InputIcon'
+import { InputPassword } from 'components/atoms/InputPassword'
 import { AuthStackParamList } from 'shared/routes/stacksParamsList'
 import { TextShape } from 'components/atoms/Text'
 import { IconEuReciclo } from 'components/molecules/IconEuReciclo'
@@ -19,12 +21,39 @@ type LoginScreenProp = NativeStackNavigationProp<
 >
 
 export function LoginScreen() {
+
+  const [emailInput, setEmailInput] = useState<string>('')
+  const [passwordInput, setPasswordInput] = useState<string>('')
+
   const theme = useTheme()
   const navigation = useNavigation<LoginScreenProp>()
+  const showToast = (text: string) => {
+    ToastAndroid.show(text, ToastAndroid.SHORT);
+  };
 
-  function handleNavToSignIn() {
+  function handleNavToSignIn () {
     navigation.navigate('ChooseRegisterScreen')
   }
+
+  async function handleSubmitAuth() {
+
+    if(!emailInput || !passwordInput!) {
+      return showToast('Login não preenchido!')
+     
+    }
+
+
+    // Fazer a requisitação Auth e navegar para dentro do APP
+
+    setEmailInput('')
+    setPasswordInput('')
+    console.log('Login efetuado com sucesso!')
+  }
+
+  useEffect(() => {
+    setEmailInput('')
+    setPasswordInput('')
+  }, [])
 
   return (
     <Container>
@@ -35,9 +64,17 @@ export function LoginScreen() {
             icon={<EnvelopeSimple size={32} color={theme.colors.primary} />}
             label="E-mail"
             placeholder="E-mail"
+            keyboardType='email-address'
+            value={emailInput}
+            onChangeText={(text) => setEmailInput(text)}
           />
-          <InputPassword label="Senha" placeholder="Senha" />
-          <Button title="Entrar" color="button" onPress={handleNavToSignIn} />
+          <InputPassword 
+            label="Senha" 
+            placeholder="Senha"
+            value={passwordInput}
+            onChangeText={(text) => setPasswordInput(text)}
+          />
+          <Button title="Entrar" color="button" onPress={handleSubmitAuth} />
         </ContainerInputs>
         <ContainerOptions>
           <TextShape.WrapperTextInline>

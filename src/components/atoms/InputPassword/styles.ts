@@ -1,5 +1,9 @@
-import { View, TextInput, TouchableOpacity } from 'react-native'
+import { View, TextInput, TouchableOpacity, Text } from 'react-native'
 import styled from 'styled-components/native'
+
+interface ILabelProps {
+  color: 'shape' | 'primary'
+}
 
 export const Container = styled(View)`
   display: flex;
@@ -9,10 +13,10 @@ export const Container = styled(View)`
   gap: ${({ theme }) => theme.spacing['1']};
 `
 
-export const Label = styled.Text`
+export const Label = styled(Text)<ILabelProps>`
   font-size: ${({ theme }) => theme.spacing[5]};
   font-weight: bold;
-  color: ${({ theme }) => theme.colors.shape};
+  color: ${({ theme, color }) => theme.colors[color]};
 `
 
 export const ContainerInput = styled(View)`

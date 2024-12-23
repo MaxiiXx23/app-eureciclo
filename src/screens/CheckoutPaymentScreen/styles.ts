@@ -1,5 +1,9 @@
-import { Text, TouchableOpacity, View } from 'react-native'
+import { Text, TouchableOpacity, TouchableOpacityProps, View } from 'react-native'
 import styled from 'styled-components/native'
+
+interface IBtnProps extends TouchableOpacityProps {
+  color: 'primary' | 'shape'
+}
 
 export const Content = styled(View)`
   flex: 1;
@@ -61,7 +65,7 @@ export const WrapperBtnsMethods = styled(View)`
     gap: ${({theme}) => theme.spacing[10]};
 `
 
-export const BtnMethod = styled(TouchableOpacity)`
+export const BtnMethod = styled(TouchableOpacity)<IBtnProps>`
 
     width: ${({theme}) => theme.spacing[24]};
     height: ${({theme}) => theme.spacing[14]};
@@ -70,7 +74,7 @@ export const BtnMethod = styled(TouchableOpacity)`
     border-width: ${({theme}) => theme.spacing.px};
     border-color: ${({theme}) => theme.colors.primary};
 
-    background-color: ${({theme}) => theme.colors.shape};
+    background-color: ${({ theme, color }) => theme.colors[color]};
 
     justify-content: center;
     align-items: center;

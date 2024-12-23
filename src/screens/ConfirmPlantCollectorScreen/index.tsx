@@ -1,16 +1,33 @@
-import { ContainerMain } from 'components/templates/Container/styles'
-
-import { useTheme } from 'styled-components'
-
-import { ContainerInfo, Content, Description, DescriptionTitleIcon, Header, SubTitleIcon, Title, TitleIcon, WrapperIcon } from './styles'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
-import { Button } from 'components/atoms/Button'
 import { SealCheck } from 'phosphor-react-native'
+
+import { ContainerMain } from 'components/templates/Container/styles'
+import { ContainerInfo, Content, Description, DescriptionTitleIcon, Header, SubTitleIcon, Title, TitleIcon, WrapperIcon } from './styles'
+import { Button } from 'components/atoms/Button'
 
 
 export function ConfirmPlantCollectorScreen() {
-  const theme = useTheme()
+
+  const getData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('@EuReciclo:registerCollector');
+
+      return jsonValue != null ? JSON.parse(jsonValue) : null;
+    } catch (e) {
+      return null
+    }
+  };
+
+  async function handleRegister() {
+    
+    // Usar o 'dataForm' para resgatar as informações do form e registrar o usuário
+    const dataForm = await getData()
+
+    console.log(dataForm)
+  }
+
 
   return (
     <SafeAreaProvider>
@@ -33,7 +50,7 @@ export function ConfirmPlantCollectorScreen() {
                         <DescriptionTitleIcon>Coletas ilimitadas!</DescriptionTitleIcon>
                     </WrapperIcon>
 
-                    <Button title="Cadastrar-me" color="primary" />
+                    <Button title="Cadastrar-me" color="primary" onPress={handleRegister} />
                 </ContainerInfo>
 
 

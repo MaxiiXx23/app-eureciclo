@@ -8,9 +8,10 @@ import { Container, ContainerInput, EyeBtn, Input, Label } from './styles'
 
 interface IProps extends TextInputProps {
   label: string
+  color?: 'shape' | 'primary'
 }
 
-export function InputPassword({ label, ...rest }: IProps) {
+export function InputPassword({ label, color='shape', ...rest }: IProps) {
   const [show, setShow] = useState(false)
   const theme = useTheme()
 
@@ -20,7 +21,7 @@ export function InputPassword({ label, ...rest }: IProps) {
 
   return (
     <Container>
-      <Label>{label}</Label>
+      <Label color={color}>{label}</Label>
       <ContainerInput>
         <Lock size={32} color={theme.colors.primary} />
         <Input secureTextEntry={!show} {...rest} />
