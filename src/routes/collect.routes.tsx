@@ -1,10 +1,12 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-import { CollectStackParamList } from 'shared/routes/stacksParamsList'
 import { CollectScreen } from 'screens/Collect'
 import { RequestCollectScreen } from 'screens/RequestCollectScreen'
 import { CameraScreen } from 'screens/CameraScreen'
 import { VerifyCollectScreen } from 'screens/VerifyCollectScreen'
+
+import { CollectStackParamList } from 'shared/routes/stacksParamsList'
+import { AddressScreen } from 'screens/AddressScreen'
 
 const Stack = createNativeStackNavigator<CollectStackParamList>()
 
@@ -49,6 +51,19 @@ export function CollectRouter() {
           headerShown: false,
         }}
       />
+
+      <Stack.Screen
+        name="Address"
+        component={AddressScreen}
+        options={{
+          headerTitle: 'Endereço',
+          headerStyle: {
+            backgroundColor: '#4ADE80',
+          },
+          headerTintColor: '#FFF'
+        }}
+      />
+
     </Stack.Navigator>
   )
 }

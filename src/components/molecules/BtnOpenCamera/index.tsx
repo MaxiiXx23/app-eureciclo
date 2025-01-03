@@ -1,9 +1,11 @@
+import { Camera } from 'phosphor-react-native'
+
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { CollectStackParamList } from 'shared/routes/stacksParamsList'
+
 import { Button, Container, ContainerPreview, Preview} from './styles'
 
-import { Camera } from 'phosphor-react-native'
+import { CollectStackParamList } from 'shared/routes/stacksParamsList'
 
 type NavProps = NativeStackNavigationProp<CollectStackParamList>
 

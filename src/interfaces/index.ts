@@ -5,4 +5,11 @@ interface INewsDTO {
     urlImage: string
 }
 
-export { INewsDTO }
+interface IResponseFetchCEP {
+    bairro: string
+    localidade: string
+    logradouro: string
+    uf: string
+}
+
+export { INewsDTO, IResponseFetchCEP }

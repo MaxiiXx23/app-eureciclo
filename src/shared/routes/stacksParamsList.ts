@@ -19,6 +19,7 @@ type CollectStackParamList = {
   Status: undefined
   Camera: undefined
   Verify: undefined
+  Address: undefined
 }
 
 

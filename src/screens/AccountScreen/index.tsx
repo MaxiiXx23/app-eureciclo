@@ -1,24 +1,29 @@
-import { ContainerMain } from 'components/templates/Container/styles'
+import { useContext } from 'react';
 
-import { Gear, HandCoins, House, Lock, Question, ShieldCheck, User, UsersFour, Wallet } from "phosphor-react-native";
-
-import { useTheme } from 'styled-components'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { ProfileStackParamList } from 'shared/routes/stacksParamsList'
+
+import { AuthContext } from 'contexts/AuthContext';
+
+import { Gear, HandCoins, House, Lock, Question, ShieldCheck, SignOut, User, UsersFour, Wallet } from "phosphor-react-native";
+
+import { ContainerMain } from 'components/templates/Container/styles'
 import { ContainerBtns, ContainerNavs, Content } from './styles'
 import { Header } from 'components/organisms/Header'
-
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { InfoProfile } from 'components/organisms/InfoProfile'
 import { BtnNavProfile } from 'components/molecules/BtnNavProfile'
 import { BtnNavArrow } from 'components/molecules/BtnNavArrow';
 
+import { ProfileStackParamList } from 'shared/routes/stacksParamsList'
+
+
 type NavProps = NativeStackNavigationProp<ProfileStackParamList, 'ProfileInitial'>
 
 export function AccountScreen() {
-  const theme = useTheme()
   const navigation = useNavigation<NavProps>()
+
+  const { logout } = useContext(AuthContext)
 
   function handleNavToProfileScreen() {
     navigation.navigate('Profile')
@@ -30,6 +35,10 @@ export function AccountScreen() {
 
   function handleNavToHelpScreen() {
     navigation.navigate('Help')
+  }
+
+  async function handleSignOut() {
+    await logout()
   }
 
   return (
@@ -51,6 +60,7 @@ export function AccountScreen() {
                   <BtnNavArrow icon={House} label='Endereço' />
                   <BtnNavArrow icon={Wallet} label='Adicionar negócio' />
                   <BtnNavArrow icon={UsersFour} label='Contatos de confiança' />
+                  <BtnNavArrow icon={SignOut} label='Sair' onPress={handleSignOut} />
                 </ContainerNavs>
 
           </Content>

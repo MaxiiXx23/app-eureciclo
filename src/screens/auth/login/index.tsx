@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { ToastAndroid } from 'react-native'
 
 import { EnvelopeSimple } from 'phosphor-react-native'
 import { useTheme } from 'styled-components'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+
+import { AuthContext } from 'contexts/AuthContext'
 
 import { Button } from 'components/atoms/Button'
 import { Container } from 'components/templates/Container/styles'
@@ -14,6 +16,7 @@ import { InputPassword } from 'components/atoms/InputPassword'
 import { AuthStackParamList } from 'shared/routes/stacksParamsList'
 import { TextShape } from 'components/atoms/Text'
 import { IconEuReciclo } from 'components/molecules/IconEuReciclo'
+
 
 type LoginScreenProp = NativeStackNavigationProp<
   AuthStackParamList,
@@ -29,7 +32,9 @@ export function LoginScreen() {
   const navigation = useNavigation<LoginScreenProp>()
   const showToast = (text: string) => {
     ToastAndroid.show(text, ToastAndroid.SHORT);
-  };
+  }
+
+  const { signIn } = useContext(AuthContext)
 
   function handleNavToSignIn () {
     navigation.navigate('ChooseRegisterScreen')
@@ -42,12 +47,15 @@ export function LoginScreen() {
      
     }
 
+    await signIn({
+      email: emailInput,
+      password: passwordInput
+    })
 
     // Fazer a requisitação Auth e navegar para dentro do APP
 
     setEmailInput('')
     setPasswordInput('')
-    console.log('Login efetuado com sucesso!')
   }
 
   useEffect(() => {
