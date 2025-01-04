@@ -8,6 +8,10 @@ export interface IRequestLogin {
     password: string
     fullName: string
     phone: string
+    docIdentification: string
+    DateOfBirth: string
+    typeUserId: number
+    companyId?: number
   }
   
   export interface IRequestRegisterStorage {

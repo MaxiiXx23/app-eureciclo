@@ -37,6 +37,7 @@ type ProfileStackParamList = {
 type RegisterCollectorStackParamList = {
   RegisterCollectorInitial: undefined
   RegisterCollectiorInfo: undefined
+  LoginScreen: undefined
 }
 
 type RegisterBusinessStackParamList = {

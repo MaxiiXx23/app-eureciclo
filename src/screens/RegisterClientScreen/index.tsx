@@ -1,10 +1,14 @@
 import { useEffect } from 'react'
 
+import { ToastAndroid } from 'react-native'
+
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { useTheme } from 'styled-components'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Controller, ControllerRenderProps, SubmitHandler, useForm } from 'react-hook-form'
+import { useNavigation } from '@react-navigation/native'
 
+import { AuthAPIs } from 'apis/auth'
 import { normalizeCnpjOrCpfNumber, normalizeDate } from 'utils/masks'
 
 import { formTypeRegisterClientSchema, registerClientSchema } from 'schemas/auth/registerClientSchema'
@@ -17,21 +21,49 @@ import { InputIcon } from 'components/atoms/InputIcon'
 import { Button } from 'components/atoms/Button'
 import { InputPassword } from 'components/atoms/InputPassword'
 
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { AuthStackParamList } from 'shared/routes/stacksParamsList'
+import { AxiosError } from 'axios'
+
+
+type NavProps = NativeStackNavigationProp<AuthStackParamList>
 
 
 export function RegisterClientScreen() {
   const theme = useTheme()
+  const navigation = useNavigation<NavProps>()
+  const showToast = (text: string) => {
+    ToastAndroid.show(text, ToastAndroid.SHORT);
+  }
 
   const { register, setValue, control, handleSubmit} = useForm<formTypeRegisterClientSchema>({
     resolver: zodResolver(registerClientSchema),
   })
 
   const onSubmit: SubmitHandler<formTypeRegisterClientSchema> = async (data) => {
-    if (data.password !== data.confirmPassword) {
-      console.log("Senhas não correspondentes!")
-    }
+    try {
+      if (data.password !== data.confirmPassword) {
+        return showToast('Senha não são iguais!')
+      }
+  
+      await AuthAPIs.registerUser({
+        email: data.email,
+        password: data.password,
+        fullName: data.fullname,
+        DateOfBirth: data.dateBirth,
+        docIdentification: data.cpf,
+        phone: '',
+        typeUserId: 2,
+      })
+  
+      navigation.navigate('LoginScreen')
+    } catch (error) {
 
-    console.log("Cadastro efetuado com sucesso!")
+      // adicionar novos tratatmentos de erros (E-mail inválido e por ai vai)
+      if(error instanceof AxiosError) {
+        return showToast('Erro não se registrar. Por favor, tente novamente.')
+      }
+    }
   }
 
   function handleChangeInputCPF(

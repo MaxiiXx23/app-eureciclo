@@ -1,16 +1,18 @@
 import { useEffect } from 'react'
 
+import { ToastAndroid } from 'react-native'
+
 import { Controller, ControllerRenderProps, SubmitHandler, useForm } from 'react-hook-form'
 import { useTheme } from 'styled-components'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { zodResolver } from '@hookform/resolvers/zod'
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { normalizeCnpjOrCpfNumber, normalizeDate } from 'utils/masks'
+import { AuthAPIs } from 'apis/auth'
 
-import { CalendarBlank, EnvelopeSimple, IdentificationCard, Lock, User } from 'phosphor-react-native'
+import { CalendarBlank, EnvelopeSimple, IdentificationCard, User } from 'phosphor-react-native'
 
 import { ContainerMain } from 'components/templates/Container/styles'
 import { Content, Description, Form, Header, Title } from './styles'
@@ -21,33 +23,45 @@ import { Button } from 'components/atoms/Button'
 import { RegisterCollectorStackParamList } from 'shared/routes/stacksParamsList'
 import { formTypeRegisterCollectorSchema, registerCollectorSchema } from 'schemas/auth/registerCollectorSchema'
 
+
+
 type NavProps = NativeStackNavigationProp<RegisterCollectorStackParamList>
 
 export function RegisterCollectorScreen() {
   const theme = useTheme()
   const navigation = useNavigation<NavProps>()
 
+  const showToast = (text: string) => {
+    ToastAndroid.show(text, ToastAndroid.SHORT);
+  }
+
     const { register, setValue, control, handleSubmit} = useForm<formTypeRegisterCollectorSchema>({
       resolver: zodResolver(registerCollectorSchema),
     })
   
     const onSubmit: SubmitHandler<formTypeRegisterCollectorSchema> = async (data) => {
-      if (data.password !== data.confirmPassword) {
-        console.log("Senhas não correspondentes!")
-      }
-
-
 
       try {
-        const jsonValue = JSON.stringify(data);
-        console.log(jsonValue)
-        await AsyncStorage.setItem('@EuReciclo:registerCollector', jsonValue);
 
-        console.log("Cadastro efetuado com sucesso!")
-        navigation.navigate('RegisterCollectiorInfo')
+        if (data.password !== data.confirmPassword) {
+          return showToast('Senhas não são iguais!')
+        }
+
+        await AuthAPIs.registerUser({
+          email: data.email,
+          password: data.password,
+          fullName: data.fullname,
+          DateOfBirth: data.dateBirth,
+          docIdentification: data.cpf,
+          phone: '',
+          typeUserId: 3,
+        })
+    
+        navigation.navigate('LoginScreen')
+
       } catch (e) {
         // saving error
-        console.log("Erro ao salvar!")
+        return showToast('Erro não se registrar. Por favor, tente novamente.')
       }
 
     }

@@ -42,19 +42,25 @@ async function logout(refreshToken: string) {
   return response.data
 }
 
-async function registerMerchant({
+async function registerUser({
   email,
   password,
   fullName,
   phone,
+  DateOfBirth,
+  docIdentification,
+  typeUserId,
 }: IRequestRegister) {
   const response = await api.post<IResponseLoginDTO>(
-    `${baseUrl}/register/merchant`,
+    `${baseUrl}/register`,
     {
       email,
       password,
       fullName,
       phone,
+      DateOfBirth,
+      docIdentification,
+      typeUserId,
     },
   )
 
@@ -65,5 +71,5 @@ export const AuthAPIs = {
   login,
   validateRefreshToken,
   logout,
-  registerMerchant,
+  registerUser,
 }
