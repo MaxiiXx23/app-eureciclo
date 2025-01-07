@@ -4,7 +4,7 @@ import { RegisterBusinessStackParamList } from 'shared/routes/stacksParamsList'
 
 import { RegisterBusinessScreen } from 'screens/RegisterBusinessScreen'
 import { ConfirmPlanBusinessScreen } from 'screens/ConfirmPlanBusinessScreen'
-import { CheckoutPaymentScreen } from 'screens/CheckoutPaymentScreen'
+import { RegisterUserBusinessScreen } from 'screens/RegisterUserBusinessScreen'
 
 const Stack = createNativeStackNavigator<RegisterBusinessStackParamList>()
 
@@ -14,9 +14,21 @@ export function RegisterBusinessRouter() {
 
       <Stack.Screen
         name="RegisterBusinessInitial"
+        component={RegisterUserBusinessScreen}
+        options={{
+          headerTitle: 'Cadastro - Usuário',
+          headerStyle: {
+            backgroundColor: '#4ADE80',
+          },
+          headerTintColor: '#FFF'
+        }}
+      />
+
+      <Stack.Screen
+        name="RegisterBusiness"
         component={RegisterBusinessScreen}
         options={{
-          headerTitle: 'Cadastro',
+          headerTitle: 'Cadastro - Empresa',
           headerStyle: {
             backgroundColor: '#4ADE80',
           },
@@ -29,18 +41,6 @@ export function RegisterBusinessRouter() {
         component={ConfirmPlanBusinessScreen}
         options={{
           headerTitle: 'Plano',
-          headerStyle: {
-            backgroundColor: '#4ADE80',
-          },
-          headerTintColor: '#FFF'
-        }}
-      />
-
-      <Stack.Screen
-        name="CheckoutPayment"
-        component={CheckoutPaymentScreen}
-        options={{
-          headerTitle: 'Pagamento',
           headerStyle: {
             backgroundColor: '#4ADE80',
           },

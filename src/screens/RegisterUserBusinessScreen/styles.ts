@@ -38,8 +38,8 @@ export const Form = styled(View)`
 
     justify-content: center;
     align-items: center;
-    gap: ${({theme}) => theme.spacing[6]};
+    gap: ${({theme}) => theme.spacing[1.5]};
 
-    margin-top: ${({theme}) => theme.spacing[10]};
+    margin-top: ${({theme}) => theme.spacing[2]};
 
 `

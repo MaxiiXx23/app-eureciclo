@@ -42,8 +42,9 @@ type RegisterCollectorStackParamList = {
 
 type RegisterBusinessStackParamList = {
   RegisterBusinessInitial: undefined
+  RegisterBusiness: undefined
   RegisterPlanBusinessInfo: undefined
-  CheckoutPayment: undefined
+  LoginScreen: undefined
 }
 
 

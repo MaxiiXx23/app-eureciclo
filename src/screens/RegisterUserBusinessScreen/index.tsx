@@ -8,9 +8,9 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { zodResolver } from '@hookform/resolvers/zod'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import { normalizeCnpjOrCpfNumber, normalizeDate } from 'utils/masks'
-import { AuthAPIs } from 'apis/auth'
 
 import { CalendarBlank, EnvelopeSimple, IdentificationCard, User } from 'phosphor-react-native'
 
@@ -20,14 +20,15 @@ import { InputIcon } from 'components/atoms/InputIcon'
 import { InputPassword } from 'components/atoms/InputPassword'
 import { Button } from 'components/atoms/Button'
 
-import { RegisterCollectorStackParamList } from 'shared/routes/stacksParamsList'
+import { RegisterBusinessStackParamList } from 'shared/routes/stacksParamsList'
 import { formTypeRegisterCollectorSchema, registerCollectorSchema } from 'schemas/auth/registerCollectorSchema'
+import { IRequestRegister } from 'interfaces/auth'
 
 
 
-type NavProps = NativeStackNavigationProp<RegisterCollectorStackParamList>
+type NavProps = NativeStackNavigationProp<RegisterBusinessStackParamList>
 
-export function RegisterCollectorScreen() {
+export function RegisterUserBusinessScreen() {
   const theme = useTheme()
   const navigation = useNavigation<NavProps>()
 
@@ -47,17 +48,19 @@ export function RegisterCollectorScreen() {
           return showToast('Senhas não são iguais!')
         }
 
-        await AuthAPIs.registerUser({
+        const dataJson: IRequestRegister = {
+          fullName: data.fullname,
+          docIdentification: data.cpf,
           email: data.email,
           password: data.password,
-          fullName: data.fullname,
           DateOfBirth: data.dateBirth,
-          docIdentification: data.cpf,
-          phone: '',
-          typeUserId: 2,
-        })
+          typeUserId: 4   
+        } 
+
+        const jsonValue = JSON.stringify(dataJson)
+        await AsyncStorage.setItem('@EuReciclo:registerUser', jsonValue);
     
-        navigation.navigate('LoginScreen')
+        navigation.navigate('RegisterBusiness')
 
       } catch (e) {
         // saving error
@@ -97,9 +100,9 @@ export function RegisterCollectorScreen() {
           <Content>
 
                 <Header>
-                    <Title>Cadastro - Coletor</Title>
+                    <Title>Cadastro - Pessoal</Title>
                     <Description>
-                        Cadastre-se para coletar materiais recicláveis de forma simples e rápida.
+                        Cadastre-se como administrador de sua empresa.
                     </Description>
                 </Header>
 

@@ -1,20 +1,26 @@
-import { ContainerMain } from 'components/templates/Container/styles'
+import { useContext } from 'react'
 
 import { useTheme } from 'styled-components'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { ProfileStackParamList } from 'shared/routes/stacksParamsList'
-import { ContainerNavs, Content, Label, Title, WrapperLabel } from './styles'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 
+import { AuthContext } from 'contexts/AuthContext'
+
+import { ContainerMain } from 'components/templates/Container/styles'
+import { ContainerNavs, Content, Label, Title, WrapperLabel } from './styles'
 import { Profile } from 'components/organisms/Profile'
 import { ButtonArrow } from 'components/atoms/ButtonArrow'
+
+import { ProfileStackParamList } from 'shared/routes/stacksParamsList'
 
 type NavProps = NativeStackNavigationProp<ProfileStackParamList, 'ProfileInitial'>
 
 export function ProfileScreen() {
   const theme = useTheme()
   const navigation = useNavigation<NavProps>()
+
+  const { userAuth } = useContext(AuthContext)
 
 //   function handleNavToDonationScreen() {
 //     navigation.navigate('Donation')
@@ -29,7 +35,7 @@ export function ProfileScreen() {
                     <Title>Informações</Title>
                     <WrapperLabel>
                         <Label>Nome</Label>
-                        <ButtonArrow title='Max Jônatas' disabled />
+                        <ButtonArrow title={`${userAuth.firstName} ${userAuth.lastName}`} disabled />
                     </WrapperLabel>
                     <WrapperLabel>
                         <Label>Telefone</Label>
@@ -38,7 +44,7 @@ export function ProfileScreen() {
 
                     <WrapperLabel>
                         <Label>E-mail</Label>
-                        <ButtonArrow title='max.232017@gmail.com' />
+                        <ButtonArrow title={userAuth.email} />
                     </WrapperLabel>
                 </ContainerNavs>
           </Content>

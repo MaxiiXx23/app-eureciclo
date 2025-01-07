@@ -1,4 +1,9 @@
+import { useContext } from "react";
+
 import { Star } from "phosphor-react-native";
+
+import { AuthContext } from "contexts/AuthContext";
+
 import { 
     Container, 
     Description, 
@@ -13,12 +18,17 @@ import {
 import { Icons } from "shared/imports/icons";
 
 export function InfoProfile() {
+
+    const { userAuth } = useContext(AuthContext)
+
+    const name = `${userAuth.firstName} ${userAuth.lastName}`
+
     return(
         <Container>
 
             <WrapperProfile>
                 <ProfileImage src='https://github.com/MaxiiXx23.png' />
-                <Name>Max Jônatas</Name>
+                <Name>{name}</Name>
                 <WrapperLabel>
                     <LabelRating>
                         Sua avaliação: <TextRating>4.8</TextRating>

@@ -7,10 +7,10 @@ export interface IRequestLogin {
     email: string
     password: string
     fullName: string
-    phone: string
+    phone?: string
     docIdentification: string
     DateOfBirth: string
-    typeUserId: number
+    typeUserId?: number
     companyId?: number
   }
   
@@ -21,4 +21,14 @@ export interface IRequestLogin {
     fullName: string
     phone: string
   }
+
+  export interface TCreateCompany {
+    docIdentification: string
+    fantasyName: string
+    email: string
+  }
   
+  export interface IRequestCreateUserAndCompany {
+    user: IRequestRegister,
+    company: TCreateCompany
+  }

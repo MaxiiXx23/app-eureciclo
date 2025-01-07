@@ -1,4 +1,10 @@
+import { useContext } from "react";
+
 import { Star } from "phosphor-react-native";
+
+import { AuthContext } from "contexts/AuthContext";
+
+import { SelectImagePicker } from "components/molecules/SelectImagePicker";
 import { 
     Container, 
     Description, 
@@ -11,15 +17,18 @@ import {
     WrapperTitle 
 } from "./styles";
 import { Icons } from "shared/imports/icons";
-import { SelectImagePicker } from "components/molecules/SelectImagePicker";
-
 export function Profile() {
+
+    const { userAuth } = useContext(AuthContext)
+
+    const name = `${userAuth.firstName} ${userAuth.lastName}`
+
     return(
         <Container>
 
             <WrapperProfile>
                 <SelectImagePicker />
-                <Name>Max Jônatas</Name>
+                <Name>{name}</Name>
                 <WrapperLabel>
                     <LabelRating>
                         Sua avaliação: <TextRating>4.8</TextRating>

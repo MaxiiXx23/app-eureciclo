@@ -19,8 +19,7 @@ import { Button } from 'components/atoms/Button'
 
 import { RegisterBusinessStackParamList } from 'shared/routes/stacksParamsList'
 import { formTypeRegisterBusinessSchema, registerBusinessSchema } from 'schemas/auth/registerBusinessSchema'
-import { InputPassword } from 'components/atoms/InputPassword'
-
+import { TCreateCompany } from 'interfaces/auth'
 
 type NavProps = NativeStackNavigationProp<RegisterBusinessStackParamList>
 
@@ -33,17 +32,18 @@ export function RegisterBusinessScreen() {
   })
 
   const onSubmit: SubmitHandler<formTypeRegisterBusinessSchema> = async (data) => {
-    if (data.password !== data.confirmPassword) {
-      console.log("Senhas não correspondentes!")
-    }
-
-
 
     try {
-      const jsonValue = JSON.stringify(data);
+
+      const dataJson: TCreateCompany = {
+        email: data.email,
+        fantasyName: data.nameFantasy,
+        docIdentification: data.cnpj
+      }
+
+      const jsonValue = JSON.stringify(dataJson);
       await AsyncStorage.setItem('@EuReciclo:registerBusiness', jsonValue);
 
-      console.log("Cadastro efetuado com sucesso!")
       navigation.navigate('RegisterPlanBusinessInfo')
     } catch (e) {
       // saving error
@@ -63,9 +63,7 @@ export function RegisterBusinessScreen() {
   useEffect(() => {
     register('nameFantasy')
     register('cnpj')
-    register('password')
     register('email')
-    register('confirmPassword')
   }, [register])
     
 
@@ -119,20 +117,6 @@ export function RegisterBusinessScreen() {
                       placeholder="Digite seu e-mail"
                       onChangeText={text => setValue('email', text)}
                       keyboardType='email-address'
-                  />
-
-                  <InputPassword
-                      color='primary'
-                      label="Senha"
-                      placeholder="Digite sua senha"
-                      onChangeText={text => setValue('password', text)}
-                  />
-
-                  <InputPassword
-                      color='primary'
-                      label="Confirme a senha"
-                      placeholder="Confirme sua senha"
-                      onChangeText={text => setValue('confirmPassword', text)}
                   />
 
                   <Button title="Próximo" color="primary" onPress={handleSubmit(onSubmit)} />

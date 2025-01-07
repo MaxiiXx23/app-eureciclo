@@ -53,7 +53,7 @@ export function RegisterClientScreen() {
         DateOfBirth: data.dateBirth,
         docIdentification: data.cpf,
         phone: '',
-        typeUserId: 2,
+        typeUserId: 1,
       })
   
       navigation.navigate('LoginScreen')

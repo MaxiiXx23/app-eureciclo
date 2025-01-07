@@ -4,7 +4,7 @@ import { api } from 'lib/axios'
 
 import { IResponseLoginDTO, IResponseRefreshTokenDTO } from 'dtos/auth'
 import { IDefaultResponseDTO } from 'dtos/IDefaultResponseDTO'
-import { IRequestLogin, IRequestRegister } from 'interfaces/auth'
+import { IRequestCreateUserAndCompany, IRequestLogin, IRequestRegister } from 'interfaces/auth'
 
 const baseUrl = 'auth'
 
@@ -67,9 +67,25 @@ async function registerUser({
   return response.data
 }
 
+async function registerUserAndCompany({
+  user,
+  company
+}: IRequestCreateUserAndCompany) {
+  const response = await api.post<IResponseLoginDTO>(
+    `${baseUrl}/register-company`,
+    {
+      user,
+      company
+    },
+  )
+
+  return response.data
+}
+
 export const AuthAPIs = {
   login,
   validateRefreshToken,
   logout,
   registerUser,
+  registerUserAndCompany
 }

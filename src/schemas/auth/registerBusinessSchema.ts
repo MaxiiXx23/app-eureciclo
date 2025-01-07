@@ -21,22 +21,6 @@ export const registerBusinessSchema = z.object({
     .min(1, 'E-mail não preechido.')
     .max(100, 'E-mail inválido.')
     .email('E-mail inválido.'),
-  password: z
-    .string()
-    .min(8, 'A senha deve possuir 8 à 16 caracteres.')
-    .max(16, 'A senha deve possuir 8 à 16 caracteres.')
-    .regex(
-      passwordRegex,
-      'A senha deve conter pelo menos uma letra maiúscula, um número e um caractere especial',
-    ),
-  confirmPassword: z
-    .string()
-    .min(8, 'A senha deve possuir 8 à 16 caracteres.')
-    .max(16, 'A senha deve possuir 8 à 16 caracteres.')
-    .regex(
-      passwordRegex,
-      'A senha deve conter pelo menos uma letra maiúscula, um número e um caractere especial',
-    ),
 })
 
 export type formTypeRegisterBusinessSchema = z.infer<
