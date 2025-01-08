@@ -17,7 +17,7 @@ export function SelectImagePicker() {
   return (
     <Container>
         <ContainerPreview>
-            <Preview src="https://github.com/MaxiiXx23.png" />
+            <Preview src="https://picsum.photos/200/300" />
             <Button onPress={handleOpenImagePicker} >
                 <PencilSimpleLine size={28} color='#4ADE80' />
             </Button>  

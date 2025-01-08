@@ -27,7 +27,7 @@ export function InfoProfile() {
         <Container>
 
             <WrapperProfile>
-                <ProfileImage src='https://github.com/MaxiiXx23.png' />
+                <ProfileImage src='https://picsum.photos/200/300' />
                 <Name>{name}</Name>
                 <WrapperLabel>
                     <LabelRating>
