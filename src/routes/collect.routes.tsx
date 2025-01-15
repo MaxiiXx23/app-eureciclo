@@ -1,69 +1,74 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
+import { CollectsProvider } from 'contexts/CollectsContext'
+
 import { CollectScreen } from 'screens/Collect'
 import { RequestCollectScreen } from 'screens/RequestCollectScreen'
 import { CameraScreen } from 'screens/CameraScreen'
 import { VerifyCollectScreen } from 'screens/VerifyCollectScreen'
+import { AddressScreen } from 'screens/AddressScreen'
 
 import { CollectStackParamList } from 'shared/routes/stacksParamsList'
-import { AddressScreen } from 'screens/AddressScreen'
 
 const Stack = createNativeStackNavigator<CollectStackParamList>()
 
 export function CollectRouter() {
+
   return (
-    <Stack.Navigator initialRouteName="CollectInitial">
-      <Stack.Screen
-        name="CollectInitial"
-        component={CollectScreen}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="Request"
-        component={RequestCollectScreen}
-        options={{
-          headerTitle: 'Solicitar Coleta',
-          headerStyle: {
-            backgroundColor: '#4ADE80',
-          },
-          headerTintColor: '#FFF'
-        }}
-      />
+    <CollectsProvider>
+      <Stack.Navigator initialRouteName="CollectInitial">
+        <Stack.Screen
+          name="CollectInitial"
+          component={CollectScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Request"
+          component={RequestCollectScreen}
+          options={{
+            headerTitle: 'Solicitar Coleta',
+            headerStyle: {
+              backgroundColor: '#4ADE80',
+            },
+            headerTintColor: '#FFF'
+          }}
+        />
 
-      <Stack.Screen
-        name="Verify"
-        component={VerifyCollectScreen}
-        options={{
-          headerTitle: 'Verificar Coleta',
-          headerStyle: {
-            backgroundColor: '#4ADE80',
-          },
-          headerTintColor: '#FFF'
-        }}
-      />
+        <Stack.Screen
+          name="Verify"
+          component={VerifyCollectScreen}
+          options={{
+            headerTitle: 'Verificar Coleta',
+            headerStyle: {
+              backgroundColor: '#4ADE80',
+            },
+            headerTintColor: '#FFF'
+          }}
+        />
 
-      <Stack.Screen
-        name="Camera"
-        component={CameraScreen}
-        options={{
-          headerShown: false,
-        }}
-      />
+        <Stack.Screen
+          name="Camera"
+          component={CameraScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
 
-      <Stack.Screen
-        name="Address"
-        component={AddressScreen}
-        options={{
-          headerTitle: 'Endereço',
-          headerStyle: {
-            backgroundColor: '#4ADE80',
-          },
-          headerTintColor: '#FFF'
-        }}
-      />
+        <Stack.Screen
+          name="Address"
+          component={AddressScreen}
+          options={{
+            headerTitle: 'Endereço',
+            headerStyle: {
+              backgroundColor: '#4ADE80',
+            },
+            headerTintColor: '#FFF'
+          }}
+        />
 
-    </Stack.Navigator>
+      </Stack.Navigator>
+    </CollectsProvider>
   )
 }

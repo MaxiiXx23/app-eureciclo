@@ -52,5 +52,4 @@ export const HeaderTitle = styled(Text)`
 export const Label = styled(Text)`
   font-size: ${({theme}) => theme.spacing[4]};
   color: ${({theme}) => theme.colors.textDark};
-
 `

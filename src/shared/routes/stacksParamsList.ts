@@ -18,13 +18,15 @@ type CollectStackParamList = {
   Request: undefined
   Status: undefined
   Camera: undefined
-  Verify: undefined
   Address: undefined
 }
 
 
 type ActivitiesStackParamList = {
   ActivitiesInitial: undefined
+  Verify: {
+    id: number
+  }
 }
 
 type ProfileStackParamList = {

@@ -1,19 +1,32 @@
-import { Button } from 'components/atoms/Button'
-import { Container, Content, HeaderLabel, HeaderTitle, } from './styles'
-import { ButtonArrow } from 'components/atoms/ButtonArrow'
+import { Info } from 'phosphor-react-native'
 
-export function InfoCollector() {
+import { Container, Content, HeaderLabel, HeaderTitle, HeaderTitleLabel, Label, WrapperLabel, } from './styles'
+import { IGetInfoCollectDTO } from 'dtos/collects'
+
+interface IProps {
+  data: {
+    id: number
+    name: string
+    createdAt: string
+  }
+}
+
+export function InfoCollector({ data }: IProps) {
 
   return (
     <Container>
         <Content>
             <HeaderLabel>
-                <HeaderTitle>Coletor</HeaderTitle>
+                <HeaderTitle>Informações do Coletor</HeaderTitle>
             </HeaderLabel>
 
-            <ButtonArrow title='Informações do coletor' />
-
-            <Button color='button' title='conversa' /> 
+            <WrapperLabel>
+                  <HeaderLabel>
+                    <Info size={24} color='#4ADE80' />
+                    <HeaderTitleLabel>Nome</HeaderTitleLabel>
+                  </HeaderLabel>
+                  <Label>{data.name}</Label>
+            </WrapperLabel>
         </Content>
 
     </Container>

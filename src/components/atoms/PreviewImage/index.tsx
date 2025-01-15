@@ -1,7 +1,7 @@
 import { Container, ContainerPreview, Preview} from './styles'
 
 interface IProps {
-    urlImage?: string
+    urlImage: string
 }
 
 export function PreviewImage({ urlImage }: IProps) {
@@ -9,7 +9,7 @@ export function PreviewImage({ urlImage }: IProps) {
   return (
     <Container>
         <ContainerPreview>
-            <Preview source={require('../../../assets/images/reciclaveis.png')} /> 
+            <Preview src={urlImage} /> 
             
         </ContainerPreview>
     </Container>
