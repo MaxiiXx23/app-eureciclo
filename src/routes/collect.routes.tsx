@@ -9,6 +9,8 @@ import { VerifyCollectScreen } from 'screens/VerifyCollectScreen'
 import { AddressScreen } from 'screens/AddressScreen'
 
 import { CollectStackParamList } from 'shared/routes/stacksParamsList'
+import { SearchCollectsScreen } from 'screens/SearchCollectsScreen'
+import { ActivitiesScreen } from 'screens/ActivitiesScreen'
 
 const Stack = createNativeStackNavigator<CollectStackParamList>()
 
@@ -41,6 +43,31 @@ export function CollectRouter() {
           component={VerifyCollectScreen}
           options={{
             headerTitle: 'Verificar Coleta',
+            headerStyle: {
+              backgroundColor: '#4ADE80',
+            },
+            headerTintColor: '#FFF'
+          }}
+        />
+
+      <Stack.Screen
+          name="VerifyCollectsInProcess"
+          component={ActivitiesScreen}
+          options={{
+            headerTitle: 'Solitações em Andamento',
+            headerStyle: {
+              backgroundColor: '#4ADE80',
+            },
+            headerTintColor: '#FFF'
+          }}
+        />
+
+
+        <Stack.Screen
+          name="SearchCollects"
+          component={SearchCollectsScreen}
+          options={{
+            headerTitle: 'Solicitações',
             headerStyle: {
               backgroundColor: '#4ADE80',
             },

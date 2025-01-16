@@ -1,8 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
+
+import { AuthContext } from 'contexts/AuthContext'
+import { CollectsAPIs } from 'apis/collects'
 
 import { House, Info, Receipt, TextAlignLeft } from 'phosphor-react-native'
 
@@ -11,41 +14,55 @@ import { ContainerInfos, Content, HeaderLabel, HeaderTitle, Label, WrapperLabel 
 import { SubHeader } from 'components/molecules/SubHeader'
 import { PreviewImage } from 'components/atoms/PreviewImage'
 import { InfoCollector } from "components/molecules/InfoCollector"
+import { InfoEmpty } from 'components/molecules/InfoEmpty'
+import { Button } from 'components/atoms/Button'
 
 import { ActivitiesStackParamList, CollectStackParamList } from 'shared/routes/stacksParamsList'
 import { IGetInfoCollectDTO } from 'dtos/collects'
-import { CollectsAPIs } from 'apis/collects'
-import { InfoEmpty } from 'components/molecules/InfoEmpty'
-
 
 type NavProps = NativeStackNavigationProp<CollectStackParamList, 'CollectInitial'>
 
 export function VerifyCollectScreen() {
   const { params } = useRoute()
+  const navigation = useNavigation<NavProps>()
 
   const [data, setData] = useState<IGetInfoCollectDTO | undefined>()
 
-  const navigation = useNavigation<NavProps>()
-
-  function handleNavToSignIn() {
-    navigation.navigate('Request')
-  }
+  const { userAuth } = useContext(AuthContext)
 
   async function fetch() {
     try {
-      if(params) {
+      if(!params?.id) {
+        const response = await CollectsAPIs.getInProgressByUserId()
+
+        setData(response.data.collect)
+        
+      } else {
 
         const { id } = params as ActivitiesStackParamList['Verify']
 
         const response = await CollectsAPIs.getCollectById(id)
 
         setData(response.data.collect)
-        
-      } else {
-        const response = await CollectsAPIs.getInProgressByUserId()
-
-        setData(response.data.collect)
       }
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async function fetchCreateInProcess() {
+    try {
+
+      if(!params) {
+        throw new Error("ID não encontrado!")
+      }
+
+      const { id } = params as ActivitiesStackParamList['Verify']
+
+      await CollectsAPIs.createInProgressByCollector(id)
+
+      navigation.navigate('SearchCollects')
 
     } catch (error) {
       console.log(error)
@@ -104,9 +121,12 @@ export function VerifyCollectScreen() {
                 <InfoCollector data={data.collector} />
               )}
               
-            </ContainerInfos>
+              {userAuth.typeUserId === 2 && data.status.id === 4 && (
+                <Button color='primary' title='Quero Coletar' onPress={fetchCreateInProcess} />
+              )}
 
-            {/* <Button color='dangerPrimary' title='cancelar' /> */}
+            </ContainerInfos>
+            
           </Content>
         )}
 

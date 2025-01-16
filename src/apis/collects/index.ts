@@ -1,7 +1,8 @@
 import { api } from 'lib/axios'
 
-import { IRequestPagination } from 'interfaces'
+import { IRequestPagination, IRequestPaginationMultipleStatus } from 'interfaces'
 import { IResponseGetInfoCollectDTO, IResponseGetListCollectsByUserDTO } from 'dtos/collects'
+import { IDefaultResponsePaginationDTO } from 'dtos/IDefaultResponseDTO'
 
 const baseUrl = 'collect'
 
@@ -29,6 +30,30 @@ async function getCollectsByUser({
   return response
 }
 
+async function getCollectsToCollector({
+  page,
+  perPage,
+  search = '',
+  ordernation,
+  // status,
+  period,
+  type = 'all',
+}: IRequestPagination) {
+
+  const response = await api.get<IResponseGetListCollectsByUserDTO>(`${baseUrl}/list/collector-search`, {
+    params: {
+        search, 
+        page,
+        perPage,
+        ordernation,
+        status: 4,
+        type,
+    },
+  })
+
+  return response
+}
+
 async function getCollectById(id: number) {
   const response = await api.get<IResponseGetInfoCollectDTO>(`${baseUrl}/info`, {
     params: {
@@ -46,8 +71,44 @@ async function getInProgressByUserId() {
   return response
 }
 
+async function createInProgressByCollector(id: number) {
+
+  const response = await api.post<IDefaultResponsePaginationDTO>(`${baseUrl}/create/in-progress?id=${id}`)
+
+  return response
+}
+
+async function getCollectsInProcessByCollector({
+  id,
+  page,
+  perPage,
+  search = '',
+  ordernation,
+  status,
+  period,
+  type = 'all',
+}: IRequestPaginationMultipleStatus) {
+
+  const response = await api.get<IResponseGetListCollectsByUserDTO>(`${baseUrl}/list/collector-search/process`, {
+    params: {
+        id,
+        search, 
+        page,
+        perPage,
+        ordernation,
+        status,
+        type,
+    },
+  })
+
+  return response
+}
+
 export const CollectsAPIs = {
     getCollectsByUser,
     getInProgressByUserId,
-    getCollectById
+    getCollectById,
+    getCollectsToCollector,
+    getCollectsInProcessByCollector,
+    createInProgressByCollector
 }

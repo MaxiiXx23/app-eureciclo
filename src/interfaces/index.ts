@@ -1,11 +1,11 @@
-interface INewsDTO {
+export interface INewsDTO {
     id: number,
     title: string
     btnText: string
     urlImage: string
 }
 
-interface IResponseFetchCEP {
+export interface IResponseFetchCEP {
     bairro: string
     localidade: string
     logradouro: string
@@ -25,7 +25,7 @@ export interface IOrdernation {
     to?: string
   }
 
-export interface IRequestPagination {
+  export interface IRequestPagination {
     id?: number
     page: number
     perPage: number
@@ -36,4 +36,6 @@ export interface IRequestPagination {
     period?: IPeriodQuery
   }
 
-export { INewsDTO, IResponseFetchCEP }
+  export interface IRequestPaginationMultipleStatus extends Omit<IRequestPagination, 'status'> {
+    status: string
+  }

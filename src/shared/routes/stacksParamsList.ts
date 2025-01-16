@@ -19,11 +19,20 @@ type CollectStackParamList = {
   Status: undefined
   Camera: undefined
   Address: undefined
+  Verify: {
+    id?: number
+  }
+  SearchCollects: undefined
+  VerifyCollectsInProcess: {
+    isInProcess: boolean
+  }
 }
 
 
 type ActivitiesStackParamList = {
-  ActivitiesInitial: undefined
+  ActivitiesInitial: {
+    isInProcess: boolean
+  }
   Verify: {
     id: number
   }

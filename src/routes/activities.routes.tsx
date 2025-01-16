@@ -17,6 +17,9 @@ export function ActivitiesRouter() {
             options={{
               headerShown: false,
             }}
+            initialParams={{
+              isInProcess: false
+            }}
           />
 
           <Stack.Screen

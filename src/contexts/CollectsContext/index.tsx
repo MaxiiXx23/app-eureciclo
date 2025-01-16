@@ -7,8 +7,8 @@ import {
   SetStateAction,
 } from 'react'
 
-import { AxiosError, AxiosResponse } from 'axios'
-import { IOrdernation, IPeriodQuery, IQueryType, IRequestPagination } from 'interfaces'
+import { AxiosError } from 'axios'
+import { IRequestPagination, IRequestPaginationMultipleStatus } from 'interfaces'
 import { IResponseGetListCollectsByUserDTO } from 'dtos/collects'
 import { CollectsAPIs } from 'apis/collects'
 
@@ -19,6 +19,10 @@ interface IContextProps {
   currentPage: number
   handlePageChange: (page: number, totalPage: number) => void
   getCollectsPaginated: (request: IRequestPagination
+  ) => Promise<IResponseGetListCollectsByUserDTO | undefined>
+  getCollectsPaginatedByCollector: (request: IRequestPaginationMultipleStatus
+  ) => Promise<IResponseGetListCollectsByUserDTO | undefined>
+  getCollectsToCollector: (request: IRequestPagination
   ) => Promise<IResponseGetListCollectsByUserDTO | undefined>
   setCurrentPage: Dispatch<SetStateAction<number>>
 }
@@ -68,11 +72,83 @@ export function CollectsProvider({ children }: Props) {
     }
   }
 
+  async function getCollectsPaginatedByCollector({
+    id,
+    search,
+    page,
+    perPage,
+    status,
+    ordernation,
+    period,
+    type,
+  }: IRequestPaginationMultipleStatus) {
+    try {
+
+      const response = await CollectsAPIs.getCollectsInProcessByCollector({
+        id,
+        search,
+        page,
+        perPage,
+        ordernation,
+        status,
+        type,
+        period,
+      })
+      
+      setCurrentPage(response.data.currentPage)
+      return response.data
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        console.log(
+            'Por favor, tente novamente recarregando a página.')
+        return
+      }
+
+      console.log('Por favor, tente novamente recarregando a página.')
+    }
+  }
+
+  async function getCollectsToCollector({
+    search,
+    page,
+    perPage,
+    status,
+    ordernation,
+    period,
+    type,
+  }: IRequestPagination) {
+    try {
+
+      const response = await CollectsAPIs.getCollectsToCollector({
+        search,
+        page,
+        perPage,
+        ordernation,
+        status,
+        type,
+        period,
+      })
+      
+      setCurrentPage(response.data.currentPage)
+      return response.data
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        console.log(
+            'Por favor, tente novamente recarregando a página.')
+        return
+      }
+
+      console.log('Por favor, tente novamente recarregando a página.')
+    }
+  }
+
 
   return (
     <CollectsContext.Provider
       value={{
         getCollectsPaginated,
+        getCollectsToCollector,
+        getCollectsPaginatedByCollector,
         currentPage,
         handlePageChange,
         setCurrentPage,
