@@ -22,7 +22,11 @@ type CollectStackParamList = {
   Verify: {
     id?: number
   }
+  ProfileInfoCompany: {
+    id: number
+  }
   SearchCollects: undefined
+  SearchCompanies: undefined
   VerifyCollectsInProcess: {
     isInProcess: boolean
   }

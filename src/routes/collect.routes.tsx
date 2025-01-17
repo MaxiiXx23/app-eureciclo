@@ -11,6 +11,8 @@ import { AddressScreen } from 'screens/AddressScreen'
 import { CollectStackParamList } from 'shared/routes/stacksParamsList'
 import { SearchCollectsScreen } from 'screens/SearchCollectsScreen'
 import { ActivitiesScreen } from 'screens/ActivitiesScreen'
+import { SearchCompanies } from 'screens/SearchCompanies'
+import { ProfileCompanyScreen } from 'screens/ProfileCompanyScreen'
 
 const Stack = createNativeStackNavigator<CollectStackParamList>()
 
@@ -26,6 +28,7 @@ export function CollectRouter() {
             headerShown: false,
           }}
         />
+
         <Stack.Screen
           name="Request"
           component={RequestCollectScreen}
@@ -68,6 +71,30 @@ export function CollectRouter() {
           component={SearchCollectsScreen}
           options={{
             headerTitle: 'Solicitações',
+            headerStyle: {
+              backgroundColor: '#4ADE80',
+            },
+            headerTintColor: '#FFF'
+          }}
+        />
+
+        <Stack.Screen
+          name="SearchCompanies"
+          component={SearchCompanies}
+          options={{
+            headerTitle: 'Empresas',
+            headerStyle: {
+              backgroundColor: '#4ADE80',
+            },
+            headerTintColor: '#FFF'
+          }}
+        />
+
+        <Stack.Screen
+          name="ProfileInfoCompany"
+          component={ProfileCompanyScreen}
+          options={{
+            headerTitle: 'Empresa',
             headerStyle: {
               backgroundColor: '#4ADE80',
             },

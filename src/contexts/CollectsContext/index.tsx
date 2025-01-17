@@ -11,6 +11,8 @@ import { AxiosError } from 'axios'
 import { IRequestPagination, IRequestPaginationMultipleStatus } from 'interfaces'
 import { IResponseGetListCollectsByUserDTO } from 'dtos/collects'
 import { CollectsAPIs } from 'apis/collects'
+import { CompaniesAPIs } from 'apis/companies'
+import { TResponseListCompaniesDTO } from 'dtos/companies'
 
 type Props = {
   children: ReactNode
@@ -25,6 +27,7 @@ interface IContextProps {
   getCollectsToCollector: (request: IRequestPagination
   ) => Promise<IResponseGetListCollectsByUserDTO | undefined>
   setCurrentPage: Dispatch<SetStateAction<number>>
+  getSearchCompaniesToCollector(data: IRequestPagination): Promise<TResponseListCompaniesDTO | undefined>
 }
 
 const CollectsContext = createContext({} as IContextProps)
@@ -142,6 +145,40 @@ export function CollectsProvider({ children }: Props) {
     }
   }
 
+  async function getSearchCompaniesToCollector({
+    search,
+    page,
+    perPage,
+    status,
+    ordernation,
+    period,
+    type,
+  }: IRequestPagination) {
+    try {
+
+      const response = await CompaniesAPIs.getSearchCompaniesToCollector({
+        search,
+        page,
+        perPage,
+        ordernation,
+        status,
+        type,
+        period,
+      })
+      
+      setCurrentPage(response.data.currentPage)
+      return response.data
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        console.log(
+            'Por favor, tente novamente recarregando a página.')
+        return
+      }
+
+      console.log('Por favor, tente novamente recarregando a página.')
+    }
+  }
+
 
   return (
     <CollectsContext.Provider
@@ -149,6 +186,7 @@ export function CollectsProvider({ children }: Props) {
         getCollectsPaginated,
         getCollectsToCollector,
         getCollectsPaginatedByCollector,
+        getSearchCompaniesToCollector,
         currentPage,
         handlePageChange,
         setCurrentPage,

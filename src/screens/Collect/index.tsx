@@ -1,6 +1,5 @@
 import { useContext } from 'react'
 
-import { useTheme } from 'styled-components'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
@@ -18,7 +17,6 @@ import { CardCollect } from 'components/molecules/CardCollect'
 type NavProps = NativeStackNavigationProp<CollectStackParamList, 'CollectInitial'>
 
 export function CollectScreen() {
-  const theme = useTheme()
   const navigation = useNavigation<NavProps>()
   const { userAuth } = useContext(AuthContext)
 
@@ -40,6 +38,10 @@ export function CollectScreen() {
     })
   }
 
+  function handleNavToSearchCompanies() {
+    navigation.navigate('SearchCompanies')
+  }
+
   return (
     <SafeAreaProvider>
       <ContainerMain>
@@ -53,14 +55,16 @@ export function CollectScreen() {
                   <>
                     <CardCollect
                       onPress={handleNavToRequest}
-                      title='Solicitar Coleta' 
-                      description='Solicite a coleta de seus materiais recicláveis.' 
+                      title='Solicitar Coleta'
+                      description='Solicite a coleta de seus materiais recicláveis.'
+                      urlImage='reciclaveis.png'
                     />
 
                   <CardCollect 
                       onPress={handleNavToVerify}
                       title='Verificar Coleta' 
-                      description='Veja as informações da sua coleta que está em andamento.' 
+                      description='Veja as informações da sua coleta que está em andamento.'
+                      urlImage='reciclaveis.png'
                     />
 
                   </>
@@ -73,13 +77,22 @@ export function CollectScreen() {
                     <CardCollect
                       onPress={handleNavToSearch}
                       title='Solicitações' 
-                      description='Pesquise e encontre solicitações na sua região.' 
+                      description='Pesquise e encontre solicitações na sua região.'
+                      urlImage='reciclaveis.png'
                     />
 
                     <CardCollect 
                       onPress={handleNavToSearchInProcessByColletor}
                       title='Verificar Coletas' 
-                      description='Veja a sua lista de coletas que estão em andamento.' 
+                      description='Veja a sua lista de coletas que estão em andamento.'
+                      urlImage='reciclaveis.png'
+                    />
+
+                    <CardCollect
+                      onPress={handleNavToSearchCompanies}
+                      title='Encontre empresas' 
+                      description='Encontre empresas na sua região de forma simples e rápida.'
+                      urlImage='reciclaveis.png'
                     />
                   </>
                 )
