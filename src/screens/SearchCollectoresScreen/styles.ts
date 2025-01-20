@@ -1,4 +1,4 @@
-import { ScrollView, View } from 'react-native'
+import { View } from 'react-native'
 import styled from 'styled-components/native'
 
 export const Content = styled(View)`
@@ -14,19 +14,4 @@ export const Content = styled(View)`
 
   border-top-right-radius: ${({theme}) => theme.spacing[6]};
   border-top-left-radius: ${({theme}) => theme.spacing[6]};
-`
-
-export const ContainerBtns = styled(View)`
-  width: 100%;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: ${({theme}) => theme.spacing[8]};
-
-  margin-top: ${({theme}) => theme.spacing[2]};
-`
-
-export const ContainerNavs = styled(ScrollView)`
-  flex: 1;
-  margin-top: ${({theme}) => theme.spacing[8]};
 `

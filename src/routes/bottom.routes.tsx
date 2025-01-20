@@ -1,14 +1,20 @@
+import { useContext } from 'react';
+
+import { AuthContext } from 'contexts/AuthContext';
+
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { House, Receipt, Recycle, User } from 'phosphor-react-native';
+import { House, Receipt, Recycle, User, UsersThree } from 'phosphor-react-native';
 
 import { CollectRouter } from './collect.routes';
 import { HomeRouter } from './home.routes';
 import { ActivitiesRouter } from './activities.routes';
 import { AccountRouter } from './account.routes';
+import { CollectoresRouter } from './collectores.routes';
 
 const Tab = createBottomTabNavigator();
 
 export function BottomRouter() {
+  const { userAuth } = useContext(AuthContext)
   return (
     <Tab.Navigator
         initialRouteName="Initial"
@@ -36,31 +42,54 @@ export function BottomRouter() {
         }}
         />
 
-        <Tab.Screen         
-          name="Collect"
-          component={CollectRouter} 
-          options={{
-            headerShown: false,
-            tabBarLabel: 'Coleta',
-            // tabBarBadge: 3,
-            tabBarIcon: ({ color, size }) => (
-              <Recycle color={color} size={size} />
-            ),
-          }}
-        />
+        {
+          userAuth.typeUserId !== 4 && (
+            <>
+              <Tab.Screen         
+                name="Collect"
+                component={CollectRouter} 
+                options={{
+                  headerShown: false,
+                  tabBarLabel: 'Coleta',
+                  // tabBarBadge: 3,
+                  tabBarIcon: ({ color, size }) => (
+                    <Recycle color={color} size={size} />
+                  ),
+                }}
+              />
 
-        <Tab.Screen         
-          name="Activities"
-          component={ActivitiesRouter} 
-          options={{
-            headerShown: false,
-            tabBarLabel: 'Atividades',
-            // tabBarBadge: 3,
-            tabBarIcon: ({ color, size }) => (
-              <Receipt color={color} size={size} />
-            ),
-          }}
-        />
+              <Tab.Screen         
+                name="Activities"
+                component={ActivitiesRouter} 
+                options={{
+                  headerShown: false,
+                  tabBarLabel: 'Atividades',
+                  // tabBarBadge: 3,
+                  tabBarIcon: ({ color, size }) => (
+                    <Receipt color={color} size={size} />
+                  ),
+                }}
+              />
+            </>
+          )
+        }
+
+        {
+          userAuth.typeUserId === 4 && (
+            <Tab.Screen         
+              name="SearchCollectores"
+              component={CollectoresRouter} 
+              options={{
+                headerShown: false,
+                tabBarLabel: 'Coletores',
+                // tabBarBadge: 3,
+                tabBarIcon: ({ color, size }) => (
+                  <UsersThree color={color} size={size} />
+                ),
+              }}
+            />
+          )
+        }
 
         <Tab.Screen         
           name="Account"
@@ -74,6 +103,7 @@ export function BottomRouter() {
             ),
           }}
         />
+
     </Tab.Navigator>
   );
 }

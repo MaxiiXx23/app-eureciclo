@@ -62,6 +62,13 @@ type RegisterBusinessStackParamList = {
   LoginScreen: undefined
 }
 
+type CollectoresStackParamList = {
+  CollectoresInitial: undefined
+  InfoProfileUser: {
+    id: number
+  }
+}
+
 
 export { 
   AuthStackParamList, 
@@ -70,5 +77,6 @@ export {
   ActivitiesStackParamList,
   ProfileStackParamList,
   RegisterCollectorStackParamList,
-  RegisterBusinessStackParamList
+  RegisterBusinessStackParamList,
+  CollectoresStackParamList
 }
