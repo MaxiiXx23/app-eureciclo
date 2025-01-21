@@ -1,11 +1,15 @@
-import { useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import { Controller, ControllerRenderProps, SubmitHandler, useForm } from 'react-hook-form'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import { useTheme } from 'styled-components'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { zodResolver } from '@hookform/resolvers/zod'
+
+import { UsersAPIs } from 'apis/users'
+import { AuthContext } from 'contexts/AuthContext'
+import { formaterCEP } from 'utils/formatters/formaterCEP'
 
 import { MapPin } from 'phosphor-react-native'
 
@@ -19,16 +23,17 @@ import { addressSchema, formTypeAddressSchema } from 'schemas/collect/addressSch
 import { InputIcon } from 'components/atoms/InputIcon'
 
 import { IResponseFetchCEP } from 'interfaces'
-import { formaterCEP } from 'utils/formatters/formaterCEP'
 
 type NavProps = NativeStackNavigationProp<CollectStackParamList>
 
-
-// Aplicar o React Hook-form nesse Componente/Tela
-
 export function AddressScreen() {
+  const [idAddress, setIdAddress] = useState<number | undefined>()
+
   const navigation = useNavigation<NavProps>()
   const theme = useTheme()
+  const { params } = useRoute()
+  const { userAuth } = useContext(AuthContext)
+
 
   const { register, setValue, control, handleSubmit, watch} = useForm<formTypeAddressSchema>({
     resolver: zodResolver(addressSchema),
@@ -36,6 +41,7 @@ export function AddressScreen() {
 
   const place = watch('place')
   const number = watch('number')
+  const complement = watch('complement')
   const district = watch('district')
   const city = watch('city')
   const state = watch('state')
@@ -43,12 +49,35 @@ export function AddressScreen() {
   const onSubmit: SubmitHandler<formTypeAddressSchema> = async (data) => {
 
     try {
-      const address = `${place}, n°${number} - ${district}`
+      
+      if(idAddress) {
+        await UsersAPIs.updateAddress({
+          id: idAddress,
+          cep: data.cep,
+          street: data.place,
+          number: data.number,
+          complement: data.complement ? data.complement : '',
+          district: data.district,
+          city: data.city,
+          state: data.state,
+          country: 'BR'
+        })
+      } else {
+        await UsersAPIs.createAddress({
+          userId: userAuth.id,
+          cep: data.cep,
+          street: data.place,
+          number: data.number,
+          complement: data.complement ? data.complement : '',
+          district: data.district,
+          city: data.city,
+          state: data.state,
+          country: 'BR'
+        })
+      }
 
-      console.log('Requisição feita!')
-      // Endereço atualizado e retorno do endereço em formato de texto para mostrar no formulário anterior
-      console.log(address)
-      navigation.navigate('Request')
+      navigation.goBack()
+
     } catch (e) {
       // saving error
       console.log("Erro ao salvar!")
@@ -74,32 +103,48 @@ export function AddressScreen() {
     setValue('state', uf)
   }
 
-    async function handleFecth(
-      e: string,
-      field: ControllerRenderProps<formTypeAddressSchema>,
-      ) {
-        if (!e) return
+  async function handleFecth(
+    e: string,
+    field: ControllerRenderProps<formTypeAddressSchema>,
+    ) {
+      if (!e) return
 
-        const cepReturned = formaterCEP(e)
+      const cepReturned = formaterCEP(e)
     
-        if (!cepReturned) return
+      if (!cepReturned) return
     
         field.onChange(cepReturned.cepInput)
 
         if (cepReturned.cepFormatted.length === 8) {
             await FecthCEP(cepReturned.cepFormatted)
-        }
+      }
     }
 
+    async function getAddressByUserId() {
+      try {
+        const { data } = await UsersAPIs.getAddressByUserId(userAuth.id)
+
+        if(data.address === null) return
+        setIdAddress(data.address.id)
+        setValue('cep', data.address.cep)
+        setValue('place', data.address.street)
+        setValue('number', data.address.number)
+        setValue('complement', data.address.complement ? data.address.complement : '')
+        setValue('district', data.address.district)
+        setValue('city', data.address.city)
+        setValue('state', data.address.state)
+
+      } catch (error) {
+        console.log(error)
+      }
+    }
 
   useEffect(() => {
-    register('cep')
-    register('place')
-    register('number')
-    register('complement')
-    register('district')
-    register('city')
-    register('state')
+
+    if(params!.type && params!.type === 1) {
+      getAddressByUserId()
+    }
+
 
   }, [])
 
@@ -136,13 +181,14 @@ export function AddressScreen() {
                     color='primary'
                     label="Rua"
                     placeholder="Rua..."
-                    value={place}
+                    defaultValue={place}
                 />
 
                 <InputIcon
                     icon={<MapPin size={32} color={theme.colors.primary} />}
                     color='primary'
                     label="Número"
+                    defaultValue={number}
                     placeholder="Digite o número..."
                     onChangeText={text => setValue('number', text)}
                 />
@@ -152,6 +198,7 @@ export function AddressScreen() {
                     color='primary'
                     label="Complemento (Opcional)"
                     placeholder="Digite o complemento..."
+                    defaultValue={complement}
                     onChangeText={text => setValue('complement', text)}
                 />
 
@@ -160,7 +207,7 @@ export function AddressScreen() {
                     color='primary'
                     label="Bairro"
                     placeholder="Bairro..."
-                    value={district}
+                    defaultValue={district}
                             
                 />
 
@@ -169,7 +216,7 @@ export function AddressScreen() {
                     color='primary'
                     label="Cidade"
                     placeholder="Cidade..."
-                    value={city}
+                    defaultValue={city}
                 />
 
                 <InputIcon
@@ -178,13 +225,12 @@ export function AddressScreen() {
                     label="Estado"
                     placeholder="Estado..."
                     maxLength={2}
-                    value={state}
+                    defaultValue={state}
                 />
 
-                <Button color='primary' title='Atualizar' onPress={handleSubmit(onSubmit)} />
             </Form>
 
-
+            <Button color='primary' title='Atualizar' onPress={handleSubmit(onSubmit)} />
           </Content>
       </ContainerMain>
     </SafeAreaProvider>

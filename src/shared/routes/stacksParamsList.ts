@@ -47,6 +47,9 @@ type ProfileStackParamList = {
   Donation: undefined
   Help: undefined
   Profile: undefined
+  Address: {
+    type: number
+  }
 }
 
 type RegisterCollectorStackParamList = {
@@ -69,6 +72,15 @@ type CollectoresStackParamList = {
   }
 }
 
+type ProfileConfigStackParamList = {
+  ProfileScreen: undefined
+  Name: undefined
+  Phone: undefined
+  Email: undefined
+  Description: undefined
+}
+
+
 
 export { 
   AuthStackParamList, 
@@ -78,5 +90,6 @@ export {
   ProfileStackParamList,
   RegisterCollectorStackParamList,
   RegisterBusinessStackParamList,
-  CollectoresStackParamList
+  CollectoresStackParamList,
+  ProfileConfigStackParamList
 }

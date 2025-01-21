@@ -4,6 +4,7 @@ export interface IAuthUserDTO {
     firstName: string
     lastName: string
     status: boolean
+    phone: string
     typeUserId: number
     businesses: {
       id: number

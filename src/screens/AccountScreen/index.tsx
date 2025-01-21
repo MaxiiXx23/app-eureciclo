@@ -37,6 +37,12 @@ export function AccountScreen() {
     navigation.navigate('Help')
   }
 
+  function handleNavToAddressScreen() {
+    navigation.navigate('Address', {
+      type: 1
+    })
+  }
+
   async function handleSignOut() {
     await logout()
   }
@@ -57,7 +63,7 @@ export function AccountScreen() {
                   <BtnNavArrow icon={Gear} label='Configurações' />
                   <BtnNavArrow icon={ShieldCheck} label='Segurança' />
                   <BtnNavArrow icon={Lock} label='Privacidade' />
-                  <BtnNavArrow icon={House} label='Endereço' />
+                  <BtnNavArrow icon={House} label='Endereço' onPress={handleNavToAddressScreen} />
                   <BtnNavArrow icon={Wallet} label='Adicionar negócio' />
                   <BtnNavArrow icon={UsersFour} label='Contatos de confiança' />
                   <BtnNavArrow icon={SignOut} label='Sair' onPress={handleSignOut} />

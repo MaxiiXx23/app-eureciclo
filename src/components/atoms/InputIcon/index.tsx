@@ -14,7 +14,7 @@ export function InputIcon({ label, icon: Icon, color = 'shape', ...rest }: IProp
   return (
     <Container>
       <Label color={color}>{label}</Label>
-      <ContainerInput>
+      <ContainerInput color={color}>
         {Icon}
         <Input {...rest} />
       </ContainerInput>

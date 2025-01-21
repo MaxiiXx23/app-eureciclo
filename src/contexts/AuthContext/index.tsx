@@ -7,7 +7,6 @@ import { IAuthUserDTO } from 'dtos/auth'
 import { AuthAPIs } from 'apis/auth'
 import { createCoockies, createCoockieToken, deleteCoockies, getCoockieRefreshToken } from 'actions/auth'
 
-
 interface Props {
   children: ReactNode
 }
@@ -51,6 +50,7 @@ function AuthProvider({ children }: Props) {
             firstName: userAuthInfos.firstName,
             lastName: userAuthInfos.lastName,
             email: userAuthInfos.email,
+            phone: userAuthInfos.phone,
             status: userAuthInfos.status,
             typeUserId: userAuthInfos.typeUserId,
             businesses: userAuthInfos.businesses,
@@ -88,6 +88,7 @@ function AuthProvider({ children }: Props) {
         firstName: userAuthInfos.firstName,
         lastName: userAuthInfos.lastName,
         email: userAuthInfos.email,
+        phone: userAuthInfos.phone,
         status: userAuthInfos.status,
         typeUserId: userAuthInfos.typeUserId,
         businesses: userAuthInfos.businesses,

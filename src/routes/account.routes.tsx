@@ -4,7 +4,9 @@ import { ProfileStackParamList } from 'shared/routes/stacksParamsList'
 import { AccountScreen } from 'screens/AccountScreen'
 import { DonationScreen } from 'screens/DonationScreen'
 import { HelpScreen } from 'screens/HelpScreen'
-import { ProfileScreen } from 'screens/ProfileScreen'
+
+import { ProfileRouter } from './profile.routes'
+import { AddressScreen } from 'screens/AddressScreen'
 
 const Stack = createNativeStackNavigator<ProfileStackParamList>()
 
@@ -21,13 +23,9 @@ export function AccountRouter() {
 
       <Stack.Screen
         name="Profile"
-        component={ProfileScreen}
+        component={ProfileRouter}
         options={{
-          headerTitle: 'Perfil',
-          headerStyle: {
-            backgroundColor: '#4ADE80',
-          },
-          headerTintColor: '#FFF'
+          headerShown: false,
         }}
       />
 
@@ -54,7 +52,18 @@ export function AccountRouter() {
           headerTintColor: '#FFF'
         }}
       />
-      
+
+      <Stack.Screen
+        name="Address"
+        component={AddressScreen}
+        options={{
+          headerTitle: 'Endereço',
+          headerStyle: {
+            backgroundColor: '#4ADE80',
+          },
+          headerTintColor: '#FFF'
+        }}
+      />
 
     </Stack.Navigator>
   )

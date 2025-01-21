@@ -19,7 +19,7 @@ export const Label = styled(Text)<ILabelProps>`
   color: ${({ theme, color }) => theme.colors[color]};
 `
 
-export const ContainerInput = styled(View)`
+export const ContainerInput = styled(View)<ILabelProps>`
   width: 100%;
   display: flex;
   align-items: center;
@@ -27,6 +27,8 @@ export const ContainerInput = styled(View)`
   flex-direction: row;
   border-radius: ${({ theme }) => theme.spacing['2']};
   background-color: ${({ theme }) => theme.colors.shape};
+  border-width: ${({ theme }) => theme.spacing.px};
+  border-color: ${({ theme, color }) => theme.colors[color]};
 `
 
 export const Input = styled(TextInput)`
