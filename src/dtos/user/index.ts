@@ -34,3 +34,7 @@ export interface IResponseGetListCollectorDTO extends IDefaultResponsePagination
 export interface IResponseGetInfoUserDTO extends IDefaultResponseDTO {
   user: IGetInfoUserDTO
 }
+
+export interface IResponseUploadImageProfileDTO extends IDefaultResponseDTO {
+  urlImage: string
+}

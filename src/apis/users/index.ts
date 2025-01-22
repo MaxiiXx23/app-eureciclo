@@ -1,7 +1,7 @@
 import { api } from 'lib/axios'
 
 import { IRequestPagination } from 'interfaces'
-import { IResponseGetInfoUserDTO, IResponseGetListCollectorDTO } from 'dtos/user'
+import { IResponseGetInfoUserDTO, IResponseGetListCollectorDTO, IResponseUploadImageProfileDTO } from 'dtos/user'
 import { IDefaultResponseDTO } from 'dtos/IDefaultResponseDTO'
 import { IRequestPatchInfoPhoneUser, IRequestUpdateInfoNameUser } from 'interfaces/user/request'
 import { IResponseGetAddress } from 'dtos/address'
@@ -110,6 +110,16 @@ async function updateAddress(data: IRequestUpdateAddress) {
   return response
 }
 
+async function uploadImageProfileUser(data: FormData) {
+  const response = await api.post<IResponseUploadImageProfileDTO>(`${baseUrl}/upload/profile`, data, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  })
+
+  return response
+}
+
 export const UsersAPIs = {
   getSearchCollectorsToCompany,
   getGetInfoUserById,
@@ -117,5 +127,6 @@ export const UsersAPIs = {
   patchPhone,
   getAddressByUserId,
   createAddress,
-  updateAddress
+  updateAddress,
+  uploadImageProfileUser
 }

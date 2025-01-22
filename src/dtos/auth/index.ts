@@ -5,6 +5,7 @@ export interface IAuthUserDTO {
     lastName: string
     status: boolean
     phone: string
+    urlImageProfile: string
     typeUserId: number
     businesses: {
       id: number
