@@ -3,13 +3,14 @@ import { useContext } from 'react';
 import { AuthContext } from 'contexts/AuthContext';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { House, Receipt, Recycle, User, UsersThree } from 'phosphor-react-native';
+import { Buildings, House, Receipt, Recycle, User, UsersThree } from 'phosphor-react-native';
 
 import { CollectRouter } from './collect.routes';
 import { HomeRouter } from './home.routes';
 import { ActivitiesRouter } from './activities.routes';
 import { AccountRouter } from './account.routes';
 import { CollectoresRouter } from './collectores.routes';
+import { AdminCompanyRouter } from './adminCompany.routes';
 
 const Tab = createBottomTabNavigator();
 
@@ -76,18 +77,32 @@ export function BottomRouter() {
 
         {
           userAuth.typeUserId === 4 && (
-            <Tab.Screen         
-              name="SearchCollectores"
-              component={CollectoresRouter} 
-              options={{
-                headerShown: false,
-                tabBarLabel: 'Coletores',
-                // tabBarBadge: 3,
-                tabBarIcon: ({ color, size }) => (
-                  <UsersThree color={color} size={size} />
-                ),
-              }}
-            />
+            <>
+              <Tab.Screen         
+                name="SearchCollectores"
+                component={CollectoresRouter} 
+                options={{
+                  headerShown: false,
+                  tabBarLabel: 'Coletores',
+                  // tabBarBadge: 3,
+                  tabBarIcon: ({ color, size }) => (
+                    <UsersThree color={color} size={size} />
+                  ),
+                }}
+              />
+              <Tab.Screen         
+                name="AdminCompany"
+                component={AdminCompanyRouter} 
+                options={{
+                  headerShown: false,
+                  tabBarLabel: 'Empresa',
+                  // tabBarBadge: 3,
+                  tabBarIcon: ({ color, size }) => (
+                    <Buildings color={color} size={size} />
+                  ),
+                }}
+              />
+            </>
           )
         }
 

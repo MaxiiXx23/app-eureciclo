@@ -72,6 +72,7 @@ export function PhoneConfigScreen() {
                         keyboardType="numeric"
                         maxLength={15}
                         defaultValue={phone}
+                        value={phone}
                         onChangeText={handleChangeStatePhone}
                     />
                 </ContainerInputs>

@@ -9,9 +9,19 @@ import { UsersAPIs } from 'apis/users';
 import { PencilSimpleLine } from 'phosphor-react-native'
 
 import { Button, Container, ContainerPreview, Preview} from './styles'
+import { CompaniesAPIs } from 'apis/companies';
 
-export function SelectImagePicker() {
-  const { userAuth, setUserAuth } = useContext(AuthContext)
+interface IProps {
+  urlImage: string
+  isUser: boolean
+  companyId?: number
+  updateImageFromState?: (url: string) => void
+}
+
+export function SelectImagePicker({ urlImage, isUser, companyId, updateImageFromState }: IProps) {
+
+  const { setUserAuth, userAuth } = useContext(AuthContext)
+
   const showToast = (text: string) => {
     ToastAndroid.show(text, ToastAndroid.SHORT);
   }
@@ -40,12 +50,22 @@ export function SelectImagePicker() {
           name: 'profile.jpg', // Nome do arquivo
         });
 
-        const { data } = await UsersAPIs.uploadImageProfileUser(formData)
+        if(isUser === false && companyId) {
+          const { data } = await CompaniesAPIs.uploadImageProfileCompany({
+            id: companyId,
+            form: formData,
+          })
+          updateImageFromState!(data.urlImage)
+
+        } else {
+
+          const { data } = await UsersAPIs.uploadImageProfileUser(formData)
         
-        setUserAuth({
-          ...userAuth,
-          urlImageProfile: data.urlImage
-        })
+          setUserAuth({
+            ...userAuth,
+            urlImageProfile: data.urlImage
+          })
+        }
 
         return showToast('Foto de perfil atualizada com sucesso.')
       }
@@ -57,7 +77,7 @@ export function SelectImagePicker() {
   return (
     <Container>
         <ContainerPreview>
-            <Preview src={userAuth.urlImageProfile} />
+            <Preview src={urlImage} />
             <Button onPress={handleOpenImagePicker} >
                 <PencilSimpleLine size={28} color='#4ADE80' />
             </Button>  

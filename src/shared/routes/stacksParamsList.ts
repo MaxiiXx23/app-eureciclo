@@ -80,7 +80,10 @@ type ProfileConfigStackParamList = {
   Description: undefined
 }
 
-
+type AdminCompanyStackParamList = {
+  AdminInitial: undefined
+  Address: undefined
+}
 
 export { 
   AuthStackParamList, 
@@ -91,5 +94,6 @@ export {
   RegisterCollectorStackParamList,
   RegisterBusinessStackParamList,
   CollectoresStackParamList,
-  ProfileConfigStackParamList
+  ProfileConfigStackParamList,
+  AdminCompanyStackParamList
 }

@@ -27,7 +27,7 @@ export function Profile() {
         <Container>
 
             <WrapperProfile>
-                <SelectImagePicker />
+                <SelectImagePicker urlImage={userAuth.urlImageProfile} isUser />
                 <Name>{name}</Name>
                 <WrapperLabel>
                     <LabelRating>

@@ -8,10 +8,12 @@ export interface IItemListCompanyDTO {
 export interface IInfoProfileCompanyDTO {
     id: number
     docIdentification: string
+    corporateReason: string
     fantasyName: string
-    phone: string | null
-    email: string | null
-    description: string | null
+    phone: string
+    email: string
+    description: string
+    urlImage: string
     address: {
         id: number
         cep: string
