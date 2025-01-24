@@ -82,7 +82,10 @@ type ProfileConfigStackParamList = {
 
 type AdminCompanyStackParamList = {
   AdminInitial: undefined
-  Address: undefined
+  Address: {
+    type: number,
+    id: number
+  }
 }
 
 export { 
@@ -95,5 +98,5 @@ export {
   RegisterBusinessStackParamList,
   CollectoresStackParamList,
   ProfileConfigStackParamList,
-  AdminCompanyStackParamList
+  AdminCompanyStackParamList,
 }

@@ -13,6 +13,7 @@ import { InfoEmpty } from 'components/molecules/InfoEmpty'
 import { CollectStackParamList } from 'shared/routes/stacksParamsList'
 import { CompaniesAPIs } from 'apis/companies'
 import { IInfoProfileCompanyDTO } from 'dtos/companies'
+import { PreviewImage } from 'components/atoms/PreviewImage'
 
 export function ProfileCompanyScreen() {
   const { params } = useRoute()
@@ -52,7 +53,7 @@ export function ProfileCompanyScreen() {
           <Content>
             <SubHeader title='Informações da empresa' description='Verifique as informações da empresa.' />
             <ContainerInfos>
-              {/* <PreviewImage urlImage={data.image.url} /> */}
+              <PreviewImage urlImage={data.urlImage} />
               <WrapperLabel>
                   <HeaderLabel>
                     <Receipt size={24} color='#4ADE80' />

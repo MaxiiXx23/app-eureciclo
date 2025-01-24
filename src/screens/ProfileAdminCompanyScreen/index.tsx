@@ -10,20 +10,21 @@ import { AuthContext } from 'contexts/AuthContext'
 import { PencilSimpleLine } from 'phosphor-react-native'
 
 import { ContainerMain } from 'components/templates/Container/styles'
-import { ContainerNavs, Content, Label, Title, WrapperLabel } from './styles'
+import { ContainerNavs, Content, Title, WrapperLabel } from './styles'
 
-import { ProfileConfigStackParamList } from 'shared/routes/stacksParamsList'
+import { AdminCompanyStackParamList } from 'shared/routes/stacksParamsList'
 import { InputIcon } from 'components/atoms/InputIcon'
 import { SelectImagePicker } from 'components/molecules/SelectImagePicker'
 import { Button } from 'components/atoms/Button'
 import { IInfoProfileCompanyDTO } from 'dtos/companies'
 import { CompaniesAPIs } from 'apis/companies'
 import { normalizePhoneNumber } from 'utils/masks'
+import { ButtonArrow } from 'components/atoms/ButtonArrow'
 
-type NavProps = NativeStackNavigationProp<ProfileConfigStackParamList, 'Name'>
+type NavProps = NativeStackNavigationProp<AdminCompanyStackParamList, 'AdminInitial'>
 
 export function ProfileAdminCompanyScreen() {
-  const [data, setData] = useState<IInfoProfileCompanyDTO>({ } as IInfoProfileCompanyDTO)
+  const [data, setData] = useState<IInfoProfileCompanyDTO>({} as IInfoProfileCompanyDTO)
   const [email, setEmail] = useState<string>('')
   const [phone, setPhone] = useState<string>('')
   const [fantasyName, setFantasyName] = useState<string>('')
@@ -35,6 +36,8 @@ export function ProfileAdminCompanyScreen() {
   }
 
   const { userAuth } = useContext(AuthContext)
+
+  const navigation = useNavigation<NavProps>()
 
   async function fetchLoadData() {
     try {
@@ -84,6 +87,13 @@ export function ProfileAdminCompanyScreen() {
     })
   }
 
+  function handleNavAdress() {
+    navigation.navigate('Address', {
+        id: userAuth.businesses!.id,
+        type: 2
+    })
+  }
+
   useEffect(() => {
     fetchLoadData()
   }, [])
@@ -98,6 +108,7 @@ export function ProfileAdminCompanyScreen() {
                     companyId={userAuth.businesses!.id}
                     updateImageFromState={updateImageFromState}
                 />
+                <ButtonArrow title='Atualizar Endereço' onPress={handleNavAdress} />
                 <ContainerNavs>
                     <Title>Informações</Title>
                     <WrapperLabel>

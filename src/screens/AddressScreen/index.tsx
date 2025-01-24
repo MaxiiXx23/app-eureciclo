@@ -23,6 +23,7 @@ import { addressSchema, formTypeAddressSchema } from 'schemas/collect/addressSch
 import { InputIcon } from 'components/atoms/InputIcon'
 
 import { IResponseFetchCEP } from 'interfaces'
+import { CompaniesAPIs } from 'apis/companies'
 
 type NavProps = NativeStackNavigationProp<CollectStackParamList>
 
@@ -49,32 +50,62 @@ export function AddressScreen() {
   const onSubmit: SubmitHandler<formTypeAddressSchema> = async (data) => {
 
     try {
-      
-      if(idAddress) {
-        await UsersAPIs.updateAddress({
-          id: idAddress,
-          cep: data.cep,
-          street: data.place,
-          number: data.number,
-          complement: data.complement ? data.complement : '',
-          district: data.district,
-          city: data.city,
-          state: data.state,
-          country: 'BR'
-        })
+
+      if(params!.type && params!.type === 1) {
+        if(idAddress) {
+          await UsersAPIs.updateAddress({
+            id: idAddress,
+            cep: data.cep,
+            street: data.place,
+            number: data.number,
+            complement: data.complement ? data.complement : '',
+            district: data.district,
+            city: data.city,
+            state: data.state,
+            country: 'BR'
+          })
+        } else {
+          await UsersAPIs.createAddress({
+            userId: userAuth.id,
+            cep: data.cep,
+            street: data.place,
+            number: data.number,
+            complement: data.complement ? data.complement : '',
+            district: data.district,
+            city: data.city,
+            state: data.state,
+            country: 'BR'
+          })
+        }
       } else {
-        await UsersAPIs.createAddress({
-          userId: userAuth.id,
-          cep: data.cep,
-          street: data.place,
-          number: data.number,
-          complement: data.complement ? data.complement : '',
-          district: data.district,
-          city: data.city,
-          state: data.state,
-          country: 'BR'
-        })
+        if(idAddress) {
+          await CompaniesAPIs.updateAddress({
+            id: idAddress,
+            cep: data.cep,
+            street: data.place,
+            number: data.number,
+            complement: data.complement ? data.complement : '',
+            district: data.district,
+            city: data.city,
+            state: data.state,
+            country: 'BR'
+          })
+        } else {
+          await CompaniesAPIs.createAddress({
+            companyId: params!.id,
+            cep: data.cep,
+            street: data.place,
+            number: data.number,
+            complement: data.complement ? data.complement : '',
+            district: data.district,
+            city: data.city,
+            state: data.state,
+            country: 'BR'
+          })
+        }
       }
+      
+
 
       navigation.goBack()
 
@@ -139,10 +170,32 @@ export function AddressScreen() {
       }
     }
 
+    async function getAddressByCompanyId(id: number) {
+      try {
+        const { data } = await CompaniesAPIs.getAddressByCompanyId(id)
+
+        if(data.address === null) return
+        setIdAddress(data.address.id)
+        setValue('cep', data.address.cep)
+        setValue('place', data.address.street)
+        setValue('number', data.address.number)
+        setValue('complement', data.address.complement ? data.address.complement : '')
+        setValue('district', data.address.district)
+        setValue('city', data.address.city)
+        setValue('state', data.address.state)
+
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+
   useEffect(() => {
 
     if(params!.type && params!.type === 1) {
       getAddressByUserId()
+    } else {
+      getAddressByCompanyId(params!.id)
     }
 
 
@@ -152,7 +205,7 @@ export function AddressScreen() {
     <SafeAreaProvider>
       <ContainerMain>
           <Content>
-            <SubHeader title='Atualizar Endereço' description='Atualize seu endereço que será usado para coletas.' />
+            <SubHeader title='Atualizar Endereço' description='Atualize seu endereço que será usado para lhe encontrar.' />
 
             <Form>
 
