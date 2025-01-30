@@ -13,6 +13,7 @@ import { SearchCollectsScreen } from 'screens/SearchCollectsScreen'
 import { ActivitiesScreen } from 'screens/ActivitiesScreen'
 import { SearchCompanies } from 'screens/SearchCompanies'
 import { ProfileCompanyScreen } from 'screens/ProfileCompanyScreen'
+import { ConfirmCollectScreem } from 'screens/ConfirmCollectScreem'
 
 const Stack = createNativeStackNavigator<CollectStackParamList>()
 
@@ -20,9 +21,9 @@ export function CollectRouter() {
 
   return (
     <CollectsProvider>
-      <Stack.Navigator initialRouteName="CollectInitial">
+      <Stack.Navigator initialRouteName="Initial">
         <Stack.Screen
-          name="CollectInitial"
+          name="Initial"
           component={CollectScreen}
           options={{
             headerShown: false,
@@ -115,6 +116,18 @@ export function CollectRouter() {
           component={AddressScreen}
           options={{
             headerTitle: 'Endereço',
+            headerStyle: {
+              backgroundColor: '#4ADE80',
+            },
+            headerTintColor: '#FFF'
+          }}
+        />
+
+        <Stack.Screen
+          name="ConfirmCollect"
+          component={ConfirmCollectScreem}
+          options={{
+            headerTitle: 'Confirmar Coleta',
             headerStyle: {
               backgroundColor: '#4ADE80',
             },

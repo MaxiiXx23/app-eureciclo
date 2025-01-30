@@ -1,4 +1,4 @@
-import { View } from 'react-native'
+import { ScrollView, Text, View } from 'react-native'
 import styled from 'styled-components/native'
 
 export const Content = styled(View)`

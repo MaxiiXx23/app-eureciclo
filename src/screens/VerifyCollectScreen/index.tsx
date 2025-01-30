@@ -68,6 +68,12 @@ export function VerifyCollectScreen() {
       console.log(error)
     }
   }
+
+  function handleNavConfirmCollect() {
+    navigation.navigate('ConfirmCollect', {
+      id: params!.id
+    })
+  }
   
   useEffect(() => {
     fetch().then().catch()
@@ -84,13 +90,18 @@ export function VerifyCollectScreen() {
             <SubHeader title='Status da Coleta' description='Verifique o status da solicitação de coleta.' />
             <ContainerInfos>
               <PreviewImage urlImage={data.image.url} />
-              <WrapperLabel>
-                  <HeaderLabel>
-                    <Receipt size={24} color='#4ADE80' />
-                    <HeaderTitle>Número de identificação</HeaderTitle>
-                  </HeaderLabel>
-                  <Label>{data.code}</Label>
-              </WrapperLabel>
+              
+              {
+                data.status.id === 3 && userAuth.typeUserId === 2 ? null : (
+                  <WrapperLabel>
+                    <HeaderLabel>
+                      <Receipt size={24} color='#4ADE80' />
+                      <HeaderTitle>Número de identificação</HeaderTitle>
+                    </HeaderLabel>
+                    <Label>{data.code}</Label>
+                  </WrapperLabel>
+                )
+              }
 
               <WrapperLabel>
                   <HeaderLabel>
@@ -123,6 +134,10 @@ export function VerifyCollectScreen() {
               
               {userAuth.typeUserId === 2 && data.status.id === 4 && (
                 <Button color='primary' title='Quero Coletar' onPress={fetchCreateInProcess} />
+              )}
+
+              {userAuth.typeUserId === 2 && data.status.id === 3 && (
+                <Button color='button' title='Confirmar Coleta' onPress={handleNavConfirmCollect} />
               )}
 
             </ContainerInfos>

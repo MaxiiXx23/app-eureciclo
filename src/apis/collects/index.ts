@@ -2,7 +2,7 @@ import { api } from 'lib/axios'
 
 import { IRequestPagination, IRequestPaginationMultipleStatus } from 'interfaces'
 import { IResponseGetInfoCollectDTO, IResponseGetListCollectsByUserDTO } from 'dtos/collects'
-import { IDefaultResponsePaginationDTO } from 'dtos/IDefaultResponseDTO'
+import { IDefaultResponseDTO, IDefaultResponsePaginationDTO } from 'dtos/IDefaultResponseDTO'
 
 const baseUrl = 'collect'
 
@@ -104,6 +104,13 @@ async function getCollectsInProcessByCollector({
   return response
 }
 
+async function patchConfirmCollect(id: number, code: string) {
+
+  const response = await api.patch<IDefaultResponseDTO>(`${baseUrl}/confirm-collect?id=${id}&code=${code}`)
+
+  return response
+}
+
 export const CollectsAPIs = {
     getCollectsByUser,
     getInProgressByUserId,
@@ -111,4 +118,5 @@ export const CollectsAPIs = {
     getCollectsToCollector,
     getCollectsInProcessByCollector,
     createInProgressByCollector,
+    patchConfirmCollect
 }

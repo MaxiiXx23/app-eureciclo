@@ -4,15 +4,16 @@ import { ActivitiesStackParamList } from 'shared/routes/stacksParamsList'
 import { ActivitiesScreen } from 'screens/ActivitiesScreen'
 import { CollectsProvider } from 'contexts/CollectsContext'
 import { VerifyCollectScreen } from 'screens/VerifyCollectScreen'
+import { ConfirmCollectScreem } from 'screens/ConfirmCollectScreem'
 
 const Stack = createNativeStackNavigator<ActivitiesStackParamList>()
 
 export function ActivitiesRouter() {
   return (
     <CollectsProvider>
-      <Stack.Navigator initialRouteName="ActivitiesInitial">
+      <Stack.Navigator initialRouteName="Initial">
           <Stack.Screen
-            name="ActivitiesInitial"
+            name="Initial"
             component={ActivitiesScreen}
             options={{
               headerShown: false,
@@ -27,6 +28,18 @@ export function ActivitiesRouter() {
             component={VerifyCollectScreen}
             options={{
               headerTitle: 'Verificar Coleta',
+              headerStyle: {
+                backgroundColor: '#4ADE80',
+              },
+              headerTintColor: '#FFF'
+            }}
+          />
+
+          <Stack.Screen
+            name="ConfirmCollect"
+            component={ConfirmCollectScreem}
+            options={{
+              headerTitle: 'Confirmar Coleta',
               headerStyle: {
                 backgroundColor: '#4ADE80',
               },

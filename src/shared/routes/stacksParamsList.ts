@@ -14,7 +14,7 @@ type HomeStackParamList = {
 }
 
 type CollectStackParamList = {
-  CollectInitial: undefined
+  Initial: undefined
   Request: undefined
   Status: undefined
   Camera: undefined
@@ -30,14 +30,20 @@ type CollectStackParamList = {
   VerifyCollectsInProcess: {
     isInProcess: boolean
   }
+  ConfirmCollect: {
+    id: number
+  }
 }
 
 
 type ActivitiesStackParamList = {
-  ActivitiesInitial: {
+  Initial: {
     isInProcess: boolean
   }
   Verify: {
+    id: number
+  }
+  ConfirmCollect: {
     id: number
   }
 }
