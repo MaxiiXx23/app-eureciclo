@@ -14,7 +14,7 @@ import { Header } from 'components/organisms/Header'
 import { SubHeader } from 'components/molecules/SubHeader'
 import { CardCollect } from 'components/molecules/CardCollect'
 
-type NavProps = NativeStackNavigationProp<CollectStackParamList, 'CollectInitial'>
+type NavProps = NativeStackNavigationProp<CollectStackParamList, 'Initial'>
 
 export function CollectScreen() {
   const navigation = useNavigation<NavProps>()

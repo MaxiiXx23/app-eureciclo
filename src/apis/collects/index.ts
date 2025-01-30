@@ -111,6 +111,17 @@ async function patchConfirmCollect(id: number, code: string) {
   return response
 }
 
+async function create(form: FormData) {
+console.log('olá')
+const response = await api.post<IDefaultResponseDTO>(`${baseUrl}/`, form, {
+  headers: {
+    'Content-Type': 'multipart/form-data',
+  },
+})
+
+return response
+}
+
 export const CollectsAPIs = {
     getCollectsByUser,
     getInProgressByUserId,
@@ -118,5 +129,6 @@ export const CollectsAPIs = {
     getCollectsToCollector,
     getCollectsInProcessByCollector,
     createInProgressByCollector,
-    patchConfirmCollect
+    patchConfirmCollect,
+    create
 }

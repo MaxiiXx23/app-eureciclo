@@ -1,10 +1,12 @@
 import { useEffect } from 'react'
 
+import { ToastAndroid } from 'react-native';
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { zodResolver } from '@hookform/resolvers/zod'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import { MapPinLine, Recycle, TextAlignLeft } from 'phosphor-react-native'
 
@@ -15,6 +17,8 @@ import { BtnOpenCamera } from 'components/molecules/BtnOpenCamera'
 import { Button } from 'components/atoms/Button'
 
 import { formTypeRequestCollectSchema, requestCollectSchema } from 'schemas/collect/requestCollectSchema'
+import { CollectsAPIs } from 'apis/collects';
+
 
 type NavProps = NativeStackNavigationProp<CollectStackParamList>
 
@@ -23,18 +27,44 @@ type NavProps = NativeStackNavigationProp<CollectStackParamList>
 
 export function RequestCollectScreen() {
   const navigation = useNavigation<NavProps>()
+  const showToast = (text: string) => {
+    ToastAndroid.show(text, ToastAndroid.SHORT);
+  }
 
-  const { register, setValue, control, handleSubmit} = useForm<formTypeRequestCollectSchema>({
+  const { register, setValue, handleSubmit, reset} = useForm<formTypeRequestCollectSchema>({
     resolver: zodResolver(requestCollectSchema),
   })
 
   const onSubmit: SubmitHandler<formTypeRequestCollectSchema> = async (data) => {
 
     try {
-      console.log('Requisição feita!')
+      const jsonValue = await AsyncStorage.getItem('@EuReciclo:uri');
+      if(jsonValue === null) {
+        return showToast('Por favor tire uma foto dos recicláveis.')
+      }
+      const uriReplaced = jsonValue.replace('"', '').replace('"', '')
+      const formData = new FormData();
+      formData.append('file', {
+        uri: uriReplaced,
+        type: 'image/jpeg', // Tipo do arquivo
+        name: 'image-collect.jpg', // Nome do arquivo
+      });
+
+      const dataForm: IRequestCreateCollect['data'] = {
+        addressId: 1,
+        description: data.description,
+        statusCollectId: 4
+      }
+
+      formData.append('data', JSON.stringify(dataForm))
+
+      await CollectsAPIs.create(formData)
+      await AsyncStorage.removeItem('@EuReciclo:uri');
+      showToast('Solicitação realizado com sucesso!')
+      navigation.navigate('Initial')
     } catch (e) {
       // saving error
-      console.log("Erro ao salvar!")
+      return showToast('Erro ao solicitar coleta! Por favor, tente novamente.')
     }
 
   }

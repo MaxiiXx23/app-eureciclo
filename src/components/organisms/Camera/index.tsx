@@ -8,6 +8,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { CameraRotate, Check, X } from 'phosphor-react-native';
 
 import { CollectStackParamList } from 'shared/routes/stacksParamsList';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type NavProps = NativeStackNavigationProp<CollectStackParamList>
 
@@ -62,8 +63,9 @@ export function Camera() {
     handleNavBack()
   }
 
-  function handleConfirmPicture() {
-    // save URI on the LocalStore
+  async function handleConfirmPicture() {
+    const uriPhotoJson = JSON.stringify(photo);
+    await AsyncStorage.setItem('@EuReciclo:uri', uriPhotoJson);
     handleNavBack()
   }
 
