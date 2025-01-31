@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
 
 import { FlatList } from 'react-native'
 
+import { useFocusEffect } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
@@ -49,23 +50,22 @@ export function SearchCollectoresScreen() {
     setCurrentPage(1)
   }
 
-  useEffect(() => {
-
-    getSearchCollectorsToCompany({
-      search,
-      page: currentPage,
-      perPage: 10,
-      status,
-      ordernation,
-      period,
-      type: 'all', 
-    }).then((data) =>  {
-      setListData(data)
-       
-    })
-    .catch()
-
-  }, [search, currentPage, ordernation, status, period, type])
+  useFocusEffect(
+    useCallback(() => {
+      getSearchCollectorsToCompany({
+        search,
+        page: currentPage,
+        perPage: 10,
+        status,
+        ordernation,
+        period,
+        type: 'all', 
+        }).then((data) =>  {
+          setListData(data)   
+        })
+        .catch()
+    }, [search, currentPage, ordernation, status, period, type])    
+    )
 
   return (
     <SafeAreaProvider>
@@ -73,6 +73,7 @@ export function SearchCollectoresScreen() {
           <Content>
             <SubHeaderSearch 
                 title='Coletores' 
+                label='Pesquise por nome, bairro, cidade, Estado...'
                 description='Pesquise e encontre Coletores em sua região.'
                 handleSearch={handleSearch}
             />

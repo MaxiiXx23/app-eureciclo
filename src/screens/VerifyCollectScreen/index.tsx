@@ -20,7 +20,7 @@ import { Button } from 'components/atoms/Button'
 import { ActivitiesStackParamList, CollectStackParamList } from 'shared/routes/stacksParamsList'
 import { IGetInfoCollectDTO } from 'dtos/collects'
 
-type NavProps = NativeStackNavigationProp<CollectStackParamList, 'CollectInitial'>
+type NavProps = NativeStackNavigationProp<CollectStackParamList, 'Initial'>
 
 export function VerifyCollectScreen() {
   const { params } = useRoute()
@@ -126,6 +126,14 @@ export function VerifyCollectScreen() {
                     <HeaderTitle>Etapa</HeaderTitle>
                   </HeaderLabel>
                   <Label>{data.status.name}</Label>
+              </WrapperLabel>
+
+              <WrapperLabel>
+                  <HeaderLabel>
+                    <Info size={24} color='#4ADE80' />
+                    <HeaderTitle>Solicitante</HeaderTitle>
+                  </HeaderLabel>
+                  <Label>{data.user.name}</Label>
               </WrapperLabel>
 
               {data.collector && (

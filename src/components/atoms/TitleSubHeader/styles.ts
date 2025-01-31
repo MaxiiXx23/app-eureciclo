@@ -1,5 +1,5 @@
 import { Text } from 'react-native'
-import styled from 'styled-components/native'
+import styled from 'styled-components'
 
 
 export const Label = styled(Text)`

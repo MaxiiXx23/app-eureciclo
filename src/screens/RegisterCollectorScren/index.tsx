@@ -23,8 +23,6 @@ import { Button } from 'components/atoms/Button'
 import { RegisterCollectorStackParamList } from 'shared/routes/stacksParamsList'
 import { formTypeRegisterCollectorSchema, registerCollectorSchema } from 'schemas/auth/registerCollectorSchema'
 
-
-
 type NavProps = NativeStackNavigationProp<RegisterCollectorStackParamList>
 
 export function RegisterCollectorScreen() {

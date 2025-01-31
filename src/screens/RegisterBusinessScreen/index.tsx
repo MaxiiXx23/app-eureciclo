@@ -10,7 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import { normalizeCnpjNumber } from 'utils/masks'
 
-import { EnvelopeSimple, IdentificationCard, Lock, User } from 'phosphor-react-native'
+import { EnvelopeSimple, IdentificationCard, User } from 'phosphor-react-native'
 
 import { ContainerMain } from 'components/templates/Container/styles'
 import { Content, Description, Form, Header, Title } from './styles'

@@ -1,6 +1,6 @@
 
-import { StarHalf, User } from "phosphor-react-native";
-import { Container, Content, ContentRating, TextInfo, TextTitle, WrapperIcon } from "./styles";
+import { StarHalf } from "phosphor-react-native";
+import { Container, Content, ContentRating, ImageProfileCompany, TextInfo, TextTitle } from "./styles";
 import { IGetItemListCollectorDTO } from "dtos/user";
 
 interface IProps {
@@ -11,11 +11,9 @@ interface IProps {
 export function ItemListCollectors({ data, handleNav }: IProps) {
     return(
         <Container onPress={() => handleNav(data.id)} >
-            <WrapperIcon>
-                <User size={32} color="#FFF" />
-            </WrapperIcon>
+            <ImageProfileCompany src={data.urlImage} />
             <Content>
-                <TextTitle>{`${data.firstName} ${data.lastName}`}</TextTitle>
+                <TextTitle>{data.name}</TextTitle>
             </Content>
             <Content>
                 <ContentRating>

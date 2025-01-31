@@ -1,5 +1,5 @@
-import { View } from 'react-native'
-import styled from 'styled-components/native'
+import { Text, View } from 'react-native'
+import styled from 'styled-components'
 
 export const WrapperIcon = styled(View)`
   display: flex;
@@ -9,7 +9,7 @@ export const WrapperIcon = styled(View)`
   gap: ${({ theme }) => theme.spacing['3']};
 `
 
-export const Title = styled.Text`
+export const Title = styled(Text)`
   font-size: ${({ theme }) => theme.spacing['5']};
   font-weight: bold;
   color: ${({ theme }) => theme.colors.shape};

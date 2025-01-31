@@ -20,7 +20,7 @@ export function InputSearch({ label, color='shape', handleSearch, ...rest }: IPr
         <EyeBtn>
             <MagnifyingGlass size={32} color={theme.colors.primary} />
         </EyeBtn>
-        <Input {...rest} onChangeText={(e) => handleSearch(e)} />
+        <Input {...rest} placeholder={label} onChangeText={(e) => handleSearch(e)} />
       </ContainerInput>
     </Container>
   )

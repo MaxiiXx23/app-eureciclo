@@ -3,17 +3,18 @@ import { useEffect, useState } from 'react'
 import { useRoute } from '@react-navigation/native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 
+import { CompaniesAPIs } from 'apis/companies'
+
 import { House, Receipt, TextAlignLeft } from 'phosphor-react-native'
 
 import { ContainerMain } from 'components/templates/Container/styles'
 import { ContainerInfos, Content, HeaderLabel, HeaderTitle, Label, WrapperLabel } from './styles'
 import { SubHeader } from 'components/molecules/SubHeader'
 import { InfoEmpty } from 'components/molecules/InfoEmpty'
+import { PreviewImage } from 'components/atoms/PreviewImage'
 
 import { CollectStackParamList } from 'shared/routes/stacksParamsList'
-import { CompaniesAPIs } from 'apis/companies'
 import { IInfoProfileCompanyDTO } from 'dtos/companies'
-import { PreviewImage } from 'components/atoms/PreviewImage'
 
 export function ProfileCompanyScreen() {
   const { params } = useRoute()

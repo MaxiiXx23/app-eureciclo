@@ -1,5 +1,5 @@
-import { TouchableOpacity, TouchableOpacityProps } from 'react-native'
-import styled from 'styled-components/native'
+import { Text, TouchableOpacity } from 'react-native'
+import styled from 'styled-components'
 
 export const ContainerBtn = styled(TouchableOpacity)`
   display: flex;
@@ -11,7 +11,7 @@ export const ContainerBtn = styled(TouchableOpacity)`
   padding-bottom: ${({ theme }) => theme.spacing[2]};
 `
 
-export const Title = styled.Text`
+export const Title = styled(Text)`
 
   color: ${({ theme }) => theme.colors.textDark};
   font-size: ${({ theme }) => theme.spacing[4]};

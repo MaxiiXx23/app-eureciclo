@@ -18,7 +18,9 @@ type CollectStackParamList = {
   Request: undefined
   Status: undefined
   Camera: undefined
-  Address: undefined
+  Address: {
+    type: number
+  }
   Verify: {
     id?: number
   }

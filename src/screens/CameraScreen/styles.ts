@@ -1,5 +1,5 @@
-import { ScrollView, Text, View } from 'react-native'
-import styled from 'styled-components/native'
+import { ScrollView} from 'react-native'
+import styled from 'styled-components'
 
 export const Content = styled(ScrollView)`
   flex: 1;

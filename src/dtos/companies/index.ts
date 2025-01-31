@@ -2,7 +2,8 @@ import { IDefaultResponsePaginationDTO } from "dtos/IDefaultResponseDTO"
 
 export interface IItemListCompanyDTO {
     id: number
-    fantasyName: string
+    name: string
+    urlImage: string
 }
 
 export interface IInfoProfileCompanyDTO {

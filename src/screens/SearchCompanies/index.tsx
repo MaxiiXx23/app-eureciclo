@@ -19,7 +19,7 @@ import { IOrdernation, IPeriodQuery, IQueryType } from 'interfaces'
 import { TResponseListCompaniesDTO } from 'dtos/companies'
 import { ItemListCompany } from 'components/molecules/ItemListCompany'
 
-type NavProps = NativeStackNavigationProp<CollectStackParamList, 'CollectInitial'>
+type NavProps = NativeStackNavigationProp<CollectStackParamList, 'Initial'>
 
 export function SearchCompanies() {
 

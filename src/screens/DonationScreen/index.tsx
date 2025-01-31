@@ -1,22 +1,10 @@
-import { ContainerMain } from 'components/templates/Container/styles'
-
-import { useTheme } from 'styled-components'
-import { useNavigation } from '@react-navigation/native'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { ProfileStackParamList } from 'shared/routes/stacksParamsList'
-import { ContainerInfos, ContainerThanks, Content, Description, DescriptionThanks, Header, LabelInfo, TextThanks, Title, TitleInfo, WrapperInfo, WrapperTitle } from './styles'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
+
+import { ContainerMain } from 'components/templates/Container/styles'
+import { ContainerInfos, ContainerThanks, Content, Description, DescriptionThanks, Header, LabelInfo, TextThanks, Title, TitleInfo, WrapperInfo, WrapperTitle } from './styles'
 import { Icons } from 'shared/imports/icons'
 
-type NavProps = NativeStackNavigationProp<ProfileStackParamList, 'ProfileInitial'>
-
 export function DonationScreen() {
-  const theme = useTheme()
-  const navigation = useNavigation<NavProps>()
-
-//   function handleNavToDonationScreen() {
-//     navigation.navigate('Donation')
-//   }
 
   return (
     <SafeAreaProvider>

@@ -24,8 +24,6 @@ import { RegisterBusinessStackParamList } from 'shared/routes/stacksParamsList'
 import { formTypeRegisterCollectorSchema, registerCollectorSchema } from 'schemas/auth/registerCollectorSchema'
 import { IRequestRegister } from 'interfaces/auth'
 
-
-
 type NavProps = NativeStackNavigationProp<RegisterBusinessStackParamList>
 
 export function RegisterUserBusinessScreen() {

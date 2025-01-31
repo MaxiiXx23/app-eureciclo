@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
 
 import { FlatList } from 'react-native'
 
+import { useFocusEffect } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
@@ -19,7 +20,7 @@ import { Content } from './styles'
 import { IOrdernation, IPeriodQuery, IQueryType } from 'interfaces'
 import { IResponseGetListCollectsByUserDTO } from 'dtos/collects'
 
-type NavProps = NativeStackNavigationProp<CollectStackParamList, 'CollectInitial'>
+type NavProps = NativeStackNavigationProp<CollectStackParamList, 'Initial'>
 
 export function SearchCollectsScreen() {
 
@@ -49,23 +50,23 @@ export function SearchCollectsScreen() {
     setCurrentPage(1)
   }
 
-  useEffect(() => {
-
-    getCollectsToCollector({
-      search,
-      page: currentPage,
-      perPage: 10,
-      status,
-      ordernation,
-      period,
-      type: 'all', 
-    }).then((data) =>  {
-      setListData(data)
-       
-    })
-    .catch()
-
-  }, [search, currentPage, ordernation, status, period, type])
+    useFocusEffect(
+      useCallback(() => {
+        getCollectsToCollector({
+          search,
+          page: currentPage,
+          perPage: 10,
+          status,
+          ordernation,
+          period,
+          type: 'all', 
+        }).then((data) =>  {
+          setListData(data)
+           
+        })
+        .catch()
+      }, [search, currentPage, ordernation, status, period, type])    
+    )
 
   return (
     <SafeAreaProvider>

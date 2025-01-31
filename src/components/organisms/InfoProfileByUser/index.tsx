@@ -24,7 +24,7 @@ export function InfoProfileByUser({ data }: IProps) {
         <Container>
 
             <WrapperProfile>
-                <ProfileImage src='https://picsum.photos/200/300' />
+                <ProfileImage src={data.urlImage} />
                 <Name>{data.name}</Name>
                 <WrapperLabel>
                     <LabelRating>

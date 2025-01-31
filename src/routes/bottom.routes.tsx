@@ -21,7 +21,7 @@ export function BottomRouter() {
         initialRouteName="Initial"
         screenOptions={{
             tabBarActiveTintColor: '#FFF',
-            tabBarInactiveTintColor: '#969CB2',
+            tabBarInactiveTintColor: '#499999',
             tabBarStyle: {
               backgroundColor: '#4ADE80'
             },

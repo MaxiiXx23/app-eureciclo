@@ -13,7 +13,7 @@ import { normalizeCnpjOrCpfNumber, normalizeDate } from 'utils/masks'
 
 import { formTypeRegisterClientSchema, registerClientSchema } from 'schemas/auth/registerClientSchema'
 
-import { CalendarBlank, EnvelopeSimple, IdentificationCard, Lock, User } from 'phosphor-react-native'
+import { CalendarBlank, EnvelopeSimple, IdentificationCard, User } from 'phosphor-react-native'
 
 import { ContainerMain } from 'components/templates/Container/styles'
 import { Content, Description, Form, Header, Title } from './styles'

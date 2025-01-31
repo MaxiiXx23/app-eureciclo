@@ -1,17 +1,13 @@
-import { Text, View } from 'react-native'
-import styled from 'styled-components/native'
+import { ScrollView, Text, View } from 'react-native'
+import styled from 'styled-components'
 
-export const Content = styled(View)`
+export const Content = styled(ScrollView)`
   flex: 1;
   background-color: ${({theme}) => theme.colors.shape};
   paddingRight:  ${({theme}) => theme.spacing[3]};
   paddingLeft:  ${({theme}) => theme.spacing[3]};
   paddingTop:  ${({theme}) => theme.spacing[3]};
   paddingBottom:  ${({theme}) => theme.spacing[3]};
-
-  justify-content: start;
-  align-items: center;
-
   gap:  ${({theme}) => theme.spacing[4]};
 
   border-top-right-radius: ${({theme}) => theme.spacing[6]};
@@ -19,6 +15,8 @@ export const Content = styled(View)`
 `
 
 export const WrapperLabel = styled(View)`
+  margin-top:  ${({theme}) => theme.spacing[1]};
+  margin-bottom:  ${({theme}) => theme.spacing[3]};
   justify-content: center;
   align-items: start;
   width: 100%;

@@ -1,5 +1,5 @@
 import { View, TextInput, TouchableOpacity, Text } from 'react-native'
-import styled from 'styled-components/native'
+import styled from 'styled-components'
 
 interface ILabelProps {
   color: 'shape' | 'primary'

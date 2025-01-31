@@ -1,5 +1,5 @@
 import { Image } from 'react-native'
-import styled from 'styled-components/native'
+import styled from 'styled-components'
 
 export const Container = styled(Image)`
   height: ${({ theme }) => theme.spacing[40]};

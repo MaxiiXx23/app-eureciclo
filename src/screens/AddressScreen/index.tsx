@@ -36,7 +36,7 @@ export function AddressScreen() {
   const { userAuth } = useContext(AuthContext)
 
 
-  const { register, setValue, control, handleSubmit, watch} = useForm<formTypeAddressSchema>({
+  const {register, setValue, control, handleSubmit, watch} = useForm<formTypeAddressSchema>({
     resolver: zodResolver(addressSchema),
   })
 
@@ -198,8 +198,15 @@ export function AddressScreen() {
       getAddressByCompanyId(params!.id)
     }
 
+    register('cep')
+    register('place')
+    register('number')
+    register('complement')
+    register('district')
+    register('city')
+    register('state')
 
-  }, [])
+  }, [register])
 
   return (
     <SafeAreaProvider>

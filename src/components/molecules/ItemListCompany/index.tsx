@@ -1,6 +1,5 @@
-
-import { Buildings, StarHalf } from "phosphor-react-native";
-import { Container, Content, ContentRating, TextInfo, TextTitle, WrapperIcon } from "./styles";
+import { StarHalf } from "phosphor-react-native";
+import { Container, Content, ContentRating, ImageProfileCompany, TextInfo, TextTitle } from "./styles";
 import { IItemListCompanyDTO } from "dtos/companies";
 
 interface IProps {
@@ -11,11 +10,9 @@ interface IProps {
 export function ItemListCompany({ data, handleNav }: IProps) {
     return(
         <Container onPress={() => handleNav(data.id)} >
-            <WrapperIcon>
-                <Buildings size={32} color="#FFF" />
-            </WrapperIcon>
+             <ImageProfileCompany src={data.urlImage} />
             <Content>
-                <TextTitle>{data.fantasyName}</TextTitle>
+                <TextTitle>{data.name}</TextTitle>
             </Content>
             <Content>
                 <ContentRating>

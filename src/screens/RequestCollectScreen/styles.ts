@@ -57,10 +57,10 @@ export const Header = styled(View)`
 
 export const TextArea = styled(TextInput)`
   width: 100%;
-  height: ${({ theme }) => theme.spacing[10]};
+  height: ${({ theme }) => theme.spacing[14]};
   border-width: 1px;
   border-radius: ${({ theme }) => theme.spacing[3]};
-  padding: ${({ theme }) => theme.spacing[3]};
+  padding: ${({ theme }) => theme.spacing[4]};
 
   font-size: ${({ theme }) => theme.spacing[4]};
   color: ${({ theme }) => theme.colors.textDark};
@@ -84,7 +84,7 @@ export const ButtonAddress = styled(TouchableOpacity)`
   padding: ${({ theme }) => theme.spacing[2]};
 `
 
-export const BtnTitle = styled.Text`
+export const BtnTitle = styled(Text)`
   color: ${({ theme }) => theme.colors.shape};
   font-size: ${({ theme }) => theme.spacing[4]};
   text-transform: uppercase;

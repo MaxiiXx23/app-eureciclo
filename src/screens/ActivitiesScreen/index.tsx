@@ -1,7 +1,8 @@
-import { useContext, useEffect, useState } from 'react'
+import { useCallback, useContext, useState } from 'react'
 
 import { FlatList } from 'react-native'
 
+import { useFocusEffect } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
@@ -22,7 +23,7 @@ import { IOrdernation, IPeriodQuery, IQueryType } from 'interfaces'
 import { IResponseGetListCollectsByUserDTO } from 'dtos/collects'
 import { SubHeaderSearch } from 'components/molecules/SubHeaderSearch'
 
-type NavProps = NativeStackNavigationProp<ActivitiesStackParamList, 'ActivitiesInitial'>
+type NavProps = NativeStackNavigationProp<ActivitiesStackParamList, 'Initial'>
 
 export function ActivitiesScreen() {
   
@@ -53,43 +54,41 @@ export function ActivitiesScreen() {
     setCurrentPage(1)
   }
 
-  useEffect(() => {
-
-    if(userAuth.typeUserId === 1) {
-      getCollectsPaginated({
-        search,
-        page: currentPage,
-        perPage: 10,
-        status,
-        ordernation,
-        period,
-        type: 'all', 
-      }).then((data) =>  {
-        setListData(data)
-         
-      })
-      .catch()
-    } else {
-
-      getCollectsPaginatedByCollector({
-        id: userAuth.id,
-        search,
-        page: currentPage,
-        perPage: 10,
-        status: isInProcess ? '3' : '1,3',
-        ordernation,
-        period,
-        type: 'all', 
-      }).then((data) =>  {
-        setListData(data)
-         
-      })
-      .catch()
-    }
-
-
-
-  }, [search, currentPage, ordernation, status, period, type])
+  useFocusEffect(
+    useCallback(() => {
+      if(userAuth.typeUserId === 1) {
+        getCollectsPaginated({
+          search,
+          page: currentPage,
+          perPage: 10,
+          status,
+          ordernation,
+          period,
+          type: 'all', 
+        }).then((data) =>  {
+          setListData(data)
+           
+        })
+        .catch()
+      } else {
+  
+        getCollectsPaginatedByCollector({
+          id: userAuth.id,
+          search,
+          page: currentPage,
+          perPage: 10,
+          status: isInProcess ? '3' : '1,3',
+          ordernation,
+          period,
+          type: 'all', 
+        }).then((data) =>  {
+          setListData(data)
+           
+        })
+        .catch()
+      }
+    }, [search, currentPage, ordernation, status, period, type])    
+  )
 
   return (
     <SafeAreaProvider>

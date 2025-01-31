@@ -2,8 +2,8 @@ import { IDefaultResponseDTO, IDefaultResponsePaginationDTO } from "dtos/IDefaul
 
 export interface IGetItemListCollectorDTO {
     id: number
-    firstName: string
-    lastName: string
+    name: string
+    urlImage: string
 }
 
 export interface IGetInfoUserDTO {
@@ -13,6 +13,7 @@ export interface IGetInfoUserDTO {
   description: string
   phone: string | null
   dateOfBirth: string
+  urlImage: string
   address: {
     id: number
     cep: string

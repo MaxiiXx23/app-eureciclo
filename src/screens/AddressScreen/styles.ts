@@ -1,5 +1,5 @@
 import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import styled from 'styled-components/native'
+import styled from 'styled-components'
 
 
 export const TitleHeader = styled(Text)`

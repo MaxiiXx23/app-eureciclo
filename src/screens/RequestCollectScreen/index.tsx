@@ -1,5 +1,6 @@
-import { useEffect } from 'react'
+import { useCallback, useContext, useState } from 'react'
 
+import { useFocusEffect } from '@react-navigation/native';
 import { ToastAndroid } from 'react-native';
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
@@ -8,36 +9,45 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { zodResolver } from '@hookform/resolvers/zod'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
+import { CollectsAPIs } from 'apis/collects';
+import { UsersAPIs } from 'apis/users';
+
 import { MapPinLine, Recycle, TextAlignLeft } from 'phosphor-react-native'
 
 import { ContainerMain } from 'components/templates/Container/styles'
-import { CollectStackParamList } from 'shared/routes/stacksParamsList'
 import { BtnTitle, ButtonAddress, ContainerInput, Content, Header, HeaderInput, LabelInput, TextAddress, TextArea, WrapperTitleInput } from './styles'
 import { BtnOpenCamera } from 'components/molecules/BtnOpenCamera'
 import { Button } from 'components/atoms/Button'
 
 import { formTypeRequestCollectSchema, requestCollectSchema } from 'schemas/collect/requestCollectSchema'
-import { CollectsAPIs } from 'apis/collects';
-
+import { CollectStackParamList } from 'shared/routes/stacksParamsList'
+import { AuthContext } from 'contexts/AuthContext';
+import { IResponseGetAddress } from 'dtos/address';
 
 type NavProps = NativeStackNavigationProp<CollectStackParamList>
 
-
-// Aplicar o React Hook-form nesse Componente/Tela
-
 export function RequestCollectScreen() {
+
+  const [address, setAddress] = useState<IResponseGetAddress['address'] | undefined>()
+
+  const { userAuth } = useContext(AuthContext)
   const navigation = useNavigation<NavProps>()
   const showToast = (text: string) => {
     ToastAndroid.show(text, ToastAndroid.SHORT);
   }
 
-  const { register, setValue, handleSubmit, reset} = useForm<formTypeRequestCollectSchema>({
+  const { register, setValue, handleSubmit} = useForm<formTypeRequestCollectSchema>({
     resolver: zodResolver(requestCollectSchema),
   })
 
   const onSubmit: SubmitHandler<formTypeRequestCollectSchema> = async (data) => {
 
     try {
+
+      if(!address) {
+        return showToast('Por favor informe o endereço para coleta.')
+      }
+
       const jsonValue = await AsyncStorage.getItem('@EuReciclo:uri');
       if(jsonValue === null) {
         return showToast('Por favor tire uma foto dos recicláveis.')
@@ -51,7 +61,7 @@ export function RequestCollectScreen() {
       });
 
       const dataForm: IRequestCreateCollect['data'] = {
-        addressId: 1,
+        addressId: address.id,
         description: data.description,
         statusCollectId: 4
       }
@@ -70,12 +80,30 @@ export function RequestCollectScreen() {
   }
 
   function handleNavToAddressUpdate() {
-    navigation.navigate('Address')
+    navigation.navigate('Address', {
+      type: 1
+    })
   }
 
-  useEffect(() => {
-    register('description')
-  }, [register])
+  async function getAddressByUserId() {
+    try {
+      const { data } = await UsersAPIs.getAddressByUserId(userAuth.id)
+  
+      if(data.address === null) return
+        setAddress(data.address)
+  
+      } catch (error) {
+        return showToast('Erro ao buscar seu endereço. Por favor, recarregue a tela novamente.')
+      }
+    }
+
+  useFocusEffect(
+    useCallback(() => {
+      getAddressByUserId()
+      register('description')
+    }, [register])
+      
+  )
 
   return (
     <SafeAreaProvider>
@@ -108,7 +136,11 @@ export function RequestCollectScreen() {
                   <BtnTitle>Atualizar</BtnTitle>
                 </ButtonAddress>
               </Header>
-              <TextAddress>Rua das Pérolas, n° 23 - Jardim Pérola</TextAddress>
+              {address ? (
+                <TextAddress>{address.street}, n° {address.number} - {address.district} - {address.city} - {address.state}</TextAddress>
+              ): (
+                <TextAddress>Sem endereço informado para coleta.</TextAddress>
+              )}
             </ContainerInput>
 
             <Button color='primary' title='Confirmar' onPress={handleSubmit(onSubmit)} />

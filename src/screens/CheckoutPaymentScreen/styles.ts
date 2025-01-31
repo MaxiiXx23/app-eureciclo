@@ -1,5 +1,5 @@
 import { Text, TouchableOpacity, TouchableOpacityProps, View } from 'react-native'
-import styled from 'styled-components/native'
+import styled from 'styled-components'
 
 interface IBtnProps extends TouchableOpacityProps {
   color: 'primary' | 'shape'

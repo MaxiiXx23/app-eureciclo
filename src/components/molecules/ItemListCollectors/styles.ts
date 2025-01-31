@@ -1,5 +1,5 @@
-import { Text, TouchableOpacity, View } from 'react-native'
-import styled from 'styled-components/native'
+import { Image, Text, TouchableOpacity, View } from 'react-native'
+import styled from 'styled-components'
 
 
 export const Container = styled(TouchableOpacity)`
@@ -19,18 +19,6 @@ export const Container = styled(TouchableOpacity)`
 
     padding-right: ${({theme}) => theme.spacing[2]};
     padding-left: ${({theme}) => theme.spacing[2]};
-`
-
-export const WrapperIcon = styled(View)`
-
-    width: ${({theme}) => theme.spacing[10]};
-    height: ${({theme}) => theme.spacing[10]};
-    background-color: ${({ theme }) => theme.colors.primary};
-    border-radius: 999px;
-
-    justify-content: center;
-    align-items: center;
-
 `
 
 export const Content = styled(View)`
@@ -56,4 +44,11 @@ export const ContentRating = styled(View)`
     justify-content: center;
     gap: ${({theme}) => theme.spacing[1]};
 
+`
+
+export const ImageProfileCompany = styled(Image)`
+
+    width: ${({theme}) => theme.spacing[8]};
+    height: ${({theme}) => theme.spacing[8]};
+    border-radius: 999px;
 `

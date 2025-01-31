@@ -6,20 +6,20 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 
 import { AuthContext } from 'contexts/AuthContext'
+import { CompaniesAPIs } from 'apis/companies'
+import { normalizePhoneNumber } from 'utils/masks'
 
 import { PencilSimpleLine } from 'phosphor-react-native'
 
 import { ContainerMain } from 'components/templates/Container/styles'
 import { ContainerNavs, Content, Title, WrapperLabel } from './styles'
-
-import { AdminCompanyStackParamList } from 'shared/routes/stacksParamsList'
 import { InputIcon } from 'components/atoms/InputIcon'
 import { SelectImagePicker } from 'components/molecules/SelectImagePicker'
 import { Button } from 'components/atoms/Button'
-import { IInfoProfileCompanyDTO } from 'dtos/companies'
-import { CompaniesAPIs } from 'apis/companies'
-import { normalizePhoneNumber } from 'utils/masks'
 import { ButtonArrow } from 'components/atoms/ButtonArrow'
+
+import { IInfoProfileCompanyDTO } from 'dtos/companies'
+import { AdminCompanyStackParamList } from 'shared/routes/stacksParamsList'
 
 type NavProps = NativeStackNavigationProp<AdminCompanyStackParamList, 'AdminInitial'>
 

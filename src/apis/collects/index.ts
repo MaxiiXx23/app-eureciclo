@@ -112,7 +112,6 @@ async function patchConfirmCollect(id: number, code: string) {
 }
 
 async function create(form: FormData) {
-console.log('olá')
 const response = await api.post<IDefaultResponseDTO>(`${baseUrl}/`, form, {
   headers: {
     'Content-Type': 'multipart/form-data',

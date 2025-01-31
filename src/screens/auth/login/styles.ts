@@ -1,5 +1,5 @@
 import { View } from 'react-native'
-import styled from 'styled-components/native'
+import styled from 'styled-components'
 
 export const ContainerForm = styled(View)`
   display: flex;

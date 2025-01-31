@@ -1,5 +1,5 @@
-import { TouchableOpacity, TouchableOpacityProps } from 'react-native'
-import styled from 'styled-components/native'
+import { Text, TouchableOpacity, TouchableOpacityProps } from 'react-native'
+import styled from 'styled-components'
 
 interface IButtonProps extends TouchableOpacityProps {
   color: 'primary' | 'secondary' | 'dangerPrimary' | 'button'
@@ -15,7 +15,7 @@ export const ContainerBtn = styled(TouchableOpacity)<IButtonProps>`
   padding: ${({ theme }) => theme.spacing['5']};
 `
 
-export const Title = styled.Text`
+export const Title = styled(Text)`
   color: ${({ theme }) => theme.colors.shape};
   font-size: 16px;
   text-transform: uppercase;
