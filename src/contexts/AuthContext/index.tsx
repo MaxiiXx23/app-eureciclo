@@ -78,48 +78,36 @@ function AuthProvider({ children }: Props) {
   }, [])
 
   const signIn = async (request: IDataSignIn) => {
-    try {
-      const data = await AuthAPIs.login(request)
-      const token = data.token
-      const refreshToken = data.refreshToken
-      const userAuthInfos = jwtDecode(token) as IAuthUserDTO
+    const data = await AuthAPIs.login(request)
+    const token = data.token
+    const refreshToken = data.refreshToken
+    const userAuthInfos = jwtDecode(token) as IAuthUserDTO
 
-      setUserAuth({
-        id: userAuthInfos.id,
-        firstName: userAuthInfos.firstName,
-        lastName: userAuthInfos.lastName,
-        email: userAuthInfos.email,
-        phone: userAuthInfos.phone,
-        urlImageProfile: userAuthInfos.urlImageProfile,
-        status: userAuthInfos.status,
-        typeUserId: userAuthInfos.typeUserId,
-        businesses: userAuthInfos.businesses,
-      })
+    setUserAuth({
+      id: userAuthInfos.id,
+      firstName: userAuthInfos.firstName,
+      lastName: userAuthInfos.lastName,
+      email: userAuthInfos.email,
+      phone: userAuthInfos.phone,
+      urlImageProfile: userAuthInfos.urlImageProfile,
+      status: userAuthInfos.status,
+      typeUserId: userAuthInfos.typeUserId,
+      businesses: userAuthInfos.businesses,
+    })
 
-      await createCoockies({ token, refreshToken })
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        console.log(error.message)
-      }
-    }
+    await createCoockies({ token, refreshToken })
   }
 
   const logout = async () => {
-    try {
-      const storageRefreshToken = await getCoockieRefreshToken()
+    const storageRefreshToken = await getCoockieRefreshToken()
 
-      if(!storageRefreshToken) {
-        throw new Error('Refresh Token não encontrado')
-      }
-
-      await AuthAPIs.logout(storageRefreshToken)
-      await deleteCoockies()
-      setUserAuth({} as IAuthUserDTO)
-
-    } catch (error) {
-
-      console.log(error)
+    if(!storageRefreshToken) {
+      throw new Error('Refresh Token não encontrado')
     }
+
+    await AuthAPIs.logout(storageRefreshToken)
+    await deleteCoockies()
+    setUserAuth({} as IAuthUserDTO)
   }
 
   return (

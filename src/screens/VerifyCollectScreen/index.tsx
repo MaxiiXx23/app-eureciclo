@@ -1,5 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 
+import { ToastAndroid } from 'react-native'
+
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
@@ -19,12 +21,16 @@ import { Button } from 'components/atoms/Button'
 
 import { ActivitiesStackParamList, CollectStackParamList } from 'shared/routes/stacksParamsList'
 import { IGetInfoCollectDTO } from 'dtos/collects'
+import { AxiosError } from 'axios'
 
 type NavProps = NativeStackNavigationProp<CollectStackParamList, 'Initial'>
 
 export function VerifyCollectScreen() {
   const { params } = useRoute()
   const navigation = useNavigation<NavProps>()
+  const showToast = (text: string) => {
+    ToastAndroid.show(text, ToastAndroid.SHORT);
+  }
 
   const [data, setData] = useState<IGetInfoCollectDTO | undefined>()
 
@@ -47,7 +53,11 @@ export function VerifyCollectScreen() {
       }
 
     } catch (error) {
-      console.log(error)
+        if (error instanceof AxiosError) {
+          return showToast(error.response?.data.messsage)
+        }
+      
+        return showToast("Erro ao buscar dados! Por Favor, tente novamente.")
     }
   }
 
@@ -65,7 +75,11 @@ export function VerifyCollectScreen() {
       navigation.navigate('SearchCollects')
 
     } catch (error) {
-      console.log(error)
+        if (error instanceof AxiosError) {
+          return showToast(error.response?.data.messsage)
+        }
+      
+        return showToast("Erro ao solicitar coleta! Por Favor, tente novamente.")
     }
   }
 

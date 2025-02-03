@@ -1,5 +1,7 @@
 import { useContext } from 'react';
 
+import { ToastAndroid } from 'react-native'
+
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
@@ -16,12 +18,16 @@ import { BtnNavProfile } from 'components/molecules/BtnNavProfile'
 import { BtnNavArrow } from 'components/molecules/BtnNavArrow';
 
 import { ProfileStackParamList } from 'shared/routes/stacksParamsList'
+import { AxiosError } from 'axios';
 
 
 type NavProps = NativeStackNavigationProp<ProfileStackParamList, 'ProfileInitial'>
 
 export function AccountScreen() {
   const navigation = useNavigation<NavProps>()
+  const showToast = (text: string) => {
+    ToastAndroid.show(text, ToastAndroid.SHORT);
+  }
 
   const { logout } = useContext(AuthContext)
 
@@ -44,7 +50,15 @@ export function AccountScreen() {
   }
 
   async function handleSignOut() {
-    await logout()
+    try {
+      await logout()
+    } catch(error) {
+      if(error instanceof AxiosError) {
+        return showToast(error.response?.data.message)
+      }
+
+      return showToast('Erro ao sair do App! Por favor, tente novamante.')
+    }
   }
 
   return (

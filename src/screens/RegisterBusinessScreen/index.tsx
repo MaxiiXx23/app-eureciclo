@@ -1,5 +1,7 @@
 import { useEffect } from 'react'
 
+import { ToastAndroid } from 'react-native'
+
 import { Controller, ControllerRenderProps, SubmitHandler, useForm } from 'react-hook-form'
 import { useTheme } from 'styled-components'
 import { useNavigation } from '@react-navigation/native'
@@ -26,6 +28,9 @@ type NavProps = NativeStackNavigationProp<RegisterBusinessStackParamList>
 export function RegisterBusinessScreen() {
   const theme = useTheme()
   const navigation = useNavigation<NavProps>()
+  const showToast = (text: string) => {
+    ToastAndroid.show(text, ToastAndroid.SHORT);
+  }
 
   const { register, setValue, control, handleSubmit} = useForm<formTypeRegisterBusinessSchema>({
     resolver: zodResolver(registerBusinessSchema),
@@ -45,9 +50,9 @@ export function RegisterBusinessScreen() {
       await AsyncStorage.setItem('@EuReciclo:registerBusiness', jsonValue);
 
       navigation.navigate('RegisterPlanBusinessInfo')
-    } catch (e) {
+    } catch {
       // saving error
-      console.log("Erro ao salvar!")
+      return showToast("Erro ao salvar dados! Por Favor, tente novamente.")
     }
 
   }

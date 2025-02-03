@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 
+import { ToastAndroid } from 'react-native'
+
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { useRoute } from '@react-navigation/native'
 
@@ -12,10 +14,14 @@ import { Content, HeaderLabel, HeaderTitle, Label, WrapperLabel } from './styles
 import { InfoProfileByUser } from 'components/organisms/InfoProfileByUser'
 
 import { IGetInfoUserDTO } from 'dtos/user'
+import { AxiosError } from 'axios'
 
 export function InfoProfileUserScreen() {
 
     const { params } = useRoute()
+    const showToast = (text: string) => {
+      ToastAndroid.show(text, ToastAndroid.SHORT);
+    }
 
     const [data, setData] = useState<IGetInfoUserDTO>({} as IGetInfoUserDTO)
 
@@ -25,7 +31,11 @@ export function InfoProfileUserScreen() {
         
             setData(response.data.user)
         } catch (error) {
-            console.log(error)
+            if (error instanceof AxiosError) {
+              return showToast(error.response?.data.messsage)
+            }
+            
+            return showToast("Erro ao buscar dados! Por Favor, tente novamente.")
         }
     }
 

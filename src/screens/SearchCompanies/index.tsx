@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { FlatList } from 'react-native'
+import { FlatList, ToastAndroid } from 'react-native'
 
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { useNavigation } from '@react-navigation/native'
@@ -8,23 +8,26 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 import { useCollects } from 'contexts/CollectsContext'
 
-import { CollectStackParamList } from 'shared/routes/stacksParamsList'
 import { ContainerMain } from 'components/templates/Container/styles'
 import { SubHeaderSearch } from 'components/molecules/SubHeaderSearch'
 import { Pagination } from 'components/molecules/Pagination'
 import { InfoEmpty } from 'components/molecules/InfoEmpty'
+import { ItemListCompany } from 'components/molecules/ItemListCompany'
 import { Content } from './styles'
 
+import { AxiosError } from 'axios'
+import { CollectStackParamList } from 'shared/routes/stacksParamsList'
 import { IOrdernation, IPeriodQuery, IQueryType } from 'interfaces'
 import { TResponseListCompaniesDTO } from 'dtos/companies'
-import { ItemListCompany } from 'components/molecules/ItemListCompany'
 
 type NavProps = NativeStackNavigationProp<CollectStackParamList, 'Initial'>
 
 export function SearchCompanies() {
 
   const [listData, setListData] = useState<TResponseListCompaniesDTO | undefined>()
-
+  const showToast = (text: string) => {
+    ToastAndroid.show(text, ToastAndroid.SHORT);
+  }
   const [ordernation, setOrdernation] =
   useState<IOrdernation['ordernation']>('asc')
 
@@ -63,7 +66,13 @@ export function SearchCompanies() {
       setListData(data)
        
     })
-    .catch()
+    .catch((error) => {
+      if (error instanceof AxiosError) {
+        return showToast(error.response?.data.messsage)
+      }
+
+      return showToast("Erro não fazer login! Por Favor, tente novamente.")
+    })
 
   }, [search, currentPage, ordernation, status, period, type])
 

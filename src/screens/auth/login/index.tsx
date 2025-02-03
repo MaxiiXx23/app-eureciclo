@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from 'react'
+
 import { ToastAndroid } from 'react-native'
 
 import { EnvelopeSimple } from 'phosphor-react-native'
@@ -17,6 +18,7 @@ import { AuthStackParamList } from 'shared/routes/stacksParamsList'
 import { TextShape } from 'components/atoms/Text'
 import { IconEuReciclo } from 'components/molecules/IconEuReciclo'
 
+import { AxiosError } from 'axios'
 
 type LoginScreenProp = NativeStackNavigationProp<
   AuthStackParamList,
@@ -42,20 +44,28 @@ export function LoginScreen() {
 
   async function handleSubmitAuth() {
 
-    if(!emailInput || !passwordInput!) {
-      return showToast('Login não preenchido!')
-     
+    try {
+      if(!emailInput || !passwordInput!) {
+        return showToast('Login não preenchido!')
+       
+      }
+  
+      await signIn({
+        email: emailInput,
+        password: passwordInput
+      })
+  
+      // Fazer a requisitação Auth e navegar para dentro do APP
+  
+      setEmailInput('')
+      setPasswordInput('')
+    } catch(error) {
+      if(error instanceof AxiosError) {
+        return showToast(error.response?.data.message)
+      }
+
+      return showToast('Erro ao fazer Login! Por favor, tente novamante.')
     }
-
-    await signIn({
-      email: emailInput,
-      password: passwordInput
-    })
-
-    // Fazer a requisitação Auth e navegar para dentro do APP
-
-    setEmailInput('')
-    setPasswordInput('')
   }
 
   useEffect(() => {

@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react'
 
-import { FlatList } from 'react-native'
+import { FlatList, ToastAndroid } from 'react-native'
 
 import { useFocusEffect } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context'
@@ -19,6 +19,7 @@ import { ItemListCollectors } from 'components/molecules/ItemListCollectors'
 import { IOrdernation, IPeriodQuery, IQueryType } from 'interfaces'
 import { IResponseGetListCollectorDTO } from 'dtos/user'
 import { CollectoresStackParamList } from 'shared/routes/stacksParamsList'
+import { AxiosError } from 'axios';
 
 type NavProps = NativeStackNavigationProp<CollectoresStackParamList, 'CollectoresInitial'>
 
@@ -33,6 +34,9 @@ export function SearchCollectoresScreen() {
   const [search, setSearch] = useState<string>('')
   const [period, setPeriod] = useState<IPeriodQuery>({})
   const type: IQueryType['type'] = 'all'
+  const showToast = (text: string) => {
+    ToastAndroid.show(text, ToastAndroid.SHORT);
+  }
 
   const navigation = useNavigation<NavProps>()
 
@@ -63,7 +67,13 @@ export function SearchCollectoresScreen() {
         }).then((data) =>  {
           setListData(data)   
         })
-        .catch()
+        .catch((error) => {
+          if (error instanceof AxiosError) {
+            return showToast(error.response?.data.messsage)
+          }
+          
+          return showToast("Erro não fazer login! Por Favor, tente novamente.")
+        })
     }, [search, currentPage, ordernation, status, period, type])    
     )
 

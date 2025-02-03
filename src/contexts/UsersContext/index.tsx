@@ -7,11 +7,9 @@ import {
   SetStateAction,
 } from 'react'
 
-import { AxiosError } from 'axios'
-import { IRequestPagination, IRequestPaginationMultipleStatus } from 'interfaces'
-import { IResponseGetListCollectsByUserDTO } from 'dtos/collects'
-import { TResponseListCompaniesDTO } from 'dtos/companies'
 import { UsersAPIs } from 'apis/users'
+
+import { IRequestPagination } from 'interfaces'
 import { IResponseGetListCollectorDTO } from 'dtos/user'
 
 type Props = {
@@ -44,29 +42,18 @@ export function UsersProvider({ children }: Props) {
     period,
     type,
   }: IRequestPagination) {
-    try {
-
-      const response = await UsersAPIs.getSearchCollectorsToCompany({
-        search,
-        page,
-        perPage,
-        ordernation,
-        status,
-        type,
-        period,
-      })
-      
-      setCurrentPage(response.data.currentPage)
-      return response.data
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        console.log(
-            'Por favor, tente novamente recarregando a página.')
-        return
-      }
-
-      console.log('Por favor, tente novamente recarregando a página.')
-    }
+    const response = await UsersAPIs.getSearchCollectorsToCompany({
+      search,
+      page,
+      perPage,
+      ordernation,
+      status,
+      type,
+      period,
+    })
+    
+    setCurrentPage(response.data.currentPage)
+    return response.data
   }
 
 

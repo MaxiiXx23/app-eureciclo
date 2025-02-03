@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 
+import { ToastAndroid } from 'react-native'
+
 import { useRoute } from '@react-navigation/native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 
@@ -15,9 +17,13 @@ import { PreviewImage } from 'components/atoms/PreviewImage'
 
 import { CollectStackParamList } from 'shared/routes/stacksParamsList'
 import { IInfoProfileCompanyDTO } from 'dtos/companies'
+import { AxiosError } from 'axios'
 
 export function ProfileCompanyScreen() {
   const { params } = useRoute()
+  const showToast = (text: string) => {
+    ToastAndroid.show(text, ToastAndroid.SHORT);
+  }
   const [data, setData] = useState<IInfoProfileCompanyDTO | undefined>()
 
   // Falta pegar a Foto de perfil da Empresa através da API
@@ -35,7 +41,11 @@ export function ProfileCompanyScreen() {
       }
 
     } catch (error) {
-      console.log(error)
+        if (error instanceof AxiosError) {
+          return showToast(error.response?.data.messsage)
+        }
+      
+        return showToast("Erro ao buscar dados! Por Favor, tente novamente.")
     }
   }
 

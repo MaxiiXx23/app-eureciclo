@@ -1,6 +1,6 @@
 import { useCallback, useContext, useState } from 'react'
 
-import { FlatList } from 'react-native'
+import { FlatList, ToastAndroid } from 'react-native'
 
 import { useFocusEffect } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context'
@@ -18,10 +18,11 @@ import { SubHeader } from 'components/molecules/SubHeader'
 import { ItemActivity } from 'components/molecules/ItemActivity'
 import { Pagination } from 'components/molecules/Pagination'
 import { InfoEmpty } from 'components/molecules/InfoEmpty'
+import { SubHeaderSearch } from 'components/molecules/SubHeaderSearch'
 
 import { IOrdernation, IPeriodQuery, IQueryType } from 'interfaces'
 import { IResponseGetListCollectsByUserDTO } from 'dtos/collects'
-import { SubHeaderSearch } from 'components/molecules/SubHeaderSearch'
+import { AxiosError } from 'axios';
 
 type NavProps = NativeStackNavigationProp<ActivitiesStackParamList, 'Initial'>
 
@@ -30,6 +31,9 @@ export function ActivitiesScreen() {
   const { params } = useRoute()
   const navigation = useNavigation<NavProps>()
   const { userAuth } = useContext(AuthContext)
+  const showToast = (text: string) => {
+    ToastAndroid.show(text, ToastAndroid.SHORT);
+  }
 
   const [listData, setListData] = useState<IResponseGetListCollectsByUserDTO | undefined>()
   const [ordernation, setOrdernation] =
@@ -69,7 +73,13 @@ export function ActivitiesScreen() {
           setListData(data)
            
         })
-        .catch()
+        .catch((error) => {
+          if (error instanceof AxiosError) {
+            return showToast(error.response?.data.messsage)
+          }
+        
+          return showToast("Erro não fazer login! Por Favor, tente novamente.")
+        })
       } else {
   
         getCollectsPaginatedByCollector({
@@ -85,7 +95,13 @@ export function ActivitiesScreen() {
           setListData(data)
            
         })
-        .catch()
+        .catch((error) => {
+            if (error instanceof AxiosError) {
+              return showToast(error.response?.data.messsage)
+            }
+          
+          return showToast("Erro não fazer login! Por Favor, tente novamente.")
+        })
       }
     }, [search, currentPage, ordernation, status, period, type])    
   )

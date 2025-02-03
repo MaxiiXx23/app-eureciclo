@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react'
 
-import { FlatList } from 'react-native'
+import { FlatList, ToastAndroid } from 'react-native'
 
 import { useFocusEffect } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context'
@@ -19,6 +19,7 @@ import { Content } from './styles'
 
 import { IOrdernation, IPeriodQuery, IQueryType } from 'interfaces'
 import { IResponseGetListCollectsByUserDTO } from 'dtos/collects'
+import { AxiosError } from 'axios';
 
 type NavProps = NativeStackNavigationProp<CollectStackParamList, 'Initial'>
 
@@ -33,6 +34,10 @@ export function SearchCollectsScreen() {
   const [search, setSearch] = useState<string>('')
   const [period, setPeriod] = useState<IPeriodQuery>({})
   const type: IQueryType['type'] = 'all'
+  const showToast = (text: string) => {
+    ToastAndroid.show(text, ToastAndroid.SHORT);
+  }
+  
 
   const navigation = useNavigation<NavProps>()
 
@@ -64,7 +69,13 @@ export function SearchCollectsScreen() {
           setListData(data)
            
         })
-        .catch()
+        .catch((error) => {
+          if (error instanceof AxiosError) {
+            return showToast(error.response?.data.messsage)
+          }
+          
+          return showToast("Erro não fazer login! Por Favor, tente novamente.")
+        })
       }, [search, currentPage, ordernation, status, period, type])    
     )
 

@@ -7,12 +7,13 @@ import {
   SetStateAction,
 } from 'react'
 
-import { AxiosError } from 'axios'
-import { IRequestPagination, IRequestPaginationMultipleStatus } from 'interfaces'
-import { IResponseGetListCollectsByUserDTO } from 'dtos/collects'
+
 import { CollectsAPIs } from 'apis/collects'
 import { CompaniesAPIs } from 'apis/companies'
 import { TResponseListCompaniesDTO } from 'dtos/companies'
+
+import { IResponseGetListCollectsByUserDTO } from 'dtos/collects'
+import { IRequestPagination, IRequestPaginationMultipleStatus } from 'interfaces'
 
 type Props = {
   children: ReactNode
@@ -50,29 +51,18 @@ export function CollectsProvider({ children }: Props) {
     period,
     type,
   }: IRequestPagination) {
-    try {
-
-      const response = await CollectsAPIs.getCollectsByUser({
-        search,
-        page,
-        perPage,
-        ordernation,
-        status,
-        type,
-        period,
-      })
-      
-      setCurrentPage(response.data.currentPage)
-      return response.data
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        console.log(
-            'Por favor, tente novamente recarregando a página.')
-        return
-      }
-
-      console.log('Por favor, tente novamente recarregando a página.')
-    }
+    const response = await CollectsAPIs.getCollectsByUser({
+      search,
+      page,
+      perPage,
+      ordernation,
+      status,
+      type,
+      period,
+    })
+    
+    setCurrentPage(response.data.currentPage)
+    return response.data
   }
 
   async function getCollectsPaginatedByCollector({
@@ -85,30 +75,19 @@ export function CollectsProvider({ children }: Props) {
     period,
     type,
   }: IRequestPaginationMultipleStatus) {
-    try {
-
-      const response = await CollectsAPIs.getCollectsInProcessByCollector({
-        id,
-        search,
-        page,
-        perPage,
-        ordernation,
-        status,
-        type,
-        period,
-      })
-      
-      setCurrentPage(response.data.currentPage)
-      return response.data
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        console.log(
-            'Por favor, tente novamente recarregando a página.')
-        return
-      }
-
-      console.log('Por favor, tente novamente recarregando a página.')
-    }
+    const response = await CollectsAPIs.getCollectsInProcessByCollector({
+      id,
+      search,
+      page,
+      perPage,
+      ordernation,
+      status,
+      type,
+      period,
+    })
+    
+    setCurrentPage(response.data.currentPage)
+    return response.data
   }
 
   async function getCollectsToCollector({
@@ -120,29 +99,18 @@ export function CollectsProvider({ children }: Props) {
     period,
     type,
   }: IRequestPagination) {
-    try {
-
-      const response = await CollectsAPIs.getCollectsToCollector({
-        search,
-        page,
-        perPage,
-        ordernation,
-        status,
-        type,
-        period,
-      })
-      
-      setCurrentPage(response.data.currentPage)
-      return response.data
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        console.log(
-            'Por favor, tente novamente recarregando a página.')
-        return
-      }
-
-      console.log('Por favor, tente novamente recarregando a página.')
-    }
+    const response = await CollectsAPIs.getCollectsToCollector({
+      search,
+      page,
+      perPage,
+      ordernation,
+      status,
+      type,
+      period,
+    })
+    
+    setCurrentPage(response.data.currentPage)
+    return response.data
   }
 
   async function getSearchCompaniesToCollector({
@@ -154,29 +122,18 @@ export function CollectsProvider({ children }: Props) {
     period,
     type,
   }: IRequestPagination) {
-    try {
-
-      const response = await CompaniesAPIs.getSearchCompaniesToCollector({
-        search,
-        page,
-        perPage,
-        ordernation,
-        status,
-        type,
-        period,
-      })
-      
-      setCurrentPage(response.data.currentPage)
-      return response.data
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        console.log(
-            'Por favor, tente novamente recarregando a página.')
-        return
-      }
-
-      console.log('Por favor, tente novamente recarregando a página.')
-    }
+    const response = await CompaniesAPIs.getSearchCompaniesToCollector({
+      search,
+      page,
+      perPage,
+      ordernation,
+      status,
+      type,
+      period,
+    })
+    
+    setCurrentPage(response.data.currentPage)
+    return response.data
   }
 
 

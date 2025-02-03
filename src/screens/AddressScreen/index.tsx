@@ -1,5 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 
+import { ToastAndroid } from 'react-native'
+
 import { Controller, ControllerRenderProps, SubmitHandler, useForm } from 'react-hook-form'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { useNavigation, useRoute } from '@react-navigation/native'
@@ -24,6 +26,7 @@ import { InputIcon } from 'components/atoms/InputIcon'
 
 import { IResponseFetchCEP } from 'interfaces'
 import { CompaniesAPIs } from 'apis/companies'
+import { AxiosError } from 'axios'
 
 type NavProps = NativeStackNavigationProp<CollectStackParamList>
 
@@ -34,7 +37,9 @@ export function AddressScreen() {
   const theme = useTheme()
   const { params } = useRoute()
   const { userAuth } = useContext(AuthContext)
-
+  const showToast = (text: string) => {
+    ToastAndroid.show(text, ToastAndroid.SHORT);
+  }
 
   const {register, setValue, control, handleSubmit, watch} = useForm<formTypeAddressSchema>({
     resolver: zodResolver(addressSchema),
@@ -109,9 +114,12 @@ export function AddressScreen() {
 
       navigation.goBack()
 
-    } catch (e) {
-      // saving error
-      console.log("Erro ao salvar!")
+    } catch (error) {
+        if (error instanceof AxiosError) {
+          return showToast(error.response?.data.messsage)
+        }
+      
+        return showToast("Erro não fazer login! Por Favor, tente novamente.")
     }
 
   }
@@ -122,8 +130,8 @@ export function AddressScreen() {
     .then(json => {
       return json;
     })
-    .catch(error => {
-      console.error(error);
+    .catch(() => {
+      return showToast("Erro ao buscar dados! Por Favor, tente novamente.")
     });
 
     const { logradouro, bairro, localidade, uf } = result
@@ -166,7 +174,11 @@ export function AddressScreen() {
         setValue('state', data.address.state)
 
       } catch (error) {
-        console.log(error)
+          if (error instanceof AxiosError) {
+            return showToast(error.response?.data.messsage)
+          }
+        
+          return showToast("Erro não fazer login! Por Favor, tente novamente.")
       }
     }
 
@@ -185,7 +197,11 @@ export function AddressScreen() {
         setValue('state', data.address.state)
 
       } catch (error) {
-        console.log(error)
+          if (error instanceof AxiosError) {
+            return showToast(error.response?.data.messsage)
+          }
+        
+          return showToast("Erro não fazer login! Por Favor, tente novamente.")
       }
     }
 
