@@ -14,6 +14,7 @@ import { ActivitiesScreen } from 'screens/ActivitiesScreen'
 import { SearchCompanies } from 'screens/SearchCompanies'
 import { ProfileCompanyScreen } from 'screens/ProfileCompanyScreen'
 import { ConfirmCollectScreem } from 'screens/ConfirmCollectScreem'
+import { DonationScreen } from 'screens/DonationScreen'
 
 const Stack = createNativeStackNavigator<CollectStackParamList>()
 
@@ -128,6 +129,17 @@ export function CollectRouter() {
           component={ConfirmCollectScreem}
           options={{
             headerTitle: 'Confirmar Coleta',
+            headerStyle: {
+              backgroundColor: '#4ADE80',
+            },
+            headerTintColor: '#FFF'
+          }}
+        />
+        <Stack.Screen
+          name="Donation"
+          component={DonationScreen}
+          options={{
+            headerTitle: 'Doação',
             headerStyle: {
               backgroundColor: '#4ADE80',
             },

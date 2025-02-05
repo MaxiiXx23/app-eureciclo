@@ -1,6 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import { UsersProvider } from 'contexts/UsersContext'
+import { DonationScreen } from 'screens/DonationScreen'
 
 import { InfoProfileUserScreen } from 'screens/InfoProfileUserScreen'
 import { SearchCollectoresScreen } from 'screens/SearchCollectoresScreen'
@@ -29,6 +30,17 @@ export function CollectoresRouter() {
           component={InfoProfileUserScreen}
           options={{
             headerTitle: 'Perfil Coletor',
+            headerStyle: {
+              backgroundColor: '#4ADE80',
+            },
+            headerTintColor: '#FFF'
+          }}
+        />
+        <Stack.Screen
+          name="Donation"
+          component={DonationScreen}
+          options={{
+            headerTitle: 'Doação',
             headerStyle: {
               backgroundColor: '#4ADE80',
             },

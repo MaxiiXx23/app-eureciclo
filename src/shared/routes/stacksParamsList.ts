@@ -11,6 +11,7 @@ type HomeStackParamList = {
   Collect: undefined
   Activities: undefined
   Account: undefined
+  Donation: undefined
 }
 
 type CollectStackParamList = {
@@ -18,6 +19,7 @@ type CollectStackParamList = {
   Request: undefined
   Status: undefined
   Camera: undefined
+  Donation: undefined
   Address: {
     type: number
   }
@@ -48,6 +50,7 @@ type ActivitiesStackParamList = {
   ConfirmCollect: {
     id: number
   }
+  Donation: undefined
 }
 
 type ProfileStackParamList = {
@@ -74,6 +77,7 @@ type RegisterBusinessStackParamList = {
 }
 
 type CollectoresStackParamList = {
+  Donation: undefined
   CollectoresInitial: undefined
   InfoProfileUser: {
     id: number
@@ -89,6 +93,7 @@ type ProfileConfigStackParamList = {
 }
 
 type AdminCompanyStackParamList = {
+  Donation: undefined
   AdminInitial: undefined
   Address: {
     type: number,

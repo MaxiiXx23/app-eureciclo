@@ -4,6 +4,7 @@ import { ToastAndroid } from 'react-native'
 
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
 
 import { AuthContext } from 'contexts/AuthContext';
 
@@ -12,7 +13,7 @@ import { Gear, HandCoins, House, Lock, Question, ShieldCheck, SignOut, User, Use
 import { ContainerMain } from 'components/templates/Container/styles'
 import { ContainerBtns, ContainerNavs, Content } from './styles'
 import { Header } from 'components/organisms/Header'
-import { SafeAreaProvider } from 'react-native-safe-area-context'
+
 import { InfoProfile } from 'components/organisms/InfoProfile'
 import { BtnNavProfile } from 'components/molecules/BtnNavProfile'
 import { BtnNavArrow } from 'components/molecules/BtnNavArrow';

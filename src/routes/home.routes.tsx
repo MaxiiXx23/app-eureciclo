@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { ChooseRegisterScreen } from 'screens/auth/ChooseRegisterScreen'
 import { HomeStackParamList } from 'shared/routes/stacksParamsList'
 import { HomeScreen } from 'screens/Home'
+import { DonationScreen } from 'screens/DonationScreen'
 
 const Stack = createNativeStackNavigator<HomeStackParamList>()
 
@@ -21,6 +22,17 @@ export function HomeRouter() {
         component={ChooseRegisterScreen}
         options={{
           headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Donation"
+        component={DonationScreen}
+        options={{
+        headerTitle: 'Doação',
+          headerStyle: {
+            backgroundColor: '#4ADE80',
+            },
+          headerTintColor: '#FFF'
         }}
       />
     </Stack.Navigator>
