@@ -31,9 +31,9 @@ export function Profile() {
                 <Name>{name}</Name>
                 <WrapperLabel>
                     <LabelRating>
-                        Sua avaliação: <TextRating>4.8</TextRating>
+                        Sua avaliação: <TextRating>{userAuth.rating}</TextRating>
                     </LabelRating>
-                    <Star size={24} color='#FDE047' />
+                     size={24} color='#FDE047' />
                 </WrapperLabel>
             </WrapperProfile>
 

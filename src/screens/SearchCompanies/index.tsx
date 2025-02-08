@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import { FlatList, ToastAndroid } from 'react-native'
 
 import { SafeAreaProvider } from 'react-native-safe-area-context'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useFocusEffect } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 import { useCollects } from 'contexts/CollectsContext'
@@ -75,6 +75,30 @@ export function SearchCompanies() {
     })
 
   }, [search, currentPage, ordernation, status, period, type])
+
+      useFocusEffect(
+        useCallback(() => {
+          getSearchCompaniesToCollector({
+            search,
+            page: currentPage,
+            perPage: 10,
+            status,
+            ordernation,
+            period,
+            type: 'all', 
+          }).then((data) =>  {
+            setListData(data)
+             
+          })
+          .catch((error) => {
+            if (error instanceof AxiosError) {
+              return showToast(error.response?.data.messsage)
+            }
+      
+            return showToast("Erro buscar empresas! Por Favor, tente novamente.")
+          })
+        }, [search, currentPage, ordernation, status, period, type])    
+      )
 
   return (
     <SafeAreaProvider>

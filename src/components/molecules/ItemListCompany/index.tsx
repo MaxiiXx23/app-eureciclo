@@ -16,8 +16,8 @@ export function ItemListCompany({ data, handleNav }: IProps) {
             </Content>
             <Content>
                 <ContentRating>
-                        <TextInfo>4.8</TextInfo>
-                        <StarHalf size={24} color="#FDE047" />
+                        <TextInfo>{data.rating}</TextInfo>
+                        <StarHalf size={24} color="#FDE047" weight="fill" />
                 </ContentRating>
                 
             </Content>

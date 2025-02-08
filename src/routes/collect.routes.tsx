@@ -15,6 +15,7 @@ import { SearchCompanies } from 'screens/SearchCompanies'
 import { ProfileCompanyScreen } from 'screens/ProfileCompanyScreen'
 import { ConfirmCollectScreem } from 'screens/ConfirmCollectScreem'
 import { DonationScreen } from 'screens/DonationScreen'
+import { SendReviewScreen } from 'screens/SendReviewScreen'
 
 const Stack = createNativeStackNavigator<CollectStackParamList>()
 
@@ -135,6 +136,19 @@ export function CollectRouter() {
             headerTintColor: '#FFF'
           }}
         />
+
+        <Stack.Screen
+          name="SendReview"
+          component={SendReviewScreen}
+          options={{
+            headerTitle: 'Avaliação',
+            headerStyle: {
+              backgroundColor: '#4ADE80',
+            },
+            headerTintColor: '#FFF'
+          }}
+        />
+
         <Stack.Screen
           name="Donation"
           component={DonationScreen}

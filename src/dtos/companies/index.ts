@@ -3,6 +3,7 @@ import { IDefaultResponsePaginationDTO } from "dtos/IDefaultResponseDTO"
 export interface IItemListCompanyDTO {
     id: number
     name: string
+    rating: number
     urlImage: string
 }
 

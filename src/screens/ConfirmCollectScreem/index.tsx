@@ -15,7 +15,6 @@ import { SubHeader } from 'components/molecules/SubHeader'
 import { InputIcon } from 'components/atoms/InputIcon'
 import { Button } from 'components/atoms/Button'
 import { CollectsAPIs } from 'apis/collects'
-import { AxiosError } from 'axios'
 
 type NavProps = NativeStackNavigationProp<CollectStackParamList, 'Initial'>
 

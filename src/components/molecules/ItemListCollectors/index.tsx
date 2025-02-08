@@ -16,10 +16,10 @@ export function ItemListCollectors({ data, handleNav }: IProps) {
                 <TextTitle>{data.name}</TextTitle>
             </Content>
             <Content>
-                <ContentRating>
-                        <TextInfo>4.8</TextInfo>
-                        <StarHalf size={24} color="#FDE047" />
-                </ContentRating>
+            <ContentRating>
+                        <TextInfo>{data.rating}</TextInfo>
+                        <StarHalf size={24} color="#FDE047" weight="fill" />
+            </ContentRating>
                 
             </Content>
         </Container>

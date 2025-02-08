@@ -9,10 +9,10 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { AuthContext } from 'contexts/AuthContext'
 import { CollectsAPIs } from 'apis/collects'
 
-import { House, Info, Receipt, TextAlignLeft } from 'phosphor-react-native'
+import { House, Info, Receipt, Star, TextAlignLeft } from 'phosphor-react-native'
 
 import { ContainerMain } from 'components/templates/Container/styles'
-import { ContainerInfos, Content, HeaderLabel, HeaderTitle, Label, WrapperLabel } from './styles'
+import { ContainerInfos, Content, ContentRating, HeaderLabel, HeaderTitle, Label, WrapperLabel } from './styles'
 import { SubHeader } from 'components/molecules/SubHeader'
 import { PreviewImage } from 'components/atoms/PreviewImage'
 import { InfoCollector } from "components/molecules/InfoCollector"
@@ -88,6 +88,16 @@ export function VerifyCollectScreen() {
       id: params!.id
     })
   }
+
+  function handleNavSendReview() {
+
+    if(!data) return
+
+    navigation.navigate('SendReview', {
+      id: params!.id,
+      reviewedUserId: userAuth.typeUserId === 1 ? data.collector!.id : data.user.id
+    })
+  }
   
   useEffect(() => {
     fetch().then().catch()
@@ -147,7 +157,14 @@ export function VerifyCollectScreen() {
                     <Info size={24} color='#4ADE80' />
                     <HeaderTitle>Solicitante</HeaderTitle>
                   </HeaderLabel>
-                  <Label>{data.user.name}</Label>
+                  <HeaderLabel>
+                    <Label>{data.user.name} -</Label>
+                    <ContentRating>
+                      <Label>{data.user.rating}</Label> 
+                      <Star size={24} color='#FDE047'weight="fill" />
+                    </ContentRating>
+                  </HeaderLabel>
+
               </WrapperLabel>
 
               {data.collector && (
@@ -161,6 +178,12 @@ export function VerifyCollectScreen() {
               {userAuth.typeUserId === 2 && data.status.id === 3 && (
                 <Button color='button' title='Confirmar Coleta' onPress={handleNavConfirmCollect} />
               )}
+
+              {
+                data.status.id === 1 && (
+                  <Button color='button' title='Avaliar' onPress={handleNavSendReview} />
+                )
+              }
 
             </ContainerInfos>
             

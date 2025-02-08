@@ -74,7 +74,7 @@ export function SearchCollectsScreen() {
             return showToast(error.response?.data.messsage)
           }
           
-          return showToast("Erro não fazer login! Por Favor, tente novamente.")
+          return showToast("Erro ao buscar solicitações de coleta! Por Favor, tente novamente.")
         })
       }, [search, currentPage, ordernation, status, period, type])    
     )

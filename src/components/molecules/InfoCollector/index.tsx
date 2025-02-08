@@ -1,12 +1,12 @@
-import { Info } from 'phosphor-react-native'
+import { Info, Star } from 'phosphor-react-native'
 
 import { Container, Content, HeaderLabel, HeaderTitle, HeaderTitleLabel, Label, WrapperLabel, } from './styles'
-import { IGetInfoCollectDTO } from 'dtos/collects'
 
 interface IProps {
   data: {
     id: number
     name: string
+    rating: number
     createdAt: string
   }
 }
@@ -25,7 +25,11 @@ export function InfoCollector({ data }: IProps) {
                     <Info size={24} color='#4ADE80' />
                     <HeaderTitleLabel>Nome</HeaderTitleLabel>
                   </HeaderLabel>
-                  <Label>{data.name}</Label>
+                  <HeaderLabel>
+                    <Label>{data.name} -</Label>
+                    <Label>{data.rating}</Label>
+                    <Star size={24} color='#FDE047'weight="fill" />
+                  </HeaderLabel>
             </WrapperLabel>
         </Content>
 

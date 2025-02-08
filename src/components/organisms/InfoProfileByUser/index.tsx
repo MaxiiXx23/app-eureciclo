@@ -28,9 +28,9 @@ export function InfoProfileByUser({ data }: IProps) {
                 <Name>{data.name}</Name>
                 <WrapperLabel>
                     <LabelRating>
-                        Sua avaliação: <TextRating>4.8</TextRating>
+                        Sua avaliação: <TextRating>{data.rating}</TextRating>
                     </LabelRating>
-                    <Star size={24} color='#FDE047' />
+                    <Star size={24} color='#FDE047' weight="fill" />
                 </WrapperLabel>
             </WrapperProfile>
 

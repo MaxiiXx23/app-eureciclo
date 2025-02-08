@@ -37,6 +37,10 @@ type CollectStackParamList = {
   ConfirmCollect: {
     id: number
   }
+  SendReview: {
+    id: number
+    reviewedUserId: number
+  }
 }
 
 
@@ -44,11 +48,18 @@ type ActivitiesStackParamList = {
   Initial: {
     isInProcess: boolean
   }
+  
   Verify: {
     id: number
   }
+
   ConfirmCollect: {
     id: number
+  }
+
+  SendReview: {
+    id: number
+    reviewedUserId: number
   }
   Donation: undefined
 }
