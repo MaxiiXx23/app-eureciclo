@@ -1,10 +1,11 @@
 interface IRequestCreateReview {
-    rating: number
-    comment?: string
-    reviewedUserId?: number
-    collectId?: number
-    companyId?: number
-  }
+  rating: number
+  comment?: string
+  reviewedUserId?: number
+  collectId?: number
+  companyId?: number
+}
+
   
-  export { IRequestCreateReview }
+export { IRequestCreateReview }
   

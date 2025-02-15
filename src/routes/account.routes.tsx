@@ -7,6 +7,8 @@ import { HelpScreen } from 'screens/HelpScreen'
 
 import { ProfileRouter } from './profile.routes'
 import { AddressScreen } from 'screens/AddressScreen'
+import { NotificationsScreen } from 'screens/NotificationsScreen'
+import { SendReviewScreen } from 'screens/SendReviewScreen'
 
 const Stack = createNativeStackNavigator<ProfileStackParamList>()
 
@@ -34,6 +36,29 @@ export function AccountRouter() {
         component={DonationScreen}
         options={{
           headerTitle: 'Doação',
+          headerStyle: {
+            backgroundColor: '#4ADE80',
+          },
+          headerTintColor: '#FFF'
+        }}
+      />
+      <Stack.Screen
+        name="Notifications"
+        component={NotificationsScreen}
+        options={{
+        headerTitle: 'Notificações',
+          headerStyle: {
+            backgroundColor: '#4ADE80',
+            },
+          headerTintColor: '#FFF'
+        }}
+      />
+
+      <Stack.Screen
+        name="SendReview"
+        component={SendReviewScreen}
+        options={{
+          headerTitle: 'Avaliação',
           headerStyle: {
             backgroundColor: '#4ADE80',
           },

@@ -95,6 +95,7 @@ export function VerifyCollectScreen() {
 
     navigation.navigate('SendReview', {
       id: params!.id,
+      type: 2,
       reviewedUserId: userAuth.typeUserId === 1 ? data.collector!.id : data.user.id
     })
   }

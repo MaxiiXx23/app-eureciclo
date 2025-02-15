@@ -12,6 +12,12 @@ type HomeStackParamList = {
   Activities: undefined
   Account: undefined
   Donation: undefined
+  Notifications: undefined
+  SendReview: {
+    id: number
+    type: number
+    reviewedUserId?: number
+  }
 }
 
 type CollectStackParamList = {
@@ -37,9 +43,11 @@ type CollectStackParamList = {
   ConfirmCollect: {
     id: number
   }
+  Notifications: undefined
   SendReview: {
     id: number
-    reviewedUserId: number
+    type: number
+    reviewedUserId?: number
   }
 }
 
@@ -56,10 +64,11 @@ type ActivitiesStackParamList = {
   ConfirmCollect: {
     id: number
   }
-
+  Notifications: undefined
   SendReview: {
     id: number
-    reviewedUserId: number
+    type: number
+    reviewedUserId?: number
   }
   Donation: undefined
 }
@@ -69,9 +78,16 @@ type ProfileStackParamList = {
   Donation: undefined
   Help: undefined
   Profile: undefined
+  Notifications: undefined
+  SendReview: {
+    id: number
+    type: number
+    reviewedUserId?: number
+  }
   Address: {
     type: number
   }
+
 }
 
 type RegisterCollectorStackParamList = {
@@ -89,6 +105,12 @@ type RegisterBusinessStackParamList = {
 
 type CollectoresStackParamList = {
   Donation: undefined
+  Notifications: undefined
+  SendReview: {
+    id: number
+    type: number
+    reviewedUserId?: number
+  }
   CollectoresInitial: undefined
   InfoProfileUser: {
     id: number
@@ -109,6 +131,12 @@ type AdminCompanyStackParamList = {
   Address: {
     type: number,
     id: number
+  }
+  Notifications: undefined
+  SendReview: {
+    id: number
+    type: number
+    reviewedUserId?: number
   }
 }
 

@@ -4,7 +4,9 @@ import { UsersProvider } from 'contexts/UsersContext'
 import { DonationScreen } from 'screens/DonationScreen'
 
 import { InfoProfileUserScreen } from 'screens/InfoProfileUserScreen'
+import { NotificationsScreen } from 'screens/NotificationsScreen'
 import { SearchCollectoresScreen } from 'screens/SearchCollectoresScreen'
+import { SendReviewScreen } from 'screens/SendReviewScreen'
 
 import { CollectoresStackParamList } from 'shared/routes/stacksParamsList'
 
@@ -35,6 +37,30 @@ export function CollectoresRouter() {
             },
             headerTintColor: '#FFF'
           }}
+        />
+
+      <Stack.Screen
+        name="Notifications"
+        component={NotificationsScreen}
+        options={{
+        headerTitle: 'Notificações',
+          headerStyle: {
+            backgroundColor: '#4ADE80',
+            },
+          headerTintColor: '#FFF'
+        }}
+      />
+
+      <Stack.Screen
+        name="SendReview"
+        component={SendReviewScreen}
+        options={{
+          headerTitle: 'Avaliação',
+          headerStyle: {
+            backgroundColor: '#4ADE80',
+          },
+          headerTintColor: '#FFF'
+        }}
         />
         <Stack.Screen
           name="Donation"

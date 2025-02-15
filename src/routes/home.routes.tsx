@@ -4,6 +4,8 @@ import { ChooseRegisterScreen } from 'screens/auth/ChooseRegisterScreen'
 import { HomeStackParamList } from 'shared/routes/stacksParamsList'
 import { HomeScreen } from 'screens/Home'
 import { DonationScreen } from 'screens/DonationScreen'
+import { NotificationsScreen } from 'screens/NotificationsScreen'
+import { SendReviewScreen } from 'screens/SendReviewScreen'
 
 const Stack = createNativeStackNavigator<HomeStackParamList>()
 
@@ -35,6 +37,29 @@ export function HomeRouter() {
           headerTintColor: '#FFF'
         }}
       />
+      <Stack.Screen
+        name="Notifications"
+        component={NotificationsScreen}
+        options={{
+        headerTitle: 'Notificações',
+          headerStyle: {
+            backgroundColor: '#4ADE80',
+            },
+          headerTintColor: '#FFF'
+        }}
+      />
+
+      <Stack.Screen
+        name="SendReview"
+        component={SendReviewScreen}
+        options={{
+          headerTitle: 'Avaliação',
+          headerStyle: {
+            backgroundColor: '#4ADE80',
+          },
+          headerTintColor: '#FFF'
+        }}
+        />
     </Stack.Navigator>
   )
 }

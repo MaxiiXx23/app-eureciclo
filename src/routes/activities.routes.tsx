@@ -7,6 +7,7 @@ import { VerifyCollectScreen } from 'screens/VerifyCollectScreen'
 import { ConfirmCollectScreem } from 'screens/ConfirmCollectScreem'
 import { DonationScreen } from 'screens/DonationScreen'
 import { SendReviewScreen } from 'screens/SendReviewScreen'
+import { NotificationsScreen } from 'screens/NotificationsScreen'
 
 const Stack = createNativeStackNavigator<ActivitiesStackParamList>()
 
@@ -60,7 +61,17 @@ export function ActivitiesRouter() {
               headerTintColor: '#FFF'
             }}
           />
-
+        <Stack.Screen
+          name="Notifications"
+          component={NotificationsScreen}
+          options={{
+          headerTitle: 'Notificações',
+            headerStyle: {
+              backgroundColor: '#4ADE80',
+              },
+            headerTintColor: '#FFF'
+          }}
+        />
           <Stack.Screen
             name="Donation"
             component={DonationScreen}

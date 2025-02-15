@@ -1,4 +1,4 @@
-import { TouchableHighlight, View } from 'react-native'
+import { TouchableOpacity, View } from 'react-native'
 import styled from 'styled-components'
 
 export const Container = styled(View)`
@@ -20,4 +20,4 @@ export const ContainerBtns = styled(View)`
 
 `
 
-export const BtnAction = styled(TouchableHighlight)``
+export const BtnAction = styled(TouchableOpacity)``

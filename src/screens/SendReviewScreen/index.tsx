@@ -36,14 +36,27 @@ export function SendReviewScreen() {
                 return showToast('Avaliação não selecionada! Por favor, selecione-a.')
             }
     
-            const response = await ReviewAPIs.create({
-                rating,
-                comment,
-                collectId: params!.id,
-                reviewedUserId: params!.reviewedUserId
+            if(params.type === 2 ) {
+                const response = await ReviewAPIs.create({
+                    rating,
+                    comment,
+                    collectId: params!.id,
+                    reviewedUserId: params!.reviewedUserId
+    
+                })
 
-            })
-            showToast(response.data.message)
+                showToast(response.data.message)
+            } else {
+
+                const response = await ReviewAPIs.create({
+                    rating,
+                    comment,
+                    companyId: params!.id,
+                })
+
+                showToast(response.data.message)
+            }
+            
             navigation.goBack()
         } catch(error) {
 
@@ -57,7 +70,7 @@ export function SendReviewScreen() {
           <Content>
                 <SubHeader
                     title='Avalie' 
-                    description='Avalie a pessoa no momento da coleta.'
+                    description={params!.type === 2 ? 'Avalie a pessoa no momento da coleta.' : 'Avalie o atendimento/serviço da empresa.'}
                 />
                 <ContainerInputs>
                     <StarRating onRate={setRating} />

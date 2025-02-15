@@ -33,7 +33,7 @@ export function Profile() {
                     <LabelRating>
                         Sua avaliação: <TextRating>{userAuth.rating}</TextRating>
                     </LabelRating>
-                     size={24} color='#FDE047' />
+                    <Star size={24} color='#FDE047' weight="fill" />
                 </WrapperLabel>
             </WrapperProfile>
 

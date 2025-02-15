@@ -13,6 +13,7 @@ export const ContainerBtn = styled(TouchableOpacity)<IButtonProps>`
   border-radius: 16px;
   background-color: ${({ theme, color }) => theme.colors[color]};
   padding: ${({ theme }) => theme.spacing['5']};
+  margin-bottom: ${({ theme }) => theme.spacing[3]};
 `
 
 export const Title = styled(Text)`
