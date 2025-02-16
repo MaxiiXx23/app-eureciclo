@@ -36,6 +36,11 @@ export interface IOrdernation {
     period?: IPeriodQuery
   }
 
+  export interface IRequestPaginationDefault {
+    page: number
+    perPage: number
+  }
+
   export interface IRequestPaginationMultipleStatus extends Omit<IRequestPagination, 'status'> {
     status: string
   }

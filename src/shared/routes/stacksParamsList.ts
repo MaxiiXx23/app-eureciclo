@@ -18,6 +18,10 @@ type HomeStackParamList = {
     type: number
     reviewedUserId?: number
   }
+
+  Post: {
+    id: number
+  }
 }
 
 type CollectStackParamList = {

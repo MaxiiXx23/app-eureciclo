@@ -6,6 +6,7 @@ import { HomeScreen } from 'screens/Home'
 import { DonationScreen } from 'screens/DonationScreen'
 import { NotificationsScreen } from 'screens/NotificationsScreen'
 import { SendReviewScreen } from 'screens/SendReviewScreen'
+import { PostScreen } from 'screens/PostScreen'
 
 const Stack = createNativeStackNavigator<HomeStackParamList>()
 
@@ -59,7 +60,19 @@ export function HomeRouter() {
           },
           headerTintColor: '#FFF'
         }}
-        />
+      />
+
+      <Stack.Screen
+        name="Post"
+        component={PostScreen}
+        options={{
+          headerTitle: 'Postagem',
+          headerStyle: {
+            backgroundColor: '#4ADE80',
+          },
+          headerTintColor: '#FFF'
+        }}
+      />
     </Stack.Navigator>
   )
 }

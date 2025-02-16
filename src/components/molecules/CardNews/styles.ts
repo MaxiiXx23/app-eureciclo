@@ -1,7 +1,7 @@
-import { Image, Text, View } from 'react-native'
+import { Image, Text, TouchableOpacity, View } from 'react-native'
 import styled from 'styled-components'
 
-export const Container = styled(View)`
+export const Container = styled(TouchableOpacity)`
     flexDirection: row;
     height: ${({theme}) => theme.spacing[40]};
     width: ${({theme}) => theme.spacing[80]};
