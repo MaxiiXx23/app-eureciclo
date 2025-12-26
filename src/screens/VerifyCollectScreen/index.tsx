@@ -40,7 +40,6 @@ export function VerifyCollectScreen() {
     try {
       if(!params?.id) {
         const response = await CollectsAPIs.getInProgressByUserId()
-
         setData(response.data.collect)
         
       } else {
@@ -117,7 +116,7 @@ export function VerifyCollectScreen() {
               <PreviewImage urlImage={data.image.url} />
               
               {
-                data.status.id === 3 && userAuth.typeUserId === 2 ? null : (
+                (data.status.id === 3 || data.status.id === 4) && userAuth.typeUserId === 2 ? null : (
                   <WrapperLabel>
                     <HeaderLabel>
                       <Receipt size={24} color='#4ADE80' />

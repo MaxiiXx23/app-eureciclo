@@ -11,51 +11,44 @@ import { Button, Container, ContainerPreview, Preview} from './styles'
 
 import { CollectStackParamList } from 'shared/routes/stacksParamsList'
 import { services } from 'config/services'
-import { Image, StyleSheet } from 'react-native'
+import { Image, StyleSheet, Text } from 'react-native'
+import { SelectImageCollectPicker } from '../SelectImageCollectPicker';
 
 type NavProps = NativeStackNavigationProp<CollectStackParamList>
 
 export function BtnOpenCamera() {
   const navigation = useNavigation<NavProps>()
   const [url, setURL] = useState('')
-  const [uri, setURI] = useState('')
+  const [triggerReload, setTriggerReload] = useState(false)
   
 
   function handleNavToCamera() {
     navigation.navigate('Camera')
   }
 
+  function handleTriggerReload() {
+    setTriggerReload((prev) => !prev)
+  }
+
   async function getURI() {
     const jsonValue = await AsyncStorage.getItem('@EuReciclo:uri');
 
     if(jsonValue === null) {
-      return setURL(`${services.baseUrl}/imagens/icon-image.jpg`)
+      return setURL(`${services.baseUrl}/imagens/icon-image.jpeg`)
     }
 
     const uriReplaced = jsonValue.replace('"', '').replace('"', '')
-    setURI(uriReplaced)
+    setURL(uriReplaced)
   }
 
-  useFocusEffect(
-    useCallback(() => {
-      // Simula uma requisição ou atualização de estado
-      getURI()
-    }, [])
-    
-  )
+  useEffect(() => {
+    getURI()
+  }, [triggerReload])
 
   return (
     <Container>
         <ContainerPreview>
-            {uri ? (
-              <Image source={{ uri }} style={styles.previewImage}  />
-            ) : (
-              <Image src={url} style={styles.previewImage}  />
-            )}
-            <Button onPress={handleNavToCamera} >
-                <Camera size={32} color='#4ADE80' />
-            </Button>  
-            
+            <SelectImageCollectPicker urlImage={url}  handleTriggerReload={handleTriggerReload} />
         </ContainerPreview>
     </Container>
 
